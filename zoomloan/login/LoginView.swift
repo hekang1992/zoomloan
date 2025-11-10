@@ -47,6 +47,34 @@ class LoginView: BaseView {
         return oneView
     }()
     
+    lazy var numLabel: UILabel = {
+        let numLabel = UILabel()
+        numLabel.text = "+63"
+        numLabel.textAlignment = .center
+        numLabel.textColor = UIColor.init(hexString: "#333333")
+        numLabel.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight(700))
+        return numLabel
+    }()
+    
+    lazy var lineView: UIView = {
+        let lineView = UIView()
+        lineView.backgroundColor = UIColor.init(hexString: "#666666")
+        return lineView
+    }()
+    
+    lazy var phoneTextFiled: UITextField = {
+        let phoneTextFiled = UITextField()
+        phoneTextFiled.keyboardType = .numberPad
+        let attrString = NSMutableAttributedString(string: "Please enter the phone number", attributes: [
+            .foregroundColor: UIColor.init(hexString: "#999999") as Any,
+            .font: UIFont.systemFont(ofSize: 12, weight: UIFont.Weight(700))
+        ])
+        phoneTextFiled.attributedPlaceholder = attrString
+        phoneTextFiled.font = UIFont.systemFont(ofSize: 12, weight: UIFont.Weight(700))
+        phoneTextFiled.textColor = UIColor.init(hexString: "#333333")
+        return phoneTextFiled
+    }()
+    
     lazy var codeLabel: UILabel = {
         let codeLabel = UILabel()
         codeLabel.text = "Verification Code"
@@ -64,6 +92,28 @@ class LoginView: BaseView {
         return twoView
     }()
     
+    lazy var codeTextFiled: UITextField = {
+        let codeTextFiled = UITextField()
+        codeTextFiled.keyboardType = .numberPad
+        let attrString = NSMutableAttributedString(string: "Please enter the verification code", attributes: [
+            .foregroundColor: UIColor.init(hexString: "#999999") as Any,
+            .font: UIFont.systemFont(ofSize: 12, weight: UIFont.Weight(700))
+        ])
+        codeTextFiled.attributedPlaceholder = attrString
+        codeTextFiled.font = UIFont.systemFont(ofSize: 12, weight: UIFont.Weight(700))
+        codeTextFiled.textColor = UIColor.init(hexString: "#333333")
+        return codeTextFiled
+    }()
+    
+    lazy var codeBtn: UIButton = {
+        let codeBtn = UIButton(type: .custom)
+        codeBtn.setTitle("Send", for: .normal)
+        codeBtn.setTitleColor(.white, for: .normal)
+        codeBtn.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: UIFont.Weight(700))
+        codeBtn.setBackgroundImage(UIImage(named: "cd_code_image"), for: .normal)
+        return codeBtn
+    }()
+    
     lazy var loginBtn: UIButton = {
         let loginBtn = UIButton(type: .custom)
         loginBtn.setTitle("Log in to Zoom Loan", for: .normal)
@@ -78,6 +128,12 @@ class LoginView: BaseView {
         return agreementView
     }()
     
+    lazy var voiceBtn: UIButton = {
+        let voiceBtn = UIButton(type: .custom)
+        voiceBtn.setImage(UIImage(named: "voic_icon_image"), for: .normal)
+        return voiceBtn
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(bgImageView)
@@ -89,6 +145,7 @@ class LoginView: BaseView {
         scrollView.addSubview(twoView)
         scrollView.addSubview(loginBtn)
         scrollView.addSubview(agreementView)
+        scrollView.addSubview(voiceBtn)
         bgImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
@@ -130,8 +187,51 @@ class LoginView: BaseView {
         }
         agreementView.snp.makeConstraints { make in
             make.top.equalTo(loginBtn.snp.bottom).offset(31)
-            make.left.equalTo(loginBtn.snp.left)
+            make.left.equalTo(loginBtn.snp.left).offset(12)
             make.height.equalTo(18)
+            make.right.equalTo(loginBtn.snp.right)
+        }
+        
+        oneView.addSubview(numLabel)
+        oneView.addSubview(lineView)
+        oneView.addSubview(phoneTextFiled)
+        
+        numLabel.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.left.equalToSuperview().offset(10)
+            make.height.equalTo(30)
+            make.width.equalTo(32)
+        }
+        lineView.snp.makeConstraints { make in
+            make.left.equalTo(numLabel.snp.right).offset(7)
+            make.size.equalTo(CGSize(width: 1, height: 23))
+            make.centerY.equalToSuperview()
+        }
+        phoneTextFiled.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.left.equalTo(lineView.snp.right).offset(7)
+            make.right.equalToSuperview().offset(-10)
+            make.height.equalTo(30)
+        }
+        
+        twoView.addSubview(codeBtn)
+        twoView.addSubview(codeTextFiled)
+        codeBtn.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.right.equalToSuperview().offset(-10)
+            make.size.equalTo(CGSize(width: 80, height: 35))
+        }
+        codeTextFiled.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.left.equalToSuperview().offset(10)
+            make.height.equalTo(30)
+            make.right.equalTo(codeBtn.snp.left).offset(-10)
+        }
+        voiceBtn.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(agreementView.snp.bottom).offset(34)
+            make.size.equalTo(CGSize(width: 177, height: 24))
+            make.bottom.equalToSuperview().offset(-20)
         }
     }
     

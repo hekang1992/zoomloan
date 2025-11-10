@@ -70,15 +70,14 @@ class AgreementView: BaseView {
     }
     
     private func setupAgreementText() {
-        let fullText = "I have read and agree to Privacy Policy"
+        let fullText = "I have read and agree to <Privacy Policy>"
         let attributedString = NSMutableAttributedString(string: fullText)
         
-        attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 16), range: NSRange(location: 0, length: fullText.count))
-        attributedString.addAttribute(.foregroundColor, value: UIColor.label, range: NSRange(location: 0, length: fullText.count))
+        attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 13), range: NSRange(location: 0, length: fullText.count))
+        attributedString.addAttribute(.foregroundColor, value: UIColor.init(hexString: "#FFFFFF").withAlphaComponent(0.6), range: NSRange(location: 0, length: fullText.count))
         
-        let privacyRange = (fullText as NSString).range(of: "Privacy Policy")
-        attributedString.addAttribute(.foregroundColor, value: UIColor.systemBlue, range: privacyRange)
-        attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: privacyRange)
+        let privacyRange = (fullText as NSString).range(of: "<Privacy Policy>")
+        attributedString.addAttribute(.foregroundColor, value: UIColor.black, range: privacyRange)
         
         agreementLabel.attributedText = attributedString
     }
