@@ -8,11 +8,17 @@
 import UIKit
 
 class BaseViewController: UIViewController {
+    
+    lazy var headView: AppMainHeadView = {
+        let headView = AppMainHeadView()
+        return headView
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        view.backgroundColor = UIColor.init(hexString: "#D9EEF3")
     }
     
 
