@@ -13,6 +13,7 @@ class BaseModel: Codable {
 
 class credulityModel: Codable {
     var efforts: effortsModel?
+    var considerate: String?
 }
 
 class effortsModel: Codable {

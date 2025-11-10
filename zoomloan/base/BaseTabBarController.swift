@@ -8,7 +8,7 @@
 import UIKit
 
 class BaseTabBarController: UITabBarController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTabBar()
@@ -16,13 +16,8 @@ class BaseTabBarController: UITabBarController {
     }
     
     private func setupTabBar() {
-        tabBar.barTintColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1.0)
-        tabBar.tintColor = .white
-        tabBar.unselectedItemTintColor = .gray
-        
         let appearance = UITabBarAppearance()
         appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1.0)
         
         appearance.stackedLayoutAppearance.selected.titleTextAttributes = [
             .foregroundColor: UIColor.white,
@@ -31,7 +26,7 @@ class BaseTabBarController: UITabBarController {
         
         appearance.stackedLayoutAppearance.normal.titleTextAttributes = [
             .foregroundColor: UIColor.gray,
-            .font: UIFont.systemFont(ofSize: 11, weight: .regular)
+            .font: UIFont.systemFont(ofSize: 11, weight: .medium)
         ]
         
         tabBar.standardAppearance = appearance
@@ -39,7 +34,13 @@ class BaseTabBarController: UITabBarController {
             tabBar.scrollEdgeAppearance = appearance
         }
         
+        let bgView = UIView(frame: tabBar.bounds)
+        bgView.backgroundColor = UIColor(hexString: "#58BBB6")
+        bgView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        tabBar.insertSubview(bgView, at: 0)
+        
     }
+    
     
     private func setupViewControllers() {
         let firstVC = createNavController(
@@ -73,11 +74,11 @@ class BaseTabBarController: UITabBarController {
         
         navController.tabBarItem = UITabBarItem(
             title: title,
-            image: image.withRenderingMode(.alwaysTemplate),
-            selectedImage: selectedImage.withRenderingMode(.alwaysTemplate)
+            image: image.withRenderingMode(.alwaysOriginal),
+            selectedImage: selectedImage.withRenderingMode(.alwaysOriginal)
         )
         
-        navController.tabBarItem.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
+        navController.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
         
         return navController
     }

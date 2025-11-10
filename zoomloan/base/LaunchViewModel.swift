@@ -25,7 +25,6 @@ class LaunchViewModel {
     }
     
     func initTwoInfo(with json: [String: Any]) async throws -> BaseModel {
-        
         do {
             let model: BaseModel = try await RequsetHttpManager.shared.post("/dhlpt/author", body: json)
             return model

@@ -8,6 +8,10 @@
 import UIKit
 import SnapKit
 
+let DESC_PHONE = "Please enter the phone number"
+let DESC_CODE = "Please enter the verification code"
+let DESC_AGREE = "Please agree to Privacy Policy"
+
 class LoginView: BaseView {
     
     lazy var scrollView: UIScrollView = {
@@ -52,7 +56,7 @@ class LoginView: BaseView {
         numLabel.text = "+63"
         numLabel.textAlignment = .center
         numLabel.textColor = UIColor.init(hexString: "#333333")
-        numLabel.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight(700))
+        numLabel.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight(700))
         return numLabel
     }()
     
@@ -65,7 +69,7 @@ class LoginView: BaseView {
     lazy var phoneTextFiled: UITextField = {
         let phoneTextFiled = UITextField()
         phoneTextFiled.keyboardType = .numberPad
-        let attrString = NSMutableAttributedString(string: "Please enter the phone number", attributes: [
+        let attrString = NSMutableAttributedString(string: DESC_PHONE, attributes: [
             .foregroundColor: UIColor.init(hexString: "#999999") as Any,
             .font: UIFont.systemFont(ofSize: 12, weight: UIFont.Weight(700))
         ])
@@ -95,12 +99,12 @@ class LoginView: BaseView {
     lazy var codeTextFiled: UITextField = {
         let codeTextFiled = UITextField()
         codeTextFiled.keyboardType = .numberPad
-        let attrString = NSMutableAttributedString(string: "Please enter the verification code", attributes: [
+        let attrString = NSMutableAttributedString(string: DESC_CODE, attributes: [
             .foregroundColor: UIColor.init(hexString: "#999999") as Any,
             .font: UIFont.systemFont(ofSize: 12, weight: UIFont.Weight(700))
         ])
         codeTextFiled.attributedPlaceholder = attrString
-        codeTextFiled.font = UIFont.systemFont(ofSize: 12, weight: UIFont.Weight(700))
+        codeTextFiled.font = UIFont.systemFont(ofSize: 12, weight: UIFont.Weight(600))
         codeTextFiled.textColor = UIColor.init(hexString: "#333333")
         return codeTextFiled
     }()
