@@ -7,8 +7,37 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
+import RxGesture
+import RxSwift
+import RxCocoa
 
-class HomeView: UIView {
+class HomeView: BaseView {
+    
+    var applyBlock: ((chairsModel) -> Void)?
+
+    var model: chairsModel? {
+        didSet {
+            guard let model = model else { return }
+            let logoUrl = model.breaking ?? ""
+            logoImageView.kf.setImage(with: URL(string: logoUrl))
+            nameLabel.text = model.profound ?? ""
+            let descText = model.goes ?? ""
+            oneLabel.text = "\(descText)(₱)"
+            moneyLabel.text = model.going ?? ""
+            
+            oneListView.bgImageView.image = UIImage(named: "home_rate_image")
+            oneListView.oneLabel.text = model.explain ?? ""
+            oneListView.twoLabel.text = model.hereafter ?? ""
+            
+            twoListView.bgImageView.image = UIImage(named: "home_item_image")
+            twoListView.oneLabel.text = model.relate ?? ""
+            twoListView.twoLabel.text = model.extraordinary ?? ""
+            
+            let illusion = model.illusion ?? ""
+            loginBtn.setTitle(illusion, for: .normal)
+        }
+    }
     
     lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -28,6 +57,7 @@ class HomeView: UIView {
     lazy var twoImageView: UIImageView = {
         let twoImageView = UIImageView()
         twoImageView.image = UIImage(named: "home_two_image")
+        twoImageView.isUserInteractionEnabled = true
         return twoImageView
     }()
     
@@ -60,6 +90,40 @@ class HomeView: UIView {
         nameLabel.textColor = UIColor.init(hexString: "#4BA5B6")
         nameLabel.font = UIFont.systemFont(ofSize: 16, weight: UIFont.Weight(700))
         return nameLabel
+    }()
+    
+    lazy var oneLabel: UILabel = {
+        let oneLabel = UILabel()
+        oneLabel.textAlignment = .center
+        oneLabel.textColor = UIColor.init(hexString: "#666666")
+        oneLabel.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight(700))
+        return oneLabel
+    }()
+    
+    lazy var moneyLabel: UILabel = {
+        let moneyLabel = UILabel()
+        moneyLabel.textAlignment = .center
+        moneyLabel.textColor = UIColor.init(hexString: "#333333")
+        moneyLabel.font = UIFont.systemFont(ofSize: 48, weight: UIFont.Weight(900))
+        return moneyLabel
+    }()
+    
+    lazy var oneListView: HomeTermView = {
+        let oneListView = HomeTermView()
+        return oneListView
+    }()
+    
+    lazy var twoListView: HomeTermView = {
+        let twoListView = HomeTermView()
+        return twoListView
+    }()
+    
+    lazy var loginBtn: UIButton = {
+        let loginBtn = UIButton(type: .custom)
+        loginBtn.setTitleColor(.white, for: .normal)
+        loginBtn.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight(700))
+        loginBtn.setBackgroundImage(UIImage(named: "login_btn_image"), for: .normal)
+        return loginBtn
     }()
 
     override init(frame: CGRect) {
@@ -104,6 +168,8 @@ class HomeView: UIView {
         
         twoImageView.addSubview(logoImageView)
         twoImageView.addSubview(nameLabel)
+        twoImageView.addSubview(oneLabel)
+        twoImageView.addSubview(moneyLabel)
         
         logoImageView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(9)
@@ -112,7 +178,52 @@ class HomeView: UIView {
         }
         nameLabel.snp.makeConstraints { make in
             make.centerY.equalTo(logoImageView.snp.centerY)
+            make.left.equalTo(logoImageView.snp.right).offset(5)
+            make.height.equalTo(19)
         }
+        oneLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().offset(61)
+            make.height.equalTo(20)
+        }
+        moneyLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(oneLabel.snp.bottom).offset(6)
+            make.height.equalTo(58)
+        }
+        
+        twoImageView.addSubview(oneListView)
+        twoImageView.addSubview(twoListView)
+        twoImageView.addSubview(loginBtn)
+        
+        oneListView.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(30)
+            make.top.equalTo(moneyLabel.snp.bottom).offset(13)
+            make.right.equalToSuperview().offset(-30)
+            make.height.equalTo(20)
+        }
+        twoListView.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(30)
+            make.top.equalTo(oneListView.snp.bottom).offset(6)
+            make.right.equalToSuperview().offset(-30)
+            make.height.equalTo(20)
+        }
+        loginBtn.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.size.equalTo(CGSize(width: 272, height: 48))
+            make.top.equalTo(twoListView.snp.bottom).offset(15)
+        }
+        
+        twoImageView.rx.tapGesture().when(.recognized).bind(onNext: { [weak self] _ in
+            guard let self = self, let model = model else { return }
+            self.applyBlock?(model)
+        }).disposed(by: disposeBag)
+        
+        loginBtn.rx.tap.bind(onNext: { [weak self] in
+            guard let self = self, let model = model else { return }
+            self.applyBlock?(model)
+        }).disposed(by: disposeBag)
+        
     }
     
     required init?(coder: NSCoder) {

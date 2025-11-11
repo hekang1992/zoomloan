@@ -28,6 +28,10 @@ class HomeViewController: BaseViewController {
         self.homeView.scrollView.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
             self?.getHomeMessageInfo()
         })
+        
+        homeView.applyBlock = { [weak self] in
+            
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,13 +57,23 @@ extension HomeViewController {
             do {
                 let model = try await viewModel.getHomeInfo(with: json)
                 if model.sentences == "0" {
-                    
+                    let modelArray = getSheChairs(from: model)
+                    self.homeView.model = modelArray.first
                 }
-                
             } catch  {
                 
             }
         }
+    }
+    
+    func getSheChairs(from model: BaseModel) -> [chairsModel] {
+        let modelArray = model.credulity?.really ?? []
+        for reallyItem in modelArray {
+            if reallyItem.odd == "she" {
+                return reallyItem.chairs ?? []
+            }
+        }
+        return []
     }
     
 }

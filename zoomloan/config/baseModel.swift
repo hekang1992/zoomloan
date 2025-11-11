@@ -14,6 +14,7 @@ class BaseModel: Codable {
 class credulityModel: Codable {
     var efforts: effortsModel?
     var considerate: String?
+    var really: [reallyModel]?
 }
 
 class effortsModel: Codable {
@@ -21,4 +22,22 @@ class effortsModel: Codable {
     var entreaties: String?
     var withdraw: String?
     var entreated: String?
+}
+
+class reallyModel: Codable {
+    var odd: String?
+    var chairs: [chairsModel]?
+}
+
+class chairsModel: Codable {
+    var borne: Int?
+    var profound: String?
+    var breaking: String?
+    var illusion: String?
+    var going: String?
+    var goes: String?
+    var extraordinary: String?
+    var relate: String?
+    var hereafter: String?
+    var explain: String?
 }
