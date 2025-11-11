@@ -7,6 +7,10 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxGesture
+import RxCocoa
+import TYAlertController
 
 class SettingViewController: BaseViewController {
     
@@ -82,6 +86,7 @@ class SettingViewController: BaseViewController {
         }
         
         let deletelabel = UILabel()
+        deletelabel.isUserInteractionEnabled = true
         let attributedString = NSAttributedString(
             string: "Delete zoom loan",
             attributes: [
@@ -96,6 +101,96 @@ class SettingViewController: BaseViewController {
             make.centerX.equalToSuperview()
             make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-30)
             make.height.equalTo(20)
+        }
+        
+        
+        whiteView.rx.tapGesture().when(.recognized).bind(onNext: { [weak self] _ in
+            guard let self = self else { return }
+            self.alertLogOutView()
+        }).disposed(by: disposeBag)
+        
+        deletelabel.rx.tapGesture().when(.recognized).bind(onNext: { [weak self] _ in
+            guard let self = self else { return }
+            self.alertDeleteView()
+        }).disposed(by: disposeBag)
+        
+    }
+    
+}
+
+extension SettingViewController {
+    
+    private func alertLogOutView() {
+        let logoutView = PopLogOutView(frame: self.view.bounds)
+        let alertVc = TYAlertController(alert: logoutView, preferredStyle: .alert)
+        self.present(alertVc!, animated: true)
+        logoutView.cancelBlock = { [weak self] in
+            self?.dismiss(animated: true)
+        }
+        
+        logoutView.sureBlock = { [weak self] in
+            self?.dismiss(animated: true) {
+                self?.tolouout()
+            }
+        }
+    }
+    
+    private func alertDeleteView() {
+        let logoutView = PopDeleteAccountView(frame: self.view.bounds)
+        let alertVc = TYAlertController(alert: logoutView, preferredStyle: .alert)
+        self.present(alertVc!, animated: true)
+        logoutView.cancelBlock = { [weak self] in
+            self?.dismiss(animated: true)
+        }
+        
+        logoutView.sureBlock = { [weak self] in
+            guard let self = self else { return }
+            let isAgreed = logoutView.isAgreed.value
+            if isAgreed {
+                self.dismiss(animated: true) {
+                    self.todeleteAcc()
+                }
+            }else {
+                ToastView.showMessage(with: "Please read and agree to the agreement")
+            }
+        }
+    }
+    
+    private func tolouout() {
+        let viewModel = CentertViewModel()
+        let json = ["logout": "1"]
+        Task {
+            do {
+                let model = try await viewModel.logOutInfo(with: json)
+                if model.sentences == "0" {
+                    AuthLoginConfig.shared.logout()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                        NotificationCenter.default.post(name: CHANGE_ROOT_VC, object: nil)
+                    }
+                }
+                ToastView.showMessage(with: model.regarding ?? "")
+            } catch  {
+                
+            }
+        }
+    }
+    
+    private func todeleteAcc() {
+        let viewModel = CentertViewModel()
+        let json = ["deleteAccount": "1"]
+        Task {
+            do {
+                let model = try await viewModel.deleteAccountInfo(with: json)
+                if model.sentences == "0" {
+                    AuthLoginConfig.shared.logout()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                        NotificationCenter.default.post(name: CHANGE_ROOT_VC, object: nil)
+                    }
+                }
+                ToastView.showMessage(with: model.regarding ?? "")
+            } catch  {
+                
+            }
         }
     }
     

