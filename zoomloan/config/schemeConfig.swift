@@ -111,9 +111,11 @@ final class SchemeURLManagerTool {
             return
         }
         
-        let detailVC = ProductDetailViewController()
-        detailVC.productID = productId
-        fromVC.navigationController?.pushViewController(detailVC, animated: true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+            let detailVC = ProductDetailViewController()
+            detailVC.productID = productId
+            fromVC.navigationController?.pushViewController(detailVC, animated: true)
+        }
     }
     
     

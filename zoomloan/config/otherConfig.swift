@@ -96,7 +96,6 @@ final class Loading {
             loadingView.addSubview(activityIndicator)
             window.addSubview(loadingView)
             
-            // 设置约束
             loadingView.snp.makeConstraints { make in
                 make.edges.equalToSuperview()
             }

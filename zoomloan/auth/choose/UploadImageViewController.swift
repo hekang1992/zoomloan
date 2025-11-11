@@ -1,5 +1,5 @@
 //
-//  ProductDetailViewController.swift
+//  UploadImageViewController.swift
 //  zoomloan
 //
 //  Created by hekang on 2025/11/11.
@@ -7,9 +7,9 @@
 
 import UIKit
 
-class ProductDetailViewController: BaseViewController {
+class UploadImageViewController: UIViewController {
     
-    var productID: String = ""
+    var json: [String: Any]?
 
     override func viewDidLoad() {
         super.viewDidLoad()

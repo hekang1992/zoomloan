@@ -17,6 +17,14 @@ class credulityModel: Codable {
     var really: [reallyModel]?
     var trick: String?
     var userInfo: userInfoModel?
+    var head: headModel?
+    var lowered: loweredModel?
+    var produce: [produceModel]?
+    var expected: expectedModel?
+    var anger: angerModel?
+    var belong: angerModel?
+    var suggestion: [String]?
+    var insensibility: [String]?
 }
 
 class effortsModel: Codable {
@@ -49,4 +57,39 @@ class chairsModel: Codable {
 
 class userInfoModel: Codable {
     var userphone: String?
+}
+
+class headModel: Codable {
+    var bertolini: Int?
+    var st: String?
+    var borne: String?
+    var signora: String?
+    var profound: String?
+    var breaking: String?
+    var illusion: String?
+}
+
+class loweredModel: Codable {
+    var affray: String?
+    var repeated: String?
+}
+
+class produceModel: Codable {
+    var affray: String?
+    var sternly: String?
+    var weak: String?
+    var forbade: String?
+    var indignation: String?
+    var possessed: Int?
+    var trick: String?
+}
+
+class expectedModel: Codable {
+    var weak: String?
+    var affray: String?
+    var trick: String?
+}
+
+class angerModel: Codable {
+    var possessed: Int?
 }

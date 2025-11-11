@@ -39,8 +39,8 @@ class AppMainHeadView: BaseView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(bgImageView)
-        bgImageView.addSubview(backBtn)
-        bgImageView.addSubview(nameLabel)
+        addSubview(backBtn)
+        addSubview(nameLabel)
         bgImageView.snp.makeConstraints { make in
             make.left.top.right.equalToSuperview()
             make.height.equalTo(122)
@@ -66,3 +66,4 @@ class AppMainHeadView: BaseView {
     }
     
 }
+

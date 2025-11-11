@@ -28,8 +28,8 @@ class CentertView: BaseView {
     
     lazy var logoImageView: UIImageView = {
         let logoImageView = UIImageView()
-        logoImageView.image = UIImage(named: "")
-        logoImageView.backgroundColor = .systemPink
+        logoImageView.image = UIImage(named: "bea_icon_image")
+        logoImageView.contentMode = .scaleAspectFit
         return logoImageView
     }()
     
@@ -95,19 +95,19 @@ class CentertView: BaseView {
         logoImageView.snp.makeConstraints { make in
             make.top.equalTo(settingBtn.snp.bottom).offset(16)
             make.left.equalToSuperview().offset(16)
-            make.size.equalTo(CGSize(width: 72, height: 72))
+            make.size.equalTo(CGSize(width: 80, height: 80))
         }
         
         addSubview(appLabel)
         appLabel.snp.makeConstraints { make in
-            make.top.equalTo(logoImageView.snp.top).offset(12)
-            make.left.equalTo(logoImageView.snp.right).offset(15)
+            make.top.equalTo(logoImageView.snp.top).offset(15)
+            make.left.equalTo(logoImageView.snp.right)
             make.height.equalTo(23)
         }
         
         addSubview(phoneLabel)
         phoneLabel.snp.makeConstraints { make in
-            make.bottom.equalTo(logoImageView.snp.bottom).offset(-12)
+            make.bottom.equalTo(logoImageView.snp.bottom).offset(-15)
             make.left.equalTo(appLabel.snp.left)
             make.height.equalTo(17)
         }
