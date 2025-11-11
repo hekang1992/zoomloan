@@ -21,12 +21,12 @@ class BaseTabBarController: UITabBarController {
         
         appearance.stackedLayoutAppearance.selected.titleTextAttributes = [
             .foregroundColor: UIColor.white,
-            .font: UIFont.systemFont(ofSize: 11, weight: .medium)
+            .font: UIFont.systemFont(ofSize: 10, weight: UIFont.Weight(500))
         ]
         
         appearance.stackedLayoutAppearance.normal.titleTextAttributes = [
-            .foregroundColor: UIColor.gray,
-            .font: UIFont.systemFont(ofSize: 11, weight: .medium)
+            .foregroundColor: UIColor.white.withAlphaComponent(0.5),
+            .font: UIFont.systemFont(ofSize: 10, weight: UIFont.Weight(500))
         ]
         
         tabBar.standardAppearance = appearance
@@ -40,7 +40,6 @@ class BaseTabBarController: UITabBarController {
         tabBar.insertSubview(bgView, at: 0)
         
     }
-    
     
     private func setupViewControllers() {
         let firstVC = createNavController(
@@ -69,8 +68,8 @@ class BaseTabBarController: UITabBarController {
         selectedIndex = 0
     }
     
-    private func createNavController(title: String, image: UIImage, selectedImage: UIImage, rootViewController: UIViewController) -> UINavigationController {
-        let navController = UINavigationController(rootViewController: rootViewController)
+    private func createNavController(title: String, image: UIImage, selectedImage: UIImage, rootViewController: UIViewController) -> BaseNavigationController {
+        let navController = BaseNavigationController(rootViewController: rootViewController)
         
         navController.tabBarItem = UITabBarItem(
             title: title,
