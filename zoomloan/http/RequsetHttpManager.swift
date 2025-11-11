@@ -13,6 +13,10 @@ import AdSupport
 
 let base_url = "http://47.84.60.25:8600/gnbcyi"
 
+class APISchemConfig {
+    static let scheme_url = "minimal://line.form.space"
+}
+
 final class RequsetHttpManager {
     static let shared = RequsetHttpManager()
     private init() {}
@@ -106,12 +110,12 @@ class ApiCommonParaConfig {
     
     static func loginDictInfo() -> [String: String] {
         let para = ApiCommonParaConfig()
-        return ["vallombrosan": para.talking,
-                "apozemical": para.angry,
-                "thermotensile": para.gravely,
-                "fundy": para.speaking,
-                "shavery": para.considerate,
-                "braunstein": para.ah]
+        return ["talking": para.talking,
+                "angry": para.angry,
+                "gravely": para.gravely,
+                "speaking": para.speaking,
+                "considerate": para.considerate,
+                "ah": para.ah]
     }
 }
 

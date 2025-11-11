@@ -15,6 +15,8 @@ class credulityModel: Codable {
     var efforts: effortsModel?
     var considerate: String?
     var really: [reallyModel]?
+    var trick: String?
+    var userInfo: userInfoModel?
 }
 
 class effortsModel: Codable {
@@ -26,6 +28,9 @@ class effortsModel: Codable {
 
 class reallyModel: Codable {
     var odd: String?
+    var affray: String?
+    var trick: String?
+    var searched: String?
     var chairs: [chairsModel]?
 }
 
@@ -40,4 +45,8 @@ class chairsModel: Codable {
     var relate: String?
     var hereafter: String?
     var explain: String?
+}
+
+class userInfoModel: Codable {
+    var userphone: String?
 }

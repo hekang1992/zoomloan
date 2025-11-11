@@ -24,4 +24,20 @@ class HomeViewModel {
         }
     }
     
+    func applyProductInfo(with json: [String: Any]) async throws -> BaseModel {
+        
+        Loading.show()
+        
+        defer {
+            Loading.hide()
+        }
+        
+        do {
+            let model: BaseModel = try await RequsetHttpManager.shared.post("/dhlpt/superstitious", body: json)
+            return model
+        } catch  {
+            throw error
+        }
+    }
+    
 }

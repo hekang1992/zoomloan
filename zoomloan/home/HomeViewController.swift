@@ -29,8 +29,8 @@ class HomeViewController: BaseViewController {
             self?.getHomeMessageInfo()
         })
         
-        homeView.applyBlock = { [weak self] in
-            
+        homeView.applyBlock = { [weak self] model in
+            self?.applyProductInfo(with: model)
         }
     }
     
@@ -76,4 +76,23 @@ extension HomeViewController {
         return []
     }
     
+    private func applyProductInfo(with model: chairsModel) {
+        let viewModel = HomeViewModel()
+        let borne = model.borne ?? 0
+        Task {
+            do {
+                let model = try await viewModel.applyProductInfo(with: ["suits": borne])
+                if model.sentences == "0" {
+                    let nextPageStr = model.credulity?.trick ?? ""
+                    SchemeURLManagerTool.goPageWithPageUrl(nextPageStr, from: self)
+                }else {
+                    ToastView.showMessage(with: model.regarding ?? "")
+                }
+            } catch {
+                
+            }
+        }
+    }
+    
 }
+

