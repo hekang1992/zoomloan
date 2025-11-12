@@ -32,11 +32,7 @@ class HomeViewController: BaseViewController {
         
         homeView.applyBlock = { [weak self] model in
             guard let self = self else { return }
-//            self.applyProductInfo(with: model)
-            let timeView = PopTimeView(frame: self.view.bounds)
-            timeView.defaultDateString = "12-12-2000"
-            let alertVc = TYAlertController(alert: timeView, preferredStyle: .actionSheet)
-            self.present(alertVc!, animated: true)
+            self.applyProductInfo(with: model)
         }
     }
     

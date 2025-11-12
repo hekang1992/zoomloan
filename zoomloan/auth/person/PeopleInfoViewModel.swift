@@ -1,15 +1,13 @@
 //
-//  Untitled.swift
+//  PeopleInfoViewModel.swift
 //  zoomloan
 //
 //  Created by hekang on 2025/11/12.
 //
 
-import UIKit
-
-class UploadAuthViewModel {
+class PeopleInfoViewModel {
     
-    func uploadImageInfo(with json: [String: Any], imageData: Data) async throws -> BaseModel {
+    func getListInfo(with json: [String: Any]) async throws -> BaseModel {
         
         Loading.show()
         
@@ -18,14 +16,14 @@ class UploadAuthViewModel {
         }
         
         do {
-            let model: BaseModel = try await RequsetHttpManager.shared.uploadImage("/dhlpt/ease", imageData: imageData, params: json)
+            let model: BaseModel = try await RequsetHttpManager.shared.post("/dhlpt/prevail", body: json)
             return model
         } catch  {
             throw error
         }
     }
     
-    func saveMessageInfo(with json: [String: Any]) async throws -> BaseModel {
+    func saveInfo(with json: [String: Any]) async throws -> BaseModel {
         
         Loading.show()
         
@@ -34,7 +32,7 @@ class UploadAuthViewModel {
         }
         
         do {
-            let model: BaseModel = try await RequsetHttpManager.shared.post("/dhlpt/efforts", body: json)
+            let model: BaseModel = try await RequsetHttpManager.shared.post("/dhlpt/entreaties", body: json)
             return model
         } catch  {
             throw error

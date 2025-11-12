@@ -25,6 +25,8 @@ class credulityModel: Codable {
     var belong: angerModel?
     var suggestion: [String]?
     var insensibility: [String]?
+    var scrupulous: [scrupulousModel]?
+    var superiority: [superiorityModel]?
 }
 
 class effortsModel: Codable {
@@ -92,4 +94,27 @@ class expectedModel: Codable {
 
 class angerModel: Codable {
     var possessed: Int?
+    var trick: String?
+}
+
+class scrupulousModel: Codable {
+    var jealously: String?
+    var importance: String?
+    var sentences: String?
+}
+
+class superiorityModel: Codable {
+    var affray: String?
+    var sternly: String?
+    var sentences: String?
+    var conscious: String?
+    var displayed: Int?
+    var impunity: String?//value
+    var odd: String?//key
+    var irascible: [irascibleModel]?
+}
+
+class irascibleModel: Codable {
+    var choler: String?
+    var odd: Int?
 }

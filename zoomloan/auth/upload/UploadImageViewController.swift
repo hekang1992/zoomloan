@@ -13,6 +13,7 @@ import AVFoundation
 import Photos
 import RxSwift
 import RxCocoa
+import Kingfisher
 
 class UploadImageViewController: BaseViewController{
     
@@ -95,6 +96,7 @@ class UploadImageViewController: BaseViewController{
                 alertFaceExampleView()
                 return
             }
+            ToastView.showMessage(with: "认证完成===========")
         }
         
         uploadView.nextBtn.rx.tap.bind(onNext: { [weak self] in
@@ -124,20 +126,45 @@ extension UploadImageViewController {
     private func peopleDetailInfo() {
         let viewModel = ProductDetailViewModel()
         let json = ["suits": productID]
+        
+        defer {
+            self.uploadView.scrollView.mj_header?.endRefreshing()
+        }
+        
         Task {
             do {
                 let model = try await viewModel.facePageInfo(with: json)
                 if model.sentences == "0" {
                     self.baseModel = model
                     let angerModel = model.credulity?.anger
+                    let belongModel = model.credulity?.belong
                     let photo = angerModel?.possessed ?? 0
+                    let face = belongModel?.possessed ?? 0
+                    
                     if photo == 0 {
                         alertPhotoExampleView()
+                        return
+                    }
+                    
+                    if photo == 1 {
+                        let logoUrl = angerModel?.trick ?? ""
+                        self.uploadView.oneListView.asoImageView.isHidden = false
+                        self.uploadView.oneListView.descImageView.kf.setImage(with: URL(string: logoUrl))
+                    }
+                    
+                    if face == 0 {
+                        alertFaceExampleView()
+                        return
+                    }
+                    
+                    if face == 1 {
+                        let logoUrl = belongModel?.trick ?? ""
+                        self.uploadView.twoListView.asoImageView.isHidden = false
+                        self.uploadView.twoListView.descImageView.kf.setImage(with: URL(string: logoUrl))
                     }
                 }
-                await self.uploadView.scrollView.mj_header?.endRefreshing()
             } catch {
-                await self.uploadView.scrollView.mj_header?.endRefreshing()
+                
             }
         }
     }
@@ -174,7 +201,7 @@ extension UploadImageViewController {
         
         examView.sureBlock = { [weak self] in
             self?.dismiss(animated: true) {
-                self?.showImagePickerSheet()
+                self?.checkCameraPermission(with: 1)
             }
         }
     }
@@ -193,7 +220,7 @@ extension UploadImageViewController {
         // 相机选项
         let cameraAction = UIAlertAction(title: "拍照", style: .default) { [weak self] _ in
             self?.source = 1
-            self?.checkCameraPermission()
+            self?.checkCameraPermission(with: 0)
         }
         
         // 相册选项
@@ -214,19 +241,19 @@ extension UploadImageViewController {
     }
     
     // MARK: - 权限检查
-    private func checkCameraPermission() {
+    private func checkCameraPermission(with source: Int) {
         let status = AVCaptureDevice.authorizationStatus(for: .video)
         
         switch status {
         case .authorized:
             // 已授权，打开相机
-            openCamera()
+            openCamera(with: source)
         case .notDetermined:
             // 未决定，请求权限
             AVCaptureDevice.requestAccess(for: .video) { [weak self] granted in
                 DispatchQueue.main.async {
                     if granted {
-                        self?.openCamera()
+                        self?.openCamera(with: source)
                     } else {
                         self?.showPermissionAlert(message: "相机权限被拒绝，请在设置中启用")
                     }
@@ -270,7 +297,7 @@ extension UploadImageViewController {
     }
     
     // MARK: - 打开相机和相册
-    private func openCamera() {
+    private func openCamera(with source: Int) {
         guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
             showAlert(title: "错误", message: "相机不可用")
             return
@@ -280,6 +307,7 @@ extension UploadImageViewController {
         imagePicker.delegate = self
         imagePicker.sourceType = .camera
         imagePicker.allowsEditing = false
+        imagePicker.cameraDevice = source == 1 ? .front : .rear
         present(imagePicker, animated: true)
     }
     
@@ -367,12 +395,49 @@ extension UploadImageViewController {
             do {
                 let model = try await viewModel.uploadImageInfo(with: json, imageData: imageData)
                 if model.sentences == "0" {
-                    
+                    if isFace == 11 {
+                        alertNameView(with: model.credulity?.scrupulous ?? [])
+                    }else {
+                        self.peopleDetailInfo()
+                    }
                 }else {
                     ToastView.showMessage(with: model.regarding ?? "")
                 }
             } catch  {
                 
+            }
+        }
+    }
+    
+    private func alertNameView(with modelArray: [scrupulousModel]) {
+        let viweModel = UploadAuthViewModel()
+        let nameView = AlertNameView(frame: self.view.bounds)
+        nameView.modelArray = modelArray
+        let alertVc = TYAlertController(alert: nameView, preferredStyle: .actionSheet)
+        self.present(alertVc!, animated: true)
+        nameView.cancelBlock = { [weak self] in
+            self?.dismiss(animated: true)
+        }
+        nameView.sureBlock = { [weak self] in
+            guard let self = self else { return }
+            var json = ["insulted": authStr, "odd": isFace]
+            modelArray.forEach { model in
+                let key = model.sentences ?? ""
+                json[key] = model.importance ?? ""
+            }
+            Task {
+                do {
+                    let model = try await viweModel.saveMessageInfo(with: json)
+                    if model.sentences == "0" {
+                        self.dismiss(animated: true) {
+                            self.peopleDetailInfo()
+                        }
+                    }else {
+                        ToastView.showMessage(with: model.regarding ?? "")
+                    }
+                } catch  {
+                    
+                }
             }
         }
     }

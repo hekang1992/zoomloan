@@ -90,6 +90,11 @@ extension ProductDetailViewController {
     private func getProductDetailInfo() {
         let viewModel = ProductDetailViewModel()
         let json = ["suits": productID, "zoom": "1"]
+        
+        defer {
+            self.listView.scrollView.mj_header?.endRefreshing()
+        }
+        
         Task {
             do {
                 let model = try await viewModel.detailPageInfo(with: json)
@@ -102,9 +107,7 @@ extension ProductDetailViewController {
                     self.listView.modelArray = model.credulity?.produce ?? []
                     self.expectedmodel = model.credulity?.expected
                 }
-                await self.listView.scrollView.mj_header?.endRefreshing()
             } catch {
-                await self.listView.scrollView.mj_header?.endRefreshing()
                 print(error)
             }
         }
@@ -116,12 +119,16 @@ class ChoosePageVcConfig {
     static func chooseVc(with type: String,
                          pageUrl: String,
                          viewController: ProductDetailViewController) {
-        let json = ["suits": viewController.productID]
+        let productID = viewController.productID
+        let json = ["suits": productID]
         switch type {
         case "his":
             getFaceInfo(with: json, vc: viewController)
             break
         case "turn":
+            let peopleVc = PeopleInfoViewController()
+            peopleVc.productID = productID
+            viewController.navigationController?.pushViewController(peopleVc, animated: true)
             break
         case "quality":
             break

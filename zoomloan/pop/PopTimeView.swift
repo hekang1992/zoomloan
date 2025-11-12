@@ -205,11 +205,26 @@ class PopTimeView: BaseView {
     
     @objc private func dateChanged(_ sender: UIDatePicker) {
         let time = dateFormatter.string(from: sender.date)
-        self.time = time
-        self.timeBlock?(time)
+        self.time = convertDateString(time) ?? ""
     }
     
     func getSelectedDateString() -> String {
         return dateFormatter.string(from: datePicker.date)
+    }
+    
+    func convertDateString(_ dateString: String) -> String? {
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = "yyyy-MM-dd"
+        inputFormatter.locale = Locale(identifier: "en_US_POSIX")
+        
+        let outputFormatter = DateFormatter()
+        outputFormatter.dateFormat = "dd-MM-yyyy"
+        outputFormatter.locale = Locale(identifier: "en_US_POSIX")
+        
+        guard let date = outputFormatter.date(from: dateString) else {
+            return nil
+        }
+
+        return inputFormatter.string(from: date)
     }
 }

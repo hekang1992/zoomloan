@@ -41,7 +41,6 @@ class UploadListView: BaseView {
     
     lazy var descImageView: UIImageView = {
         let descImageView = UIImageView()
-        descImageView.contentMode = .scaleAspectFit
         return descImageView
     }()
     
