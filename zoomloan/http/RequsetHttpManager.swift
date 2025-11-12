@@ -80,7 +80,7 @@ extension RequsetHttpManager {
     ) async throws -> T {
         return try await AF.upload(multipartFormData: { formData in
             
-            formData.append(imageData, withName: "file", fileName: "image.jpg", mimeType: "image/jpeg")
+            formData.append(imageData, withName: "image", fileName: "image.jpg", mimeType: "image/jpeg")
             
             if let params = params {
                 for (key, value) in params {

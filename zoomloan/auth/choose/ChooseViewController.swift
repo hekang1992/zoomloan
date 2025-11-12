@@ -156,6 +156,9 @@ extension ChooseViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let title = modelArray?[indexPath.row] ?? ""
-        ToastView.showMessage(with: title)
+        let uploadVc = UploadImageViewController()
+        uploadVc.authStr = title
+        uploadVc.productID = productID
+        self.navigationController?.pushViewController(uploadVc, animated: true)
     }
 }

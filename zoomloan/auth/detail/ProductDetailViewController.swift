@@ -144,16 +144,16 @@ class ChoosePageVcConfig {
                 let model = try await viewModel.facePageInfo(with: json)
                 if model.sentences == "0" {
                     let angerModel = model.credulity?.anger
-                    let belongModel = model.credulity?.belong
                     let photo = angerModel?.possessed ?? 0
                     if photo == 0 {
                         let chooseVc = ChooseViewController()
                         chooseVc.baseModel = model
+                        chooseVc.productID = vc.productID
                         chooseVc.modelArray = model.credulity?.suggestion ?? []
                         vc.navigationController?.pushViewController(chooseVc, animated: true)
                     }else {
                         let uploadVc = UploadImageViewController()
-                        uploadVc.json = json
+                        uploadVc.productID = vc.productID
                         vc.navigationController?.pushViewController(uploadVc, animated: true)
                     }
                 }

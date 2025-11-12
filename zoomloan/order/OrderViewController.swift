@@ -19,7 +19,7 @@ class OrderViewController: BaseViewController {
         let scrollView = UIScrollView()
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
-        scrollView.backgroundColor = .systemPink
+        scrollView.backgroundColor = .clear
         return scrollView
     }()
 

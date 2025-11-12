@@ -72,6 +72,12 @@ class ProductDetailView: BaseView {
         return oneImageView
     }()
     
+    lazy var insImageView: UIImageView = {
+        let insImageView = UIImageView()
+        insImageView.image = UIImage(named: "net_icon_image")
+        return insImageView
+    }()
+    
     lazy var twoImageView: UIImageView = {
         let twoImageView = UIImageView()
         twoImageView.image = UIImage(named: "pro_list_image")
@@ -167,6 +173,7 @@ class ProductDetailView: BaseView {
         oneImageView.addSubview(logoImageView)
         oneImageView.addSubview(nameLabel)
         oneImageView.addSubview(oneLabel)
+        oneImageView.addSubview(insImageView)
         oneImageView.addSubview(moneyLabel)
         
         logoImageView.snp.makeConstraints { make in
@@ -183,6 +190,11 @@ class ProductDetailView: BaseView {
             make.centerX.equalToSuperview()
             make.top.equalToSuperview().offset(59)
             make.height.equalTo(20)
+        }
+        insImageView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(oneLabel.snp.bottom).offset(4)
+            make.size.equalTo(CGSize(width: 290, height: 57))
         }
         moneyLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
