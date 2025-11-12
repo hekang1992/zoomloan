@@ -10,6 +10,7 @@ import SnapKit
 import TYAlertController
 import RxSwift
 import RxCocoa
+import MJRefresh
 
 let peo_title = "Personal Details"
 
@@ -133,6 +134,11 @@ class PeopleInfoViewController: BaseViewController {
             addChangeInfo(with: json as! [String : String])
         }).disposed(by: disposeBag)
         
+        
+//        self.tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
+//            self?.listInfo()
+//        })
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -147,6 +153,11 @@ extension PeopleInfoViewController {
     private func listInfo() {
         let viewModel = PeopleInfoViewModel()
         let json = ["suits": productID ?? ""]
+        
+//        defer {
+//            self.tableView.mj_header?.endRefreshing()
+//        }
+        
         Task {
             do {
                 let model = try await viewModel.getListInfo(with: json)
