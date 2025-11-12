@@ -131,14 +131,14 @@ extension AlertNameView {
     
     private func showTimeView(with cell: EnumViewCell, model: scrupulousModel) {
         let timeView = PopTimeView(frame: self.bounds)
-        let time = cell.phoneTextFiled.text ?? ""
+        let time = cell.numTextField.text ?? ""
         let conTime = convertDateString(time) ?? ""
         timeView.defaultDateString = conTime.isEmpty ? "12-12-2000" : conTime
         guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
         window.addSubview(timeView)
         
         timeView.timeBlock = { time in
-            cell.phoneTextFiled.text = time
+            cell.numTextField.text = time
             timeView.defaultDateString = time
             model.importance = time
             timeView.removeFromSuperview()

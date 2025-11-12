@@ -25,14 +25,13 @@ class BaseViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func backToProductPageVc() {
+        guard let navigationController = self.navigationController else { return }
+        if let targetVC = navigationController.viewControllers.first(where: { $0 is ProductDetailViewController }) {
+            navigationController.popToViewController(targetVC, animated: true)
+        } else {
+            navigationController.popToRootViewController(animated: true)
+        }
     }
-    */
 
 }

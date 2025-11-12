@@ -21,8 +21,8 @@ class EnumViewCell: UITableViewCell {
             guard let model = model else { return }
             let name = model.jealously ?? ""
             nameLabel.text = name
-            phoneTextFiled.placeholder = name
-            phoneTextFiled.text = model.importance ?? ""
+            numTextField.placeholder = name
+            numTextField.text = model.importance ?? ""
         }
     }
     
@@ -30,8 +30,8 @@ class EnumViewCell: UITableViewCell {
         didSet {
             guard let authModel = authModel else { return }
             nameLabel.text = authModel.affray ?? ""
-            phoneTextFiled.placeholder = authModel.sternly ?? ""
-            phoneTextFiled.text = authModel.impunity ?? ""
+            numTextField.placeholder = authModel.sternly ?? ""
+            numTextField.text = authModel.impunity ?? ""
         }
     }
     
@@ -51,16 +51,16 @@ class EnumViewCell: UITableViewCell {
         return bgView
     }()
     
-    lazy var phoneTextFiled: UITextField = {
-        let phoneTextFiled = UITextField()
-        phoneTextFiled.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight(600))
-        phoneTextFiled.textColor = UIColor.init(hexString: "#333333")
-        phoneTextFiled.backgroundColor = .clear
-        phoneTextFiled.layer.cornerRadius = 14
-        phoneTextFiled.clipsToBounds = true
-        phoneTextFiled.leftView = UIView(frame: CGRectMake(0, 0, 10, 10))
-        phoneTextFiled.leftViewMode = .always
-        return phoneTextFiled
+    lazy var numTextField: UITextField = {
+        let numTextField = UITextField()
+        numTextField.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight(600))
+        numTextField.textColor = UIColor.init(hexString: "#59BDB7")
+        numTextField.backgroundColor = .clear
+        numTextField.layer.cornerRadius = 14
+        numTextField.clipsToBounds = true
+        numTextField.leftView = UIView(frame: CGRectMake(0, 0, 10, 10))
+        numTextField.leftViewMode = .always
+        return numTextField
     }()
     
     lazy var rightImageView: UIImageView = {
@@ -79,7 +79,7 @@ class EnumViewCell: UITableViewCell {
         contentView.addSubview(nameLabel)
         contentView.addSubview(bgView)
         bgView.addSubview(rightImageView)
-        bgView.addSubview(phoneTextFiled)
+        bgView.addSubview(numTextField)
         
         nameLabel.snp.makeConstraints { make in
             make.top.equalToSuperview()
@@ -101,7 +101,7 @@ class EnumViewCell: UITableViewCell {
             make.size.equalTo(CGSize(width: 16, height: 16))
         }
         
-        phoneTextFiled.snp.makeConstraints { make in
+        numTextField.snp.makeConstraints { make in
             make.left.equalToSuperview()
             make.top.bottom.equalToSuperview()
             make.right.equalTo(rightImageView.snp.left).offset(-10)

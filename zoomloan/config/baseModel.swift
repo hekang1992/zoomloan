@@ -27,6 +27,7 @@ class credulityModel: Codable {
     var insensibility: [String]?
     var scrupulous: [scrupulousModel]?
     var superiority: [superiorityModel]?
+    var eye: [eyeModel]?
 }
 
 class effortsModel: Codable {
@@ -42,6 +43,8 @@ class reallyModel: Codable {
     var trick: String?
     var searched: String?
     var chairs: [chairsModel]?
+    var choler: String?
+    var really: [reallyModel]?
 }
 
 class chairsModel: Codable {
@@ -103,18 +106,14 @@ class scrupulousModel: Codable {
     var sentences: String?
 }
 
-class superiorityModel: Codable {
+class eyeModel: Codable {
     var affray: String?
-    var sternly: String?
-    var sentences: String?
-    var conscious: String?
-    var displayed: Int?
-    var impunity: String?//value
-    var odd: String?//key
-    var irascible: [irascibleModel]?
-}
-
-class irascibleModel: Codable {
+    var cavigni: String?
+    var gaiety: String?
+    var merriment: String?
+    var loose: String?
     var choler: String?
-    var odd: Int?
+    var contrary: String?
+    var irascible: [irascibleModel]?
+    var clouded: String?
 }

@@ -136,20 +136,5 @@ final class Loading {
             })
         }
     }
-    
-    // 可选：自定义样式的方法
-    static func setBackgroundColor(_ color: UIColor) {
-        shared.backgroundView?.backgroundColor = color
-    }
-    
-    static func setIndicatorColor(_ color: UIColor) {
-        shared.activityIndicator?.color = color
-    }
-    
-    static func setBackgroundSize(_ size: CGSize) {
-        shared.backgroundView?.snp.updateConstraints { make in
-            make.size.equalTo(size)
-        }
-    }
 }
 

@@ -34,6 +34,8 @@ class HomeViewController: BaseViewController {
             guard let self = self else { return }
             self.applyProductInfo(with: model)
         }
+        
+        getAssInfo()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -96,5 +98,24 @@ extension HomeViewController {
         }
     }
     
+    private func getAssInfo() {
+        let viewModel = HomeViewModel()
+        Task {
+            do {
+                let model = try await viewModel.getAssInfo(with: ["suits": "1"])
+                if model.sentences == "0" {
+                    CityConfig.shared.addressModel = model
+                }
+            } catch  {
+                
+            }
+        }
+    }
+    
 }
 
+class CityConfig {
+    static let shared = CityConfig()
+    private init() {}
+    var addressModel: BaseModel?
+}

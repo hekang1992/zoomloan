@@ -1,5 +1,5 @@
 //
-//  PeopleInfoViewController.swift
+//  LifeHardViewController.swift
 //  zoomloan
 //
 //  Created by hekang on 2025/11/12.
@@ -11,9 +11,9 @@ import TYAlertController
 import RxSwift
 import RxCocoa
 
-let peo_title = "Personal Details"
+let hadf_title = "Work Certification"
 
-class PeopleInfoViewController: BaseViewController {
+class LifeHardViewController: BaseViewController {
     
     var productID: String? {
         didSet {
@@ -66,7 +66,7 @@ class PeopleInfoViewController: BaseViewController {
         
         // Do any additional setup after loading the view.
         view.addSubview(headView)
-        headView.nameLabel.text = peo_title
+        headView.nameLabel.text = hadf_title
         headView.snp.makeConstraints { make in
             make.left.right.top.equalToSuperview()
             make.height.equalTo(122)
@@ -78,7 +78,7 @@ class PeopleInfoViewController: BaseViewController {
         }
         
         let logoImageView = UIImageView()
-        logoImageView.image = UIImage(named: "lofo_pe_image")
+        logoImageView.image = UIImage(named: "has_icon_image")
         view.addSubview(logoImageView)
         logoImageView.snp.makeConstraints { make in
             make.size.equalTo(CGSize(width: 40, height: 40))
@@ -88,7 +88,7 @@ class PeopleInfoViewController: BaseViewController {
         
         let nameLabel = UILabel()
         nameLabel.textAlignment = .left
-        nameLabel.text = peo_title
+        nameLabel.text = hadf_title
         nameLabel.textColor = UIColor.init(hexString: "#333333")
         nameLabel.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight(700))
         view.addSubview(nameLabel)
@@ -142,10 +142,10 @@ class PeopleInfoViewController: BaseViewController {
     
 }
 
-extension PeopleInfoViewController {
+extension LifeHardViewController {
     
     private func listInfo() {
-        let viewModel = PeopleInfoViewModel()
+        let viewModel = LiftHardViewModel()
         let json = ["suits": productID ?? ""]
         Task {
             do {
@@ -162,7 +162,7 @@ extension PeopleInfoViewController {
     }
     
     private func addChangeInfo(with json: [String: String]) {
-        let viewModel = PeopleInfoViewModel()
+        let viewModel = LiftHardViewModel()
         Task {
             do {
                 let model = try await viewModel.saveInfo(with: json)
@@ -179,7 +179,7 @@ extension PeopleInfoViewController {
     
 }
 
-extension PeopleInfoViewController: UITableViewDelegate, UITableViewDataSource {
+extension LifeHardViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return modelArray?.count ?? 0

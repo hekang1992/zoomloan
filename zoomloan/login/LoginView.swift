@@ -66,17 +66,17 @@ class LoginView: BaseView {
         return lineView
     }()
     
-    lazy var phoneTextFiled: UITextField = {
-        let phoneTextFiled = UITextField()
-        phoneTextFiled.keyboardType = .numberPad
+    lazy var numTextField: UITextField = {
+        let numTextField = UITextField()
+        numTextField.keyboardType = .numberPad
         let attrString = NSMutableAttributedString(string: DESC_PHONE, attributes: [
             .foregroundColor: UIColor.init(hexString: "#999999") as Any,
             .font: UIFont.systemFont(ofSize: 12, weight: UIFont.Weight(700))
         ])
-        phoneTextFiled.attributedPlaceholder = attrString
-        phoneTextFiled.font = UIFont.systemFont(ofSize: 12, weight: UIFont.Weight(700))
-        phoneTextFiled.textColor = UIColor.init(hexString: "#333333")
-        return phoneTextFiled
+        numTextField.attributedPlaceholder = attrString
+        numTextField.font = UIFont.systemFont(ofSize: 12, weight: UIFont.Weight(700))
+        numTextField.textColor = UIColor.init(hexString: "#333333")
+        return numTextField
     }()
     
     lazy var codeLabel: UILabel = {
@@ -198,7 +198,7 @@ class LoginView: BaseView {
         
         oneView.addSubview(numLabel)
         oneView.addSubview(lineView)
-        oneView.addSubview(phoneTextFiled)
+        oneView.addSubview(numTextField)
         
         numLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
@@ -211,7 +211,7 @@ class LoginView: BaseView {
             make.size.equalTo(CGSize(width: 1, height: 23))
             make.centerY.equalToSuperview()
         }
-        phoneTextFiled.snp.makeConstraints { make in
+        numTextField.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.left.equalTo(lineView.snp.right).offset(7)
             make.right.equalToSuperview().offset(-10)

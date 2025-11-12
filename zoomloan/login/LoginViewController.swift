@@ -31,7 +31,7 @@ class LoginViewController: BaseViewController {
         
         loginView.codeBtn.rx.tap.bind(onNext: { [weak self] in
             guard let self = self else { return }
-            let phone = self.loginView.phoneTextFiled.text ?? ""
+            let phone = self.loginView.numTextField.text ?? ""
             if phone.isEmpty {
                 ToastView.showMessage(with: DESC_PHONE)
                 return
@@ -41,7 +41,7 @@ class LoginViewController: BaseViewController {
         
         loginView.voiceBtn.rx.tap.bind(onNext: { [weak self] in
             guard let self = self else { return }
-            let phone = self.loginView.phoneTextFiled.text ?? ""
+            let phone = self.loginView.numTextField.text ?? ""
             if phone.isEmpty {
                 ToastView.showMessage(with: DESC_PHONE)
                 return
@@ -51,7 +51,7 @@ class LoginViewController: BaseViewController {
         
         loginView.loginBtn.rx.tap.bind(onNext: { [weak self] in
             guard let self = self else { return }
-            let phone = self.loginView.phoneTextFiled.text ?? ""
+            let phone = self.loginView.numTextField.text ?? ""
             let code = self.loginView.codeTextFiled.text ?? ""
             let isAgreed = self.loginView.agreementView.isAgreed.value
             if phone.isEmpty {

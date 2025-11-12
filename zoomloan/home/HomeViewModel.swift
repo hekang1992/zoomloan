@@ -40,4 +40,20 @@ class HomeViewModel {
         }
     }
     
+    func getAssInfo(with json: [String: Any]) async throws -> BaseModel {
+        
+        Loading.show()
+        
+        defer {
+            Loading.hide()
+        }
+        
+        do {
+            let model: BaseModel = try await RequsetHttpManager.shared.get("/dhlpt/affecting", params: json)
+            return model
+        } catch  {
+            throw error
+        }
+    }
+    
 }

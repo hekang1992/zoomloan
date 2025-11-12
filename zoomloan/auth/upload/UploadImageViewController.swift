@@ -56,10 +56,9 @@ class UploadImageViewController: BaseViewController{
             make.height.equalTo(122)
         }
         headView.backBlcok = { [weak self] in
-            self?.navigationController?.popViewController(animated: true)
+            guard let self = self else { return }
+            self.backToProductPageVc()
         }
-        
-        
         
         view.addSubview(uploadView)
         uploadView.snp.makeConstraints { make in
@@ -113,7 +112,7 @@ class UploadImageViewController: BaseViewController{
                 alertFaceExampleView()
                 return
             }
-            self.navigationController?.popViewController(animated: true)
+            self.backToProductPageVc()
         }).disposed(by: disposeBag)
         
         peopleDetailInfo()

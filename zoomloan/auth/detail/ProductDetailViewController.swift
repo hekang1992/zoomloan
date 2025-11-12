@@ -72,9 +72,9 @@ class ProductDetailViewController: BaseViewController {
         }).disposed(by: disposeBag)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        getProductDetailInfo()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.getProductDetailInfo()
     }
     
 }
@@ -131,8 +131,14 @@ class ChoosePageVcConfig {
             viewController.navigationController?.pushViewController(peopleVc, animated: true)
             break
         case "quality":
+            let hardVc = LifeHardViewController()
+            hardVc.productID = productID
+            viewController.navigationController?.pushViewController(hardVc, animated: true)
             break
         case "the":
+            let fromVc = FormViewController()
+            fromVc.productID = productID
+            viewController.navigationController?.pushViewController(fromVc, animated: true)
             break
         case "between":
             break
