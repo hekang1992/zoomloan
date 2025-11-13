@@ -75,6 +75,7 @@ extension LaunchViewController {
                 
 
                 if firstModel.sentences == "0" {
+                    CredulityConfig.shared.basemodel = firstModel
                     googleModel(with: firstModel.credulity?.efforts ?? effortsModel())
                 }
                 
@@ -97,4 +98,10 @@ extension LaunchViewController {
         Settings.shared.clientToken = model.withdraw ?? ""
         ApplicationDelegate.shared.application(UIApplication.shared, didFinishLaunchingWithOptions: nil)
     }
+}
+
+class CredulityConfig {
+    static let shared = CredulityConfig()
+    private init() {}
+    var basemodel: BaseModel?
 }

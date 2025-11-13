@@ -68,6 +68,16 @@ class LoginViewController: BaseViewController {
             }
             self.loignInfo(with: phone, code: code)
         }).disposed(by: disposeBag)
+        
+        loginView.agreementView.privacyPolicyTapped.subscribe(onNext: { [weak self] in
+            guard let self = self else { return }
+            let model = CredulityConfig.shared.basemodel
+            let eage = model?.credulity?.ease ?? ""
+            let webVC = H5WebViewController()
+            webVC.pageUrl = eage
+            self.navigationController?.pushViewController(webVC, animated: true)
+        }).disposed(by: disposeBag)
+            
     }
     
     @MainActor

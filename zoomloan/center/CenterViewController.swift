@@ -35,11 +35,16 @@ class CenterViewController: BaseViewController {
         }
         
         self.centerView.oneBlock = { [weak self] in
-            ToastView.showMessage(with: "1")
+            guard let self = self else { return }
+            let model = CredulityConfig.shared.basemodel
+            let eage = model?.credulity?.ease ?? ""
+            let webVC = H5WebViewController()
+            webVC.pageUrl = eage
+            self.navigationController?.pushViewController(webVC, animated: true)
         }
         
-        self.centerView.twoBlock = { [weak self] in
-            ToastView.showMessage(with: "2")
+        self.centerView.twoBlock = {
+            NotificationCenter.default.post(name: CHANGE_ROOT_VC, object: nil, userInfo: ["order": "1"])
         }
         
         self.centerView.threeBlock = { [weak self] pageUrl in

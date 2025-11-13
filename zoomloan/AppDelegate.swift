@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate {
     
     private func initNoti() {
-        NotificationCenter.default.addObserver(self, selector: #selector(changeRootVc), name: CHANGE_ROOT_VC, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(changeRootVc(_:)), name: CHANGE_ROOT_VC, object: nil)
     }
     
     private func initWindow() {
@@ -39,9 +39,13 @@ extension AppDelegate {
         window?.makeKeyAndVisible()
     }
     
-    @objc private func changeRootVc() {
+    @objc private func changeRootVc(_ noti: Notification) {
+        let tabBar = BaseTabBarController()
         if AuthLoginConfig.shared.isLoggedIn {
-            window?.rootViewController = BaseTabBarController()
+            let userInfo = noti.userInfo as? [String: String]
+            let type = userInfo?["order"] as? String ?? ""
+            tabBar.selectedIndex = type == "1" ? 1 : 0
+            window?.rootViewController = tabBar
         }else {
             window?.rootViewController = BaseNavigationController(rootViewController: LoginViewController())
         }

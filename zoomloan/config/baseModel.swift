@@ -28,6 +28,7 @@ class credulityModel: Codable {
     var scrupulous: [scrupulousModel]?
     var superiority: [superiorityModel]?
     var eye: [eyeModel]?
+    var ease: String?
 }
 
 class effortsModel: Codable {

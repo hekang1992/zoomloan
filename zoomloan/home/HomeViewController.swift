@@ -51,10 +51,22 @@ private extension HomeViewController {
         homeView.scrollView.mj_header = MJRefreshNormalHeader { [weak self] in
             self?.getHomeMessageInfo()
         }
+        
+        lampView.scrollView.mj_header = MJRefreshNormalHeader { [weak self] in
+            self?.getHomeMessageInfo()
+        }
     }
     
     func setupBindings() {
         homeView.applyBlock = { [weak self] model in
+            self?.applyProductInfo(with: model)
+        }
+        
+        lampView.headBlock = { [weak self] model in
+            self?.applyProductInfo(with: model)
+        }
+        
+        lampView.cellClickBlock = { [weak self] model in
             self?.applyProductInfo(with: model)
         }
     }
@@ -77,6 +89,7 @@ private extension HomeViewController {
             
             await MainActor.run {
                 self.homeView.scrollView.mj_header?.endRefreshing()
+                self.lampView.scrollView.mj_header?.endRefreshing()
             }
         }
     }
@@ -129,10 +142,14 @@ private extension HomeViewController {
             return
         }
         
-        if let target = items.first(where: { $0.odd == "she" }) {
-            homeView.model = target.chairs?.first
+        if let target1 = items.first(where: { $0.odd == "she" }) {
+            homeView.model = target1.chairs?.first
             toggleViews(showHome: true)
         } else {
+            let target2 = items.first(where: { $0.odd == "soon" })
+            let target3 = items.first(where: { $0.odd == "and" })
+            lampView.model = target2?.chairs?.first
+            lampView.modelArray = target3?.chairs ?? []
             toggleViews(showHome: false)
         }
     }

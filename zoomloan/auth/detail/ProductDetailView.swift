@@ -50,7 +50,15 @@ class ProductDetailView: BaseView {
         agreeLabel.font = UIFont.systemFont(ofSize: 11, weight: UIFont.Weight(500))
         agreeLabel.isUserInteractionEnabled = true
         agreeLabel.isHidden = true
-        setupAgreeLabelText()
+        let fullText = "Please refer to the <loan agreement>, Your personal information will be strictly confidential."
+        let attributedString = NSMutableAttributedString(string: fullText)
+        attributedString.addAttribute(.foregroundColor, value: UIColor.init(hexString: "#999999"), range: NSRange(location: 0, length: fullText.count))
+        
+        if let nightedRange = fullText.range(of: "<loan agreement>") {
+            let nsRange = NSRange(nightedRange, in: fullText)
+            attributedString.addAttribute(.foregroundColor, value: UIColor.init(hexString: "#333333"), range: nsRange)
+        }
+        agreeLabel.attributedText = attributedString
         return agreeLabel
     }()
     
@@ -238,17 +246,6 @@ private extension ProductDetailView {
         }
     }
     
-    func setupAgreeLabelText() {
-        let fullText = "Please refer to the <loan agreement>, Your personal information will be strictly confidential."
-        let attributedString = NSMutableAttributedString(string: fullText)
-        attributedString.addAttribute(.foregroundColor, value: UIColor.init(hexString: "#999999"), range: NSRange(location: 0, length: fullText.count))
-        
-        if let nightedRange = fullText.range(of: "<loan agreement>") {
-            let nsRange = NSRange(nightedRange, in: fullText)
-            attributedString.addAttribute(.foregroundColor, value: UIColor.init(hexString: "#333333"), range: nsRange)
-        }
-        agreeLabel.attributedText = attributedString
-    }
 }
 
 // MARK: - Data Update Methods

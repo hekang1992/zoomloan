@@ -8,6 +8,8 @@
 import UIKit
 import SnapKit
 import MJRefresh
+import RxSwift
+import RxGesture
 
 class OrderViewController: BaseViewController {
     
@@ -77,6 +79,10 @@ class OrderViewController: BaseViewController {
         emptyView.snp.makeConstraints { make in
             make.top.equalTo(scrollView.snp.bottom)
             make.left.right.bottom.equalToSuperview()
+        }
+        
+        emptyView.clickBlock = {
+            NotificationCenter.default.post(name: CHANGE_ROOT_VC, object: nil)
         }
         
         listView.cellBlock = { [weak self ] model in
@@ -227,12 +233,15 @@ extension OrderViewController {
 }
 
 
-class EmptyView: UIView {
+class EmptyView: BaseView {
+    
+    var clickBlock: (() -> Void)?
     
     lazy var bgImageView: UIImageView = {
         let bgImageView = UIImageView()
         bgImageView.image = UIImage(named: "no_list_image")
         bgImageView.contentMode = .scaleAspectFit
+        bgImageView.isUserInteractionEnabled = true
         return bgImageView
     }()
     
@@ -244,6 +253,9 @@ class EmptyView: UIView {
             make.top.equalToSuperview().offset(100)
             make.size.equalTo(CGSize(width: 250, height: 250))
         }
+        bgImageView.rx.tapGesture().when(.recognized).subscribe(onNext: { [weak self] _ in
+            self?.clickBlock?()
+        }).disposed(by: disposeBag)
     }
     
     required init?(coder: NSCoder) {
