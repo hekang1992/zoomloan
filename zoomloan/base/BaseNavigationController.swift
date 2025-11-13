@@ -9,32 +9,47 @@ import UIKit
 
 class BaseNavigationController: UINavigationController {
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.navigationBar.isHidden = true
-        self.navigationBar.isTranslucent = false
-        
-        if let gestureRecognizers = view.gestureRecognizers {
-            for gesture in gestureRecognizers {
-                if let popGesture = gesture as? UIScreenEdgePanGestureRecognizer {
-                    view.removeGestureRecognizer(popGesture)
-                }
-            }
-        }
+        setupNavigationBar()
+        removeScreenEdgePanGesture()
     }
     
+    // MARK: - Navigation Overrides
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
-        viewController.hidesBottomBarWhenPushed = self.viewControllers.count > 0
+        configureViewControllerBeforePush(viewController)
         super.pushViewController(viewController, animated: animated)
     }
     
     override func setViewControllers(_ viewControllers: [UIViewController], animated: Bool) {
-        for (index, viewController) in viewControllers.enumerated() {
+        configureViewControllersBeforeSet(viewControllers)
+        super.setViewControllers(viewControllers, animated: animated)
+    }
+}
+
+// MARK: - Private Methods
+private extension BaseNavigationController {
+    func setupNavigationBar() {
+        navigationBar.isHidden = true
+        navigationBar.isTranslucent = false
+    }
+    
+    func removeScreenEdgePanGesture() {
+        view.gestureRecognizers?
+            .compactMap { $0 as? UIScreenEdgePanGestureRecognizer }
+            .forEach { view.removeGestureRecognizer($0) }
+    }
+    
+    func configureViewControllerBeforePush(_ viewController: UIViewController) {
+        viewController.hidesBottomBarWhenPushed = !viewControllers.isEmpty
+    }
+    
+    func configureViewControllersBeforeSet(_ viewControllers: [UIViewController]) {
+        viewControllers.enumerated().forEach { index, viewController in
             if index > 0 {
                 viewController.hidesBottomBarWhenPushed = true
             }
         }
-        super.setViewControllers(viewControllers, animated: animated)
     }
 }

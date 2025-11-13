@@ -12,29 +12,23 @@ import RxCocoa
 
 class EnumViewCell: UITableViewCell {
     
+    // MARK: - Properties
     let disposeBag = DisposeBag()
-    
     var clickBlock: (() -> Void)?
     
     var model: scrupulousModel? {
         didSet {
-            guard let model = model else { return }
-            let name = model.jealously ?? ""
-            nameLabel.text = name
-            numTextField.placeholder = name
-            numTextField.text = model.importance ?? ""
+            updateUIWithModel()
         }
     }
     
     var authModel: superiorityModel? {
         didSet {
-            guard let authModel = authModel else { return }
-            nameLabel.text = authModel.affray ?? ""
-            numTextField.placeholder = authModel.sternly ?? ""
-            numTextField.text = authModel.impunity ?? ""
+            updateUIWithAuthModel()
         }
     }
     
+    // MARK: - UI Components
     lazy var nameLabel: UILabel = {
         let nameLabel = UILabel()
         nameLabel.textAlignment = .left
@@ -60,6 +54,7 @@ class EnumViewCell: UITableViewCell {
         numTextField.clipsToBounds = true
         numTextField.leftView = UIView(frame: CGRectMake(0, 0, 10, 10))
         numTextField.leftViewMode = .always
+        numTextField.isUserInteractionEnabled = false
         return numTextField
     }()
     
@@ -74,13 +69,30 @@ class EnumViewCell: UITableViewCell {
         return cilciBtn
     }()
     
+    // MARK: - Initialization
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupUI()
+        setupConstraints()
+        bindActions()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+// MARK: - UI Setup
+private extension EnumViewCell {
+    func setupUI() {
         contentView.addSubview(nameLabel)
         contentView.addSubview(bgView)
         bgView.addSubview(rightImageView)
         bgView.addSubview(numTextField)
-        
+        contentView.addSubview(cilciBtn)
+    }
+    
+    func setupConstraints() {
         nameLabel.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.left.equalToSuperview().offset(22)
@@ -107,20 +119,34 @@ class EnumViewCell: UITableViewCell {
             make.right.equalTo(rightImageView.snp.left).offset(-10)
         }
         
-        contentView.addSubview(cilciBtn)
         cilciBtn.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
-        cilciBtn.rx.tap.bind(onNext: { [weak self] in
-            guard let self = self else { return }
-            self.clickBlock?()
-        }).disposed(by: disposeBag)
-        
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    func bindActions() {
+        cilciBtn.rx.tap
+            .bind(onNext: { [weak self] in
+                self?.clickBlock?()
+            })
+            .disposed(by: disposeBag)
+    }
+}
+
+// MARK: - Data Update Methods
+private extension EnumViewCell {
+    func updateUIWithModel() {
+        guard let model = model else { return }
+        let name = model.jealously ?? ""
+        nameLabel.text = name
+        numTextField.placeholder = name
+        numTextField.text = model.importance ?? ""
     }
     
+    func updateUIWithAuthModel() {
+        guard let authModel = authModel else { return }
+        nameLabel.text = authModel.affray ?? ""
+        numTextField.placeholder = authModel.sternly ?? ""
+        numTextField.text = authModel.impunity ?? ""
+    }
 }

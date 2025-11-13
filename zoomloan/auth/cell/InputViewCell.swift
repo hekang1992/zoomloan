@@ -10,28 +10,20 @@ import SnapKit
 
 class InputViewCell: UITableViewCell {
     
+    // MARK: - Properties
     var model: scrupulousModel? {
         didSet {
-            guard let model = model else { return }
-            let name = model.jealously ?? ""
-            nameLabel.text = name
-            numTextField.placeholder = name
-            numTextField.text = model.importance ?? ""
+            updateUIWithModel()
         }
     }
     
     var authModel: superiorityModel? {
         didSet {
-            guard let authModel = authModel else { return }
-            nameLabel.text = authModel.affray ?? ""
-            numTextField.placeholder = authModel.sternly ?? ""
-            numTextField.text = authModel.impunity ?? ""
-            let displayed = authModel.displayed ?? 0
-            
-            numTextField.keyboardType = displayed == 1 ? .numberPad : .default
+            updateUIWithAuthModel()
         }
     }
     
+    // MARK: - UI Components
     lazy var nameLabel: UILabel = {
         let nameLabel = UILabel()
         nameLabel.textAlignment = .left
@@ -62,12 +54,27 @@ class InputViewCell: UITableViewCell {
         return numTextField
     }()
     
+    // MARK: - Initialization
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupUI()
+        setupConstraints()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+// MARK: - UI Setup
+private extension InputViewCell {
+    func setupUI() {
         contentView.addSubview(nameLabel)
         contentView.addSubview(bgView)
         bgView.addSubview(numTextField)
-        
+    }
+    
+    func setupConstraints() {
         nameLabel.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.left.equalToSuperview().offset(22)
@@ -87,28 +94,43 @@ class InputViewCell: UITableViewCell {
             make.top.bottom.equalToSuperview()
             make.right.equalToSuperview().offset(-10)
         }
-        
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
 
-extension InputViewCell: UITextFieldDelegate {
+// MARK: - Data Update Methods
+private extension InputViewCell {
+    func updateUIWithModel() {
+        guard let model = model else { return }
+        let name = model.jealously ?? ""
+        nameLabel.text = name
+        numTextField.placeholder = name
+        numTextField.text = model.importance ?? ""
+    }
     
+    func updateUIWithAuthModel() {
+        guard let authModel = authModel else { return }
+        nameLabel.text = authModel.affray ?? ""
+        numTextField.placeholder = authModel.sternly ?? ""
+        numTextField.text = authModel.impunity ?? ""
+        let displayed = authModel.displayed ?? 0
+        
+        numTextField.keyboardType = displayed == 1 ? .numberPad : .default
+    }
+}
+
+// MARK: - UITextFieldDelegate
+extension InputViewCell: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-        if textField == numTextField {
-            let currentText = textField.text ?? ""
-            model?.importance = currentText
-            authModel?.impunity = currentText
-            authModel?.odd = currentText
-        }
+        guard textField == numTextField else { return }
+        
+        let currentText = textField.text ?? ""
+        model?.importance = currentText
+        authModel?.impunity = currentText
+        authModel?.odd = currentText
     }
-    
 }

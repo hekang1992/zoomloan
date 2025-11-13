@@ -17,6 +17,7 @@ class PopDeleteAccountView: BaseView {
     
     let isAgreed = BehaviorRelay<Bool>(value: false)
     
+    // MARK: - UI Components
     lazy var bgImageView: UIImageView = {
         let bgImageView = UIImageView()
         bgImageView.image = UIImage(named: "dele_icon-image")
@@ -57,14 +58,29 @@ class PopDeleteAccountView: BaseView {
         return label
     }()
     
+    // MARK: - Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setupUI()
+        setupConstraints()
+        bindActions()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+// MARK: - Private Methods
+private extension PopDeleteAccountView {
+    func setupUI() {
         addSubview(bgImageView)
-        bgImageView.addSubview(sureBtn)
-        bgImageView.addSubview(cancelBtn)
-        bgImageView.addSubview(forkBtn)
-        bgImageView.addSubview(checkButton)
-        bgImageView.addSubview(agreementLabel)
+        
+        let subviews = [sureBtn, cancelBtn, forkBtn, checkButton, agreementLabel]
+        subviews.forEach { bgImageView.addSubview($0) }
+    }
+    
+    func setupConstraints() {
         bgImageView.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.size.equalTo(CGSize(width: 311, height: 525))
@@ -99,18 +115,26 @@ class PopDeleteAccountView: BaseView {
             make.right.equalToSuperview().offset(-36)
             make.left.equalTo(checkButton.snp.right).offset(5)
         }
+    }
+    
+    func bindActions() {
+        cancelBtn.rx.tap
+            .bind(onNext: { [weak self] in
+                self?.cancelBlock?()
+            })
+            .disposed(by: disposeBag)
         
-        cancelBtn.rx.tap.bind(onNext: { [weak self] in
-            self?.cancelBlock?()
-        }).disposed(by: disposeBag)
+        forkBtn.rx.tap
+            .bind(onNext: { [weak self] in
+                self?.cancelBlock?()
+            })
+            .disposed(by: disposeBag)
         
-        forkBtn.rx.tap.bind(onNext: { [weak self] in
-            self?.cancelBlock?()
-        }).disposed(by: disposeBag)
-        
-        sureBtn.rx.tap.bind(onNext: { [weak self] in
-            self?.sureBlock?()
-        }).disposed(by: disposeBag)
+        sureBtn.rx.tap
+            .bind(onNext: { [weak self] in
+                self?.sureBlock?()
+            })
+            .disposed(by: disposeBag)
         
         checkButton.rx.tap
             .map { [weak self] in !(self?.checkButton.isSelected ?? false) }
@@ -120,9 +144,4 @@ class PopDeleteAccountView: BaseView {
             }
             .disposed(by: disposeBag)
     }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
 }
