@@ -9,26 +9,27 @@ import UIKit
 import SnapKit
 import FBSDKCoreKit
 import AppTrackingTransparency
+import Alamofire
 
 class LaunchViewController: BaseViewController {
     
-    let viewModel = LaunchViewModel()
+    // MARK: - Properties
+    private let viewModel = LaunchViewModel()
+    private var networkMonitor = NetworkMonitor.shared
     
+    // MARK: - UI Components
+    private lazy var bgImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.image = UIImage(named: "launch_app_image")
+        return imageView
+    }()
+    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
-        
-        let bgImageView = UIImageView()
-        bgImageView.contentMode = .scaleAspectFill
-        bgImageView.image = UIImage(named: "launch_app_image")
-        view.addSubview(bgImageView)
-        bgImageView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
- 
-        findIDFAInfo()
-        
+        setupUI()
+        setupNetworkMonitoring()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -37,66 +38,111 @@ class LaunchViewController: BaseViewController {
     
     @MainActor
     deinit {
+        networkMonitor.stopListening()
         print("🚀 deinit - LaunchViewController - deinit")
     }
-    
 }
 
-extension LaunchViewController {
+// MARK: - Setup Methods
+private extension LaunchViewController {
     
-    private func findIDFAInfo() {
+    func setupUI() {
+        view.addSubview(bgImageView)
+        bgImageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+    }
+    
+    func setupNetworkMonitoring() {
+        networkMonitor.statusChanged = { [weak self] status in
+            switch status {
+            case .reachable(.ethernetOrWiFi), .reachable(.cellular):
+                self?.networkMonitor.stopListening()
+                self?.startAppInitialization()
+                
+            case .notReachable, .unknown:
+                break
+            }
+        }
+        networkMonitor.startListening()
+    }
+}
+
+// MARK: - App Initialization Flow
+private extension LaunchViewController {
+    
+    func startAppInitialization() {
+        requestTrackingAuthorization()
+    }
+    
+    func requestTrackingAuthorization() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             if #available(iOS 14.0, *) {
-                ATTrackingManager.requestTrackingAuthorization { status in
-                    switch status {
-                    case .restricted:
-                        break
-                    case .authorized, .notDetermined, .denied:
-                        self.oneApiInfo()
-                        break
-                    @unknown default:
-                        break
-                    }
+                ATTrackingManager.requestTrackingAuthorization { [weak self] status in
+                    self?.handleTrackingAuthorization(status)
                 }
+            } else {
+                self.initializeAppData()
             }
         }
     }
     
-    private func oneApiInfo() {
+    func handleTrackingAuthorization(_ status: ATTrackingManager.AuthorizationStatus) {
+        switch status {
+        case .authorized, .denied, .notDetermined:
+            initializeAppData()
+        case .restricted:
+            // 受限制的情况，可以选择继续初始化或特殊处理
+            initializeAppData()
+        @unknown default:
+            initializeAppData()
+        }
+    }
+    
+    func initializeAppData() {
         Task {
-            do {
-                async let firstRequest = viewModel.initOneInfo(with: LaunchInitInfo.getJsonInfo())
-                async let secondRequest = viewModel.initTwoInfo(with: [
-                    "sullen": DeviceIDManager.shared.getIDFV(),
-                    "walked": DeviceIDManager.shared.getIDFA()
-                ])
-                
-                let (firstModel, _) = try await (firstRequest, secondRequest)
-                
-
-                if firstModel.sentences == "0" {
-                    CredulityConfig.shared.basemodel = firstModel
-                    googleModel(with: firstModel.credulity?.efforts ?? effortsModel())
-                }
-                
-                await MainActor.run {
-                    NotificationCenter.default.post(name: CHANGE_ROOT_VC, object: nil)
-                }
-                
-            } catch {
-                await MainActor.run {
-                    NotificationCenter.default.post(name: CHANGE_ROOT_VC, object: nil)
-                }
-            }
+            await fetchInitialData()
         }
     }
     
-    private func googleModel(with model: effortsModel) {
+    @MainActor
+    func fetchInitialData() async {
+        do {
+            async let firstRequest = viewModel.initOneInfo(with: LaunchInitInfo.getJsonInfo())
+            async let secondRequest = viewModel.initTwoInfo(with: [
+                "sullen": DeviceIDManager.shared.getIDFV(),
+                "walked": DeviceIDManager.shared.getIDFA()
+            ])
+            
+            let (firstModel, _) = try await (firstRequest, secondRequest)
+            
+            if firstModel.sentences == "0" {
+                CredulityConfig.shared.basemodel = firstModel
+                configureGoogleServices(with: firstModel.credulity?.efforts ?? effortsModel())
+            }
+            
+            navigateToMainScreen()
+            
+        } catch {
+            print("Initial data fetch failed: \(error)")
+            navigateToMainScreen()
+        }
+    }
+    
+    func configureGoogleServices(with model: effortsModel) {
         Settings.shared.appURLSchemeSuffix = model.prevail ?? ""
         Settings.shared.appID = model.entreaties ?? ""
         Settings.shared.displayName = model.withdraw ?? ""
         Settings.shared.clientToken = model.withdraw ?? ""
-        ApplicationDelegate.shared.application(UIApplication.shared, didFinishLaunchingWithOptions: nil)
+        
+        ApplicationDelegate.shared.application(
+            UIApplication.shared,
+            didFinishLaunchingWithOptions: nil
+        )
+    }
+    
+    func navigateToMainScreen() {
+        NotificationCenter.default.post(name: CHANGE_ROOT_VC, object: nil)
     }
 }
 
