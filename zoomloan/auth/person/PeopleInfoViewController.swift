@@ -75,7 +75,7 @@ class PeopleInfoViewController: BaseViewController {
         
         headView.backBlcok = { [weak self] in
             guard let self = self else { return }
-            self.backToProductPageVc()
+            self.backPageView()
         }
         
         let logoImageView = UIImageView()

@@ -7,13 +7,14 @@
 
 import UIKit
 import SnapKit
+import MJRefresh
 
 class OrderViewController: BaseViewController {
     
     let modelArray = ["All", "Apply", "Repayment", "Finished"]
     
     private var buttons: [UIButton] = []
-    private var selectedIndex: Int = 0
+    private var selectedIndex: Int = -1
     
     lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -21,6 +22,23 @@ class OrderViewController: BaseViewController {
         scrollView.showsVerticalScrollIndicator = false
         scrollView.backgroundColor = .clear
         return scrollView
+    }()
+    
+    lazy var stackView: UIStackView = {
+        let stackView  = UIStackView()
+        return stackView
+    }()
+    
+    lazy var listView: OrderListView = {
+        let listView = OrderListView()
+        return listView
+    }()
+
+    var unusual: String = "4"
+    
+    lazy var emptyView: EmptyView = {
+        let emptyView = EmptyView()
+        return emptyView
     }()
 
     override func viewDidLoad() {
@@ -37,11 +55,41 @@ class OrderViewController: BaseViewController {
         
         view.addSubview(scrollView)
         scrollView.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(12)
-            make.top.equalTo(headView.snp.bottom).offset(-15)
+            make.left.right.equalToSuperview().inset(10)
+            make.top.equalTo(headView.snp.bottom).offset(-20)
             make.height.equalTo(55)
         }
         createOrderTabView(with: modelArray)
+        
+        view.addSubview(listView)
+        listView.snp.makeConstraints { make in
+            make.top.equalTo(scrollView.snp.bottom).offset(1)
+            make.left.right.equalToSuperview()
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-2)
+        }
+        
+        self.listView.tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
+            guard let self = self else { return }
+            self.listInfo(with: unusual)
+        })
+        
+        self.view.addSubview(emptyView)
+        emptyView.snp.makeConstraints { make in
+            make.top.equalTo(scrollView.snp.bottom)
+            make.left.right.bottom.equalToSuperview()
+        }
+        
+        listView.cellBlock = { [weak self ] model in
+            guard let self = self else { return }
+            let pageUrl = model.earnest ?? ""
+            SchemeURLManagerTool.goPageWithPageUrl(pageUrl, from: self)
+        }
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        listInfo(with: unusual)
     }
 
 }
@@ -65,7 +113,7 @@ extension OrderViewController {
             button.snp.makeConstraints { make in
                 make.height.equalTo(38)
                 make.centerY.equalToSuperview()
-                make.width.equalTo(85)
+                make.width.equalTo((UIScreen.main.bounds.size.width - 50) * 0.25)
                 if let previous = previousButton {
                     make.left.equalTo(previous.snp.right).offset(10)
                 } else {
@@ -82,11 +130,33 @@ extension OrderViewController {
         }
         self.buttons = buttons
         if let firstButton = buttons.first {
-            buttonTapped(firstButton)
+            changeBtnColor(firstButton)
         }
     }
     
     @objc func buttonTapped(_ sender: UIButton) {
+        changeBtnColor(sender)
+        let index = sender.tag
+        switch index {
+        case 0:
+            listInfo(with: "4")
+            break
+        case 1:
+            listInfo(with: "7")
+            break
+        case 2:
+            listInfo(with: "6")
+            break
+        case 3:
+            listInfo(with: "5")
+            break
+        default:
+            break
+        }
+        
+    }
+    
+    func changeBtnColor(_ sender: UIButton) {
         sender.layoutIfNeeded()
         for button in buttons {
             button.setTitleColor(UIColor.init(hexString: "#999999"), for: .normal)
@@ -99,11 +169,6 @@ extension OrderViewController {
         sender.layer.borderColor = UIColor.clear.cgColor
         
         addGradientBackground(to: sender)
-        
-        let index = sender.tag
-        print("点击了第\(index)个按钮")
-        self.selectedIndex = index
-        
     }
 
     private func addGradientBackground(to button: UIButton) {
@@ -118,6 +183,71 @@ extension OrderViewController {
         gradientLayer.cornerRadius = button.layer.cornerRadius
         
         button.layer.insertSublayer(gradientLayer, at: 0)
+    }
+    
+}
+
+extension OrderViewController {
+    
+    private func listInfo(with unusual: String) {
+        let viewModel = OrderListViewModel()
+        self.unusual = unusual
+        let json = ["unusual": unusual]
+        defer {
+            self.listView.tableView.mj_header?.endRefreshing()
+        }
+        
+        Task {
+            do {
+                let model = try await viewModel.listOrderInfo(with: json)
+                if model.sentences == "0" {
+                    let modelArray = model.credulity?.really ?? []
+                    self.listView.modelArray = modelArray
+                    if modelArray.isEmpty {
+                        self.showEmptyView()
+                    }else {
+                        self.hideEmptyView()
+                    }
+                }else {
+                    ToastView.showMessage(with: model.regarding ?? "")
+                }
+            } catch  {
+                
+            }
+        }
+    }
+    
+    private func showEmptyView() {
+        emptyView.isHidden = false
+    }
+    
+    private func hideEmptyView() {
+        emptyView.isHidden = true
+    }
+}
+
+
+class EmptyView: UIView {
+    
+    lazy var bgImageView: UIImageView = {
+        let bgImageView = UIImageView()
+        bgImageView.image = UIImage(named: "no_list_image")
+        bgImageView.contentMode = .scaleAspectFit
+        return bgImageView
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        addSubview(bgImageView)
+        bgImageView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().offset(100)
+            make.size.equalTo(CGSize(width: 250, height: 250))
+        }
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
 }

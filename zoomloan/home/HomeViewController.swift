@@ -10,31 +10,25 @@ import SnapKit
 import MJRefresh
 import TYAlertController
 
-class HomeViewController: BaseViewController {
+final class HomeViewController: BaseViewController {
     
-    lazy var homeView: HomeView = {
-        let homeView = HomeView(frame: .zero)
-        return homeView
+    private lazy var homeView: HomeView = {
+        let view = HomeView(frame: .zero)
+        view.isHidden = true
+        return view
+    }()
+    
+    private lazy var lampView: LampView = {
+        let view = LampView(frame: .zero)
+        view.isHidden = true
+        return view
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
-        view.addSubview(homeView)
-        homeView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-        
-        self.homeView.scrollView.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
-            self?.getHomeMessageInfo()
-        })
-        
-        homeView.applyBlock = { [weak self] model in
-            guard let self = self else { return }
-            self.applyProductInfo(with: model)
-        }
-        
+        setupUI()
+        setupBindings()
         getAssInfo()
     }
     
@@ -44,53 +38,63 @@ class HomeViewController: BaseViewController {
     }
 }
 
-extension HomeViewController {
+// MARK: - Private Methods
+
+private extension HomeViewController {
     
-    private func getHomeMessageInfo() {
+    func setupUI() {
+        [homeView, lampView].forEach { view.addSubview($0) }
+        
+        homeView.snp.makeConstraints { $0.edges.equalToSuperview() }
+        lampView.snp.makeConstraints { $0.edges.equalToSuperview() }
+        
+        homeView.scrollView.mj_header = MJRefreshNormalHeader { [weak self] in
+            self?.getHomeMessageInfo()
+        }
+    }
+    
+    func setupBindings() {
+        homeView.applyBlock = { [weak self] model in
+            self?.applyProductInfo(with: model)
+        }
+    }
+    
+    // MARK: - Network
+    
+    func getHomeMessageInfo() {
         let viewModel = HomeViewModel()
-        let json = ["author": "1"]
+        let params = ["author": "1"]
         
         Task {
-            
-            defer {
-                Task { @MainActor in
-                    self.homeView.scrollView.mj_header?.endRefreshing()
-                }
-            }
-            
             do {
-                let model = try await viewModel.getHomeInfo(with: json)
-                if model.sentences == "0" {
-                    let modelArray = getSheChairs(from: model)
-                    self.homeView.model = modelArray.first
+                let model = try await viewModel.getHomeInfo(with: params)
+                await MainActor.run {
+                    self.handleHomeInfo(model)
                 }
-            } catch  {
+            } catch {
                 
             }
-        }
-    }
-    
-    func getSheChairs(from model: BaseModel) -> [chairsModel] {
-        let modelArray = model.credulity?.really ?? []
-        for reallyItem in modelArray {
-            if reallyItem.odd == "she" {
-                return reallyItem.chairs ?? []
+            
+            await MainActor.run {
+                self.homeView.scrollView.mj_header?.endRefreshing()
             }
         }
-        return []
     }
     
-    private func applyProductInfo(with model: chairsModel) {
+    func applyProductInfo(with model: chairsModel) {
         let viewModel = HomeViewModel()
-        let borne = model.borne ?? 0
+        let params = ["suits": model.borne ?? 0]
+        
         Task {
             do {
-                let model = try await viewModel.applyProductInfo(with: ["suits": borne])
-                if model.sentences == "0" {
-                    let nextPageStr = model.credulity?.trick ?? ""
-                    SchemeURLManagerTool.goPageWithPageUrl(nextPageStr, from: self)
-                }else {
-                    ToastView.showMessage(with: model.regarding ?? "")
+                let response = try await viewModel.applyProductInfo(with: params)
+                await MainActor.run {
+                    if response.sentences == "0" {
+                        let nextUrl = response.credulity?.trick ?? ""
+                        SchemeURLManagerTool.goPageWithPageUrl(nextUrl, from: self)
+                    } else {
+                        ToastView.showMessage(with: response.regarding ?? "")
+                    }
                 }
             } catch {
                 
@@ -98,24 +102,43 @@ extension HomeViewController {
         }
     }
     
-    private func getAssInfo() {
+    func getAssInfo() {
         let viewModel = HomeViewModel()
+        
         Task {
             do {
                 let model = try await viewModel.getAssInfo(with: ["suits": "1"])
                 if model.sentences == "0" {
                     CityConfig.shared.addressModel = model
                 }
-            } catch  {
+            } catch {
                 
             }
         }
     }
     
-}
-
-class CityConfig {
-    static let shared = CityConfig()
-    private init() {}
-    var addressModel: BaseModel?
+    // MARK: - UI Logic
+    
+    func handleHomeInfo(_ model: BaseModel) {
+        guard model.sentences == "0" else {
+            ToastView.showMessage(with: model.regarding ?? "")
+            return
+        }
+        
+        guard let items = model.credulity?.really, !items.isEmpty else {
+            return
+        }
+        
+        if let target = items.first(where: { $0.odd == "she" }) {
+            homeView.model = target.chairs?.first
+            toggleViews(showHome: true)
+        } else {
+            toggleViews(showHome: false)
+        }
+    }
+    
+    func toggleViews(showHome: Bool) {
+        homeView.isHidden = !showHome
+        lampView.isHidden = showHome
+    }
 }

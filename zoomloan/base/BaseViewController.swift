@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import TYAlertController
 
 class BaseViewController: UIViewController {
     
@@ -34,4 +35,26 @@ class BaseViewController: UIViewController {
         }
     }
 
+}
+
+extension BaseViewController {
+    
+    func backPageView() {
+        let libraryView = LibraryView(frame: self.view.bounds)
+        let alertVc = TYAlertController(alert: libraryView, preferredStyle: .alert)
+        self.present(alertVc!, animated: true)
+        
+        libraryView.cancelBlock = { [weak self] in
+            guard let self = self else { return }
+            self.dismiss(animated: true)
+        }
+        
+        libraryView.sureBlock = { [weak self] in
+            guard let self = self else { return }
+            self.dismiss(animated: true) {
+                self.backToProductPageVc()
+            }
+        }
+    }
+    
 }

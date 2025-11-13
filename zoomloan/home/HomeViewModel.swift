@@ -57,3 +57,9 @@ class HomeViewModel {
     }
     
 }
+
+class CityConfig {
+    static let shared = CityConfig()
+    private init() {}
+    var addressModel: BaseModel?
+}

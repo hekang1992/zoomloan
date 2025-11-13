@@ -53,7 +53,7 @@ class AppMainHeadView: BaseView {
         nameLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.centerY.equalTo(backBtn.snp.centerY)
-            make.size.equalTo(CGSize(width: 250, height: 25))
+            make.size.equalTo(CGSize(width: 280, height: 25))
         }
         
         backBtn.rx.tap.bind(onNext: { [weak self] in

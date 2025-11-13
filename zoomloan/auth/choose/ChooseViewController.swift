@@ -79,7 +79,8 @@ class ChooseViewController: BaseViewController {
         }
         
         headView.backBlcok = { [weak self] in
-            self?.navigationController?.popViewController(animated: true)
+            guard let self = self else { return }
+            self.backPageView()
         }
         
         let bgImageView = UIImageView()

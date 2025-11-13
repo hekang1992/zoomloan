@@ -17,6 +17,7 @@ class AgreementView: BaseView {
         button.setImage(UIImage(named: "agr_image_nor"), for: .normal)
         button.setImage(UIImage(named: "agr_image_sel"), for: .selected)
         button.tintColor = .systemBlue
+        button.isSelected = true
         return button
     }()
     
@@ -35,7 +36,7 @@ class AgreementView: BaseView {
         return stack
     }()
     
-    let isAgreed = BehaviorRelay<Bool>(value: false)
+    let isAgreed = BehaviorRelay<Bool>(value: true)
     let privacyPolicyTapped = PublishSubject<Void>()
     
     override init(frame: CGRect) {

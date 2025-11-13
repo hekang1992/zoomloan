@@ -87,21 +87,27 @@ final class SchemeURLManagerTool {
     @MainActor
     private static func navigateToSettingPage(_ url: URL, fromVC: BaseViewController, params: [String: String]) {
         print("Navigate to Setting Page, params: \(params)")
+        let setttingVc = SettingViewController()
+        fromVC.navigationController?.pushViewController(setttingVc, animated: true)
     }
     
     @MainActor
     private static func navigateToHomePage(_ url: URL, fromVC: BaseViewController, params: [String: String]) {
-        print("Navigate to Home Page")
+        NotificationCenter.default.post(name: CHANGE_ROOT_VC, object: nil)
     }
     
     @MainActor
     private static func navigateToLoginPage(_ url: URL, fromVC: BaseViewController, params: [String: String]) {
-        print("Navigate to Login Page")
+        AuthLoginConfig.shared.logout()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+            NotificationCenter.default.post(name: CHANGE_ROOT_VC, object: nil)
+        }
     }
     
     @MainActor
     private static func navigateToOrderPage(_ url: URL, fromVC: BaseViewController, params: [String: String]) {
         print("Navigate to Order Page, params: \(params)")
+//        NotificationCenter.default.post(name: CHANGE_ROOT_VC, object: nil)
     }
     
     @MainActor
@@ -135,7 +141,7 @@ final class SchemeURLManagerTool {
     }
     
     private static func openWebPage(with urlString: String, from viewController: BaseViewController) {
-        let webVC = AppWebViewController()
+        let webVC = H5WebViewController()
         webVC.pageUrl = urlString
         viewController.navigationController?.pushViewController(webVC, animated: true)
     }

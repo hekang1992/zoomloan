@@ -66,75 +66,86 @@ class LaunchInitInfo {
 }
 
 final class Loading {
+    
+    // MARK: - Singleton
     static let shared = Loading()
-    
-    private var loadingView: UIView?
-    private var backgroundView: UIView?
-    private var activityIndicator: UIActivityIndicatorView?
-    
     private init() {}
+    
+    // MARK: - Views
+    private lazy var overlayView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+        return view
+    }()
+    
+    private lazy var containerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .darkGray
+        view.layer.cornerRadius = 20
+        view.clipsToBounds = true
+        return view
+    }()
+    
+    private lazy var indicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.color = .white
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
+    
+    private var isShowing = false
+    
+    // MARK: - Public Methods
     
     static func show() {
         DispatchQueue.main.async {
-            guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
-            
-            if shared.loadingView != nil { return }
-            
-            let loadingView = UIView()
-            loadingView.backgroundColor = UIColor.black.withAlphaComponent(0.3)
-            
-            let backgroundView = UIView()
-            backgroundView.backgroundColor = .darkGray
-            backgroundView.layer.cornerRadius = 20
-            backgroundView.clipsToBounds = true
-            
-            let activityIndicator = UIActivityIndicatorView(style: .large)
-            activityIndicator.color = .white
-            activityIndicator.startAnimating()
-            
-            loadingView.addSubview(backgroundView)
-            loadingView.addSubview(activityIndicator)
-            window.addSubview(loadingView)
-            
-            loadingView.snp.makeConstraints { make in
-                make.edges.equalToSuperview()
-            }
-            
-            backgroundView.snp.makeConstraints { make in
-                make.center.equalToSuperview()
-                make.size.equalTo(CGSize(width: 80, height: 80))
-            }
-            
-            activityIndicator.snp.makeConstraints { make in
-                make.center.equalToSuperview()
-            }
-            
-            shared.loadingView = loadingView
-            shared.backgroundView = backgroundView
-            shared.activityIndicator = activityIndicator
-            
-            loadingView.alpha = 0
-            UIView.animate(withDuration: 0.2) {
-                loadingView.alpha = 1.0
-            }
+            shared.showInternal()
         }
     }
     
     static func hide() {
         DispatchQueue.main.async {
-            guard let loadingView = shared.loadingView else { return }
-            
-            UIView.animate(withDuration: 0.2, animations: {
-                loadingView.alpha = 0
-            }, completion: { _ in
-                shared.activityIndicator?.stopAnimating()
-                shared.loadingView?.removeFromSuperview()
-                
-                shared.activityIndicator = nil
-                shared.backgroundView = nil
-                shared.loadingView = nil
-            })
+            shared.hideInternal()
         }
     }
+    
+    // MARK: - Private Methods
+    
+    private func showInternal() {
+        guard !isShowing else { return }
+        guard let window = UIApplication.shared.connectedScenes
+            .compactMap({ $0 as? UIWindowScene })
+            .flatMap({ $0.windows })
+            .first(where: { $0.isKeyWindow }) else { return }
+        
+        isShowing = true
+        
+        overlayView.addSubview(containerView)
+        containerView.addSubview(indicator)
+        window.addSubview(overlayView)
+        
+        overlayView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        containerView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.size.equalTo(CGSize(width: 80, height: 80))
+        }
+        
+        indicator.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+        
+        indicator.startAnimating()
+    }
+    
+    private func hideInternal() {
+        guard isShowing else { return }
+        isShowing = false
+        
+        indicator.stopAnimating()
+        containerView.removeFromSuperview()
+        overlayView.removeFromSuperview()
+    }
 }
-

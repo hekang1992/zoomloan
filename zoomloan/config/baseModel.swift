@@ -45,6 +45,11 @@ class reallyModel: Codable {
     var chairs: [chairsModel]?
     var choler: String?
     var really: [reallyModel]?
+    var stopped: [stoppedModel]?
+    var earnest: String?
+    var profound: String?
+    var breaking: String?
+    var illusion: String?
 }
 
 class chairsModel: Codable {
@@ -72,6 +77,10 @@ class headModel: Codable {
     var profound: String?
     var breaking: String?
     var illusion: String?
+    var drink: String?
+    var cried: String?
+    var exploit: String?
+    var remembrance: Int?
 }
 
 class loweredModel: Codable {
@@ -116,4 +125,9 @@ class eyeModel: Codable {
     var contrary: String?
     var irascible: [irascibleModel]?
     var clouded: String?
+}
+
+class stoppedModel: Codable {
+    var affray: String?
+    var rested: String?
 }

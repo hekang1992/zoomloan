@@ -21,6 +21,7 @@ class ProductDetailViewController: BaseViewController {
     }()
     
     var expectedmodel: expectedModel?
+    var headmodel: headModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +42,8 @@ class ProductDetailViewController: BaseViewController {
         }
         
         headView.backBlcok = { [weak self] in
-            self?.navigationController?.popViewController(animated: true)
+            guard let self = self else { return }
+            self.navigationController?.popViewController(animated: true)
         }
         
         view.addSubview(listView)
@@ -72,8 +74,8 @@ class ProductDetailViewController: BaseViewController {
         }).disposed(by: disposeBag)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.getProductDetailInfo()
     }
     
@@ -106,6 +108,7 @@ extension ProductDetailViewController {
                     self.listView.productModel = model.credulity?.head
                     self.listView.modelArray = model.credulity?.produce ?? []
                     self.expectedmodel = model.credulity?.expected
+                    self.headmodel = model.credulity?.head
                 }
             } catch {
                 print(error)
@@ -141,8 +144,22 @@ class ChoosePageVcConfig {
             viewController.navigationController?.pushViewController(fromVc, animated: true)
             break
         case "between":
+            let fromVc = H5WebViewController()
+            fromVc.pageUrl = pageUrl
+            fromVc.type = "1"
+            viewController.navigationController?.pushViewController(fromVc, animated: true)
             break
         case "":
+            let headmodel = viewController.headmodel
+            let cried = headmodel?.cried ?? ""
+            let bertolini = headmodel?.bertolini ?? 0
+            let exploit = headmodel?.exploit ?? ""
+            let remembrance = headmodel?.remembrance ?? 0
+            let json = ["cried": cried,
+                        "bertolini": bertolini,
+                        "exploit": exploit,
+                        "remembrance": remembrance] as [String : Any]
+            orderPageInfo(with: json, vc: viewController)
             break
         default:
             break
@@ -169,6 +186,24 @@ class ChoosePageVcConfig {
                         uploadVc.productID = vc.productID
                         vc.navigationController?.pushViewController(uploadVc, animated: true)
                     }
+                }
+            } catch {
+                
+            }
+        }
+    }
+    
+    static private func orderPageInfo(with json: [String: Any],
+                                    vc: ProductDetailViewController) {
+        let viewModel = ProductDetailViewModel()
+        Task {
+            do {
+                let model = try await viewModel.orderPageInfo(with: json)
+                if model.sentences == "0" {
+                    let pageUrl = model.credulity?.trick ?? ""
+                    SchemeURLManagerTool.goPageWithPageUrl(pageUrl, from: vc)
+                }else {
+                    ToastView.showMessage(with: model.regarding ?? "")
                 }
             } catch {
                 

@@ -43,7 +43,8 @@ class CenterViewController: BaseViewController {
         }
         
         self.centerView.threeBlock = { [weak self] pageUrl in
-            ToastView.showMessage(with: pageUrl)
+            guard let self = self else { return }
+            SchemeURLManagerTool.goPageWithPageUrl(pageUrl, from: self)
         }
     }
     

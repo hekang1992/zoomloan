@@ -39,4 +39,20 @@ class ProductDetailViewModel {
         }
     }
     
+    func orderPageInfo(with json: [String: Any]) async throws -> BaseModel {
+        
+        Loading.show()
+        
+        defer {
+            Loading.hide()
+        }
+        
+        do {
+            let model: BaseModel = try await RequsetHttpManager.shared.post("/dhlpt/solemn", body: json)
+            return model
+        } catch  {
+            throw error
+        }
+    }
+    
 }
