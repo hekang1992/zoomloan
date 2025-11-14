@@ -36,7 +36,7 @@ class LaunchViewController: BaseViewController {
         super.viewWillAppear(animated)
     }
     
-    @MainActor
+    
     deinit {
         networkMonitor.stopListening()
         print("🚀 deinit - LaunchViewController - deinit")
@@ -56,15 +56,22 @@ private extension LaunchViewController {
     func setupNetworkMonitoring() {
         networkMonitor.statusChanged = { [weak self] status in
             switch status {
-            case .reachable(.ethernetOrWiFi), .reachable(.cellular):
-                self?.networkMonitor.stopListening()
-                self?.startAppInitialization()
-                
+            case .reachable(.ethernetOrWiFi):
+                self?.setInitInfo()
+                break
+            case .reachable(.cellular):
+                self?.setInitInfo()
+                break
             case .notReachable, .unknown:
                 break
             }
         }
         networkMonitor.startListening()
+    }
+    
+    private func setInitInfo() {
+        self.networkMonitor.stopListening()
+        self.startAppInitialization()
     }
 }
 

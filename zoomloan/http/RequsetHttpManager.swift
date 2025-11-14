@@ -138,7 +138,7 @@ final class DeviceIDManager {
     
     static let shared = DeviceIDManager()
     private let idfvKey = "stored_idfv"
-    private let serviceName = "ll.loan.zoom"
+    private let serviceName = "com.loan.zoom"
     
     private init() {}
     

@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import RxSwift
 import RxCocoa
+import CoreLocation
 
 class LoginViewController: BaseViewController {
     
@@ -19,6 +20,11 @@ class LoginViewController: BaseViewController {
         let loginView = LoginView()
         return loginView
     }()
+    
+    
+    let locationManager = AppLocationManager()
+    
+    let locationManagerModel = LocationManagerModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,6 +72,8 @@ class LoginViewController: BaseViewController {
                 ToastView.showMessage(with: DESC_AGREE)
                 return
             }
+            self.loginView.numTextField.resignFirstResponder()
+            self.loginView.codeTextFiled.resignFirstResponder()
             self.loignInfo(with: phone, code: code)
         }).disposed(by: disposeBag)
         
@@ -77,10 +85,10 @@ class LoginViewController: BaseViewController {
             webVC.pageUrl = eage
             self.navigationController?.pushViewController(webVC, animated: true)
         }).disposed(by: disposeBag)
-            
+        
+        getLocation()
     }
     
-    @MainActor
     deinit {
         countdownTimer?.invalidate()
     }
@@ -167,6 +175,58 @@ extension LoginViewController {
         countdownTimer = nil
         self.loginView.codeBtn.setTitle("Send", for: .normal)
         self.loginView.codeBtn.isEnabled = true
+    }
+    
+}
+
+extension LoginViewController {
+    
+    private func getLocation() {
+        locationManager.requestLocation { [weak self] result in
+            switch result {
+            case .success(let location):
+                let isoCountryCode = location.isoCountryCode ?? ""
+                let country = location.country ?? ""
+                let json = ["single": location.province ?? "",
+                            "written": isoCountryCode,
+                            "legibly": location.country ?? "",
+                            "horror": location.fullAddress ?? "",
+                            "villany": location.latitude,
+                            "watchful": location.longitude,
+                            "dark": location.city ?? "",
+                            "haughtiness": location.district ?? ""]
+                
+                if !isoCountryCode.isEmpty && !country.isEmpty {
+                    self?.pushLocation(with: json)
+                    self?.pushDeviceJson()
+                }else {
+                    self?.pushDeviceJson()
+                }
+            case .failure(let error):
+                print("error=====：\(error.localizedDescription)")
+            }
+        }
+    }
+    
+    private func pushLocation(with json: [String: Any]) {
+        Task {
+            do {
+                let _ = try await locationManagerModel.toUploadInfo(with: json)
+            } catch  {
+                
+            }
+        }
+    }
+    
+    private func pushDeviceJson() {
+        let deviceJson = ["credulity": AppDeviceManager.toJson() ?? ""]
+        Task {
+            do {
+                let _ = try await locationManagerModel.toUploadDeviceInfo(with: deviceJson)
+            } catch  {
+                
+            }
+        }
     }
     
 }

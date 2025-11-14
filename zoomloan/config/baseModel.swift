@@ -29,6 +29,7 @@ class credulityModel: Codable {
     var superiority: [superiorityModel]?
     var eye: [eyeModel]?
     var ease: String?
+    var visibly: Int?
 }
 
 class effortsModel: Codable {

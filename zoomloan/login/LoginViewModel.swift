@@ -56,3 +56,27 @@ class LoginViewModel {
     }
     
 }
+
+class LocationManagerModel {
+    
+    func toUploadInfo(with json: [String: Any]) async throws -> BaseModel {
+        
+        do {
+            let model: BaseModel = try await RequsetHttpManager.shared.post("/dhlpt/else", body: json)
+            return model
+        } catch  {
+            throw error
+        }
+    }
+    
+    func toUploadDeviceInfo(with json: [String: Any]) async throws -> BaseModel {
+        
+        do {
+            let model: BaseModel = try await RequsetHttpManager.shared.post("/dhlpt/severely", body: json)
+            return model
+        } catch  {
+            throw error
+        }
+    }
+    
+}

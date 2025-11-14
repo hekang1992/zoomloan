@@ -95,7 +95,6 @@ class H5WebViewController: BaseViewController {
         H5WebViewControllerScriptHandler.shared.delegate = self
     }
     
-    @MainActor
     deinit {
         removeScriptMessageHandlers()
         H5WebViewControllerScriptHandler.shared.delegate = nil

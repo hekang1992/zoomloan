@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import MJRefresh
 import TYAlertController
+import CoreLocation
 
 final class HomeViewController: BaseViewController {
     
@@ -24,12 +25,19 @@ final class HomeViewController: BaseViewController {
         return view
     }()
     
+    let locationManager = AppLocationManager()
+    
+    let launchViewModel = LaunchViewModel()
+    
+    let locationManagerModel = LocationManagerModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupUI()
         setupBindings()
         getAssInfo()
+        getLocation()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,6 +49,33 @@ final class HomeViewController: BaseViewController {
 // MARK: - Private Methods
 
 private extension HomeViewController {
+    
+    private func getLocation() {
+        locationManager.requestLocation { [weak self] result in
+            switch result {
+            case .success(let location):
+                let isoCountryCode = location.isoCountryCode ?? ""
+                let country = location.country ?? ""
+                let json = ["single": location.province ?? "",
+                            "written": isoCountryCode,
+                            "legibly": location.country ?? "",
+                            "horror": location.fullAddress ?? "",
+                            "villany": location.latitude,
+                            "watchful": location.longitude,
+                            "dark": location.city ?? "",
+                            "haughtiness": location.district ?? ""]
+                
+                if !isoCountryCode.isEmpty && !country.isEmpty {
+                    self?.pushLocation(with: json)
+                    self?.pushDeviceJson()
+                }else {
+                    self?.pushDeviceJson()
+                }
+            case .failure(let error):
+                print("error=====：\(error.localizedDescription)")
+            }
+        }
+    }
     
     func setupUI() {
         [homeView, lampView].forEach { view.addSubview($0) }
@@ -92,12 +127,37 @@ private extension HomeViewController {
                 self.lampView.scrollView.mj_header?.endRefreshing()
             }
         }
+        
+        getLocation()
+        pushDec()
     }
     
     func applyProductInfo(with model: chairsModel) {
+        
+        let alertModel = CredulityConfig.shared.basemodel
+        let visibly = alertModel?.credulity?.visibly ?? 0
+        
+        let locationStatus = CLLocationManager().authorizationStatus
+        
+        if visibly == 0 {
+            realAppluInfo(with: model)
+        }else {
+            if locationStatus == .authorizedAlways || locationStatus == .authorizedWhenInUse {
+                realAppluInfo(with: model)
+            }else {
+                if self.showPermissionAlert(message: "Location") {
+                    print("have alert =====🏮=====")
+                }else {
+                    realAppluInfo(with: model)
+                }
+            }
+        }
+        
+    }
+    
+    private func realAppluInfo(with model: chairsModel) {
         let viewModel = HomeViewModel()
         let params = ["suits": model.borne ?? 0]
-        
         Task {
             do {
                 let response = try await viewModel.applyProductInfo(with: params)
@@ -158,4 +218,75 @@ private extension HomeViewController {
         homeView.isHidden = !showHome
         lampView.isHidden = showHome
     }
+    
+    private func showPermissionAlert(message: String) -> Bool {
+        let defaults = UserDefaults.standard
+        let key = "PermissionAlertShownDate_\(message)"
+        
+        if let lastShownDate = defaults.object(forKey: key) as? Date {
+            if Calendar.current.isDateInToday(lastShownDate) {
+                return false
+            }
+        }
+        
+        let alert = UIAlertController(
+            title: "权限提示",
+            message: message,
+            preferredStyle: .alert
+        )
+        
+        let settingsAction = UIAlertAction(title: "去设置", style: .default) { _ in
+            if let url = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(url)
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel)
+        
+        alert.addAction(settingsAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true)
+        
+        defaults.set(Date(), forKey: key)
+        return true
+    }
+}
+
+extension HomeViewController {
+    
+    private func pushLocation(with json: [String: Any]) {
+        Task {
+            do {
+                let _ = try await locationManagerModel.toUploadInfo(with: json)
+            } catch  {
+                
+            }
+        }
+    }
+    
+    private func pushDeviceJson() {
+        let deviceJson = ["credulity": AppDeviceManager.toJson() ?? ""]
+        Task {
+            do {
+                let _ = try await locationManagerModel.toUploadDeviceInfo(with: deviceJson)
+            } catch  {
+                
+            }
+        }
+    }
+    
+    private func pushDec() {
+        let json = ["sullen": DeviceIDManager.shared.getIDFV(),
+                    "walked": DeviceIDManager.shared.getIDFA()]
+        Task {
+            do {
+                let _ = try await launchViewModel.initTwoInfo(with: json)
+            } catch  {
+                
+            }
+        }
+        
+    }
+    
 }
