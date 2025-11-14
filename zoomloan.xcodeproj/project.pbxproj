@@ -28,6 +28,7 @@
 		736D518B2EC6CDE1001677BD /* AppDeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736D518A2EC6CDD2001677BD /* AppDeviceManager.swift */; };
 		736D518D2EC6D50E001677BD /* wifiConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736D518C2EC6D504001677BD /* wifiConfig.swift */; };
 		736D518F2EC6F5CA001677BD /* JailbreakDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736D518E2EC6F5C9001677BD /* JailbreakDetector.swift */; };
+		736D519A2EC711AF001677BD /* QuantumConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736D51992EC71181001677BD /* QuantumConfig.swift */; };
 		73736D342EC6FC840089A771 /* SystemInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73736D332EC6FC7F0089A771 /* SystemInfo.swift */; };
 		73A4AAD72EC21BB300224C27 /* baseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A4AAD62EC21BAD00224C27 /* baseModel.swift */; };
 		73A4AAD92EC2207C00224C27 /* LaunchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A4AAD82EC2207600224C27 /* LaunchViewModel.swift */; };
@@ -106,6 +107,7 @@
 		736D518A2EC6CDD2001677BD /* AppDeviceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDeviceManager.swift; sourceTree = "<group>"; };
 		736D518C2EC6D504001677BD /* wifiConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wifiConfig.swift; sourceTree = "<group>"; };
 		736D518E2EC6F5C9001677BD /* JailbreakDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JailbreakDetector.swift; sourceTree = "<group>"; };
+		736D51992EC71181001677BD /* QuantumConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantumConfig.swift; sourceTree = "<group>"; };
 		73736D332EC6FC7F0089A771 /* SystemInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemInfo.swift; sourceTree = "<group>"; };
 		73A4AAD62EC21BAD00224C27 /* baseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = baseModel.swift; sourceTree = "<group>"; };
 		73A4AAD82EC2207600224C27 /* LaunchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewModel.swift; sourceTree = "<group>"; };
@@ -313,6 +315,7 @@
 		73E607782EC1DA9A00BCA552 /* base */ = {
 			isa = PBXGroup;
 			children = (
+				736D51992EC71181001677BD /* QuantumConfig.swift */,
 				73736D332EC6FC7F0089A771 /* SystemInfo.swift */,
 				736D518E2EC6F5C9001677BD /* JailbreakDetector.swift */,
 				736D518C2EC6D504001677BD /* wifiConfig.swift */,
@@ -615,6 +618,7 @@
 				735C8DBD2EC4D1B4003020BF /* ConAdds.swift in Sources */,
 				73CB1D242EC48A420066BEB9 /* PeopleInfoViewModel.swift in Sources */,
 				73F485772EC5C8A700548EDA /* LibraryView.swift in Sources */,
+				736D519A2EC711AF001677BD /* QuantumConfig.swift in Sources */,
 				73CB1D0C2EC41EFA0066BEB9 /* UploadAuthView.swift in Sources */,
 				736D518F2EC6F5CA001677BD /* JailbreakDetector.swift in Sources */,
 				73A4AADD2EC241FF00224C27 /* HomeView.swift in Sources */,

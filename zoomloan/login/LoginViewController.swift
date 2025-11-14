@@ -11,6 +11,8 @@ import RxSwift
 import RxCocoa
 import CoreLocation
 
+let DEFINE_TIME = String(Int(Date().timeIntervalSince1970))
+
 class LoginViewController: BaseViewController {
     
     var countdownTimer: Timer?
@@ -25,6 +27,9 @@ class LoginViewController: BaseViewController {
     let locationManager = AppLocationManager()
     
     let locationManagerModel = LocationManagerModel()
+    
+    var begintime: String = ""
+    var finishtime: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,8 +92,12 @@ class LoginViewController: BaseViewController {
         }).disposed(by: disposeBag)
         
         getLocation()
+        
+        start()
+        
     }
     
+    @MainActor
     deinit {
         countdownTimer?.invalidate()
     }
@@ -146,6 +155,8 @@ extension LoginViewController {
                 
             }
         }
+        
+        finish()
     }
     
     private func startTimer() {
@@ -175,6 +186,18 @@ extension LoginViewController {
         countdownTimer = nil
         self.loginView.codeBtn.setTitle("Send", for: .normal)
         self.loginView.codeBtn.isEnabled = true
+    }
+    
+    func start() {
+        begintime = String(Int(Date().timeIntervalSince1970))
+        UserDefaults.standard.set(begintime, forKey: "begintime")
+        UserDefaults.standard.synchronize()
+    }
+    
+    func finish() {
+        finishtime = String(Int(Date().timeIntervalSince1970))
+        UserDefaults.standard.set(finishtime, forKey: "finishtime")
+        UserDefaults.standard.synchronize()
     }
     
 }

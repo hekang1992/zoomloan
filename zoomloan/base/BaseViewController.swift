@@ -57,4 +57,17 @@ extension BaseViewController {
         }
     }
     
+    func insertInfo(with type: String,
+                    begin: String,
+                    finish: String,
+                    orderID: String) async {
+        Task {
+            let json = ["countenances": type,
+                        "conceal": begin,
+                        "thin": finish,
+                        "drew": orderID]
+            await QuantumConfig.insertPageInfoAsync(with: json)
+        }
+    }
+    
 }

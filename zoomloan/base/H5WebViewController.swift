@@ -71,6 +71,8 @@ class H5WebViewController: BaseViewController {
     private let webView: WKWebView
     private let progressView = UIProgressView()
     
+    var begintime: String = ""
+    
     // MARK: - Initialization
     init() {
         let configuration = WKWebViewConfiguration()
@@ -95,6 +97,7 @@ class H5WebViewController: BaseViewController {
         H5WebViewControllerScriptHandler.shared.delegate = self
     }
     
+    @MainActor
     deinit {
         removeScriptMessageHandlers()
         H5WebViewControllerScriptHandler.shared.delegate = nil
@@ -312,37 +315,38 @@ extension H5WebViewController: H5WebViewControllerScriptHandlerDelegate {
     }
     
     private func handleEatMessage(_ body: Any) {
-        // 处理 eat 消息
         print("Handling eat message: \(body)")
         let pageUrls = body as? [String] ?? []
         SchemeURLManagerTool.goPageWithPageUrl(pageUrls.first ?? "", from: self)
     }
     
     private func handleBitMessage(_ body: Any) {
-        // 处理 bit 消息
         print("Handling bit message: \(body)")
         NotificationCenter.default.post(name: CHANGE_ROOT_VC, object: nil)
     }
     
     private func handleTrulyMessage(_ body: Any) {
-        // 处理 truly 消息
         print("Handling truly message: \(body)")
         requestAppStoreReview()
     }
     
     private func handleTholouseMessage(_ body: Any) {
-        // 处理 tholouse 消息
         print("Handling tholouse message: \(body)")
+        Task {
+            await self.insertInfo(with: "10", begin: DEFINE_TIME, finish: DEFINE_TIME, orderID: orderID)
+        }
     }
     
     private func handleMonsMessage(_ body: Any) {
-        // 处理 mons 消息
         print("Handling mons message: \(body)")
+        begintime = DEFINE_TIME
     }
     
     private func handleMerveilleMessage(_ body: Any) {
-        // 处理 merveille 消息
         print("Handling merveille message: \(body)")
+        Task {
+            await self.insertInfo(with: "8", begin: begintime, finish: DEFINE_TIME, orderID: "")
+        }
     }
 }
 

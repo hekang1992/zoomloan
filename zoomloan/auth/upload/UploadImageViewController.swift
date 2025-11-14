@@ -39,6 +39,9 @@ class UploadImageViewController: BaseViewController{
         return descImageView
     }()
     
+    var pbegintime: String = ""
+    var fbegintime: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -117,6 +120,8 @@ class UploadImageViewController: BaseViewController{
         }).disposed(by: disposeBag)
         
         peopleDetailInfo()
+        
+        pbegintime = DEFINE_TIME
     }
     
 }
@@ -190,6 +195,7 @@ extension UploadImageViewController {
     
     private func alertFaceExampleView() {
         isFace = 10
+        fbegintime = DEFINE_TIME
         let examView = PopExampleView(frame: self.view.bounds)
         examView.bgImageView.image = UIImage(named: "popface_image")
         let alertVc = TYAlertController(alert: examView, preferredStyle: .alert)
@@ -399,6 +405,9 @@ extension UploadImageViewController {
                         alertNameView(with: model.credulity?.scrupulous ?? [])
                     }else {
                         self.peopleDetailInfo()
+                        Task {
+                            await self.insertInfo(with: "4", begin: fbegintime, finish: DEFINE_TIME, orderID: "")
+                        }
                     }
                 }else {
                     ToastView.showMessage(with: model.regarding ?? "")
@@ -431,6 +440,9 @@ extension UploadImageViewController {
                     if model.sentences == "0" {
                         self.dismiss(animated: true) {
                             self.peopleDetailInfo()
+                            Task {
+                                await self.insertInfo(with: "3", begin: self.pbegintime, finish: DEFINE_TIME, orderID: "")
+                            }
                         }
                     }else {
                         ToastView.showMessage(with: model.regarding ?? "")

@@ -22,6 +22,10 @@ class ChooseViewController: BaseViewController {
     
     var baseModel: BaseModel?
     
+    var begintime: String = ""
+    
+    var finishtime: String = ""
+    
     lazy var oneBtn: UIButton = {
         let oneBtn = UIButton(type: .custom)
         oneBtn.setTitle("Recommended ID Type", for: .normal)
@@ -137,6 +141,8 @@ class ChooseViewController: BaseViewController {
             make.left.right.equalToSuperview().inset(5)
             make.bottom.equalToSuperview().offset(-10)
         }
+        
+        begintime = DEFINE_TIME
     }
     
 }
@@ -156,10 +162,16 @@ extension ChooseViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        Task {
+            await self.insertInfo(with: "2", begin: begintime, finish: DEFINE_TIME, orderID: "")
+        }
+        
         let title = modelArray?[indexPath.row] ?? ""
         let uploadVc = UploadImageViewController()
         uploadVc.authStr = title
         uploadVc.productID = productID
         self.navigationController?.pushViewController(uploadVc, animated: true)
+        
     }
 }

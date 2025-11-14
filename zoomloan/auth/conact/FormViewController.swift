@@ -60,6 +60,8 @@ class FormViewController: BaseViewController {
     
     var modelArray: [eyeModel] = []
     
+    var begintime: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -144,7 +146,7 @@ class FormViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
         
-        
+        begintime = DEFINE_TIME
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -179,6 +181,7 @@ extension FormViewController {
             do {
                 let model = try await viewModel.saveInfo(with: json)
                 if model.sentences == "0" {
+                    await self.insertInfo(with: "7", begin: begintime, finish: DEFINE_TIME, orderID: "")
                     self.backToProductPageVc()
                 }else {
                     ToastView.showMessage(with: model.regarding ?? "")

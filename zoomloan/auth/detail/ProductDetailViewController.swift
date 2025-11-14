@@ -194,14 +194,29 @@ class ChoosePageVcConfig {
     }
     
     static private func orderPageInfo(with json: [String: Any],
-                                    vc: ProductDetailViewController) {
+                                      vc: ProductDetailViewController) {
         let viewModel = ProductDetailViewModel()
         Task {
             do {
                 let model = try await viewModel.orderPageInfo(with: json)
                 if model.sentences == "0" {
                     let pageUrl = model.credulity?.trick ?? ""
-                    SchemeURLManagerTool.goPageWithPageUrl(pageUrl, from: vc)
+                    
+                    if pageUrl.contains(APISchemConfig.scheme_url) {
+                        SchemeURLManagerTool.goPageWithPageUrl(pageUrl, from: vc)
+                    }else if pageUrl.hasPrefix("http") || pageUrl.hasPrefix("https:") {
+                        let webVC = H5WebViewController()
+                        webVC.pageUrl = pageUrl
+                        webVC.orderID = vc.headmodel?.cried ?? ""
+                        vc.navigationController?.pushViewController(webVC, animated: true)
+                    }else {
+                        print("===============")
+                    }
+                    let ninejson = ["countenances": "9",
+                                    "conceal": DEFINE_TIME,
+                                    "thin": DEFINE_TIME,
+                                    "drew": json["cried"] as? String ?? ""]
+                    await QuantumConfig.insertPageInfoAsync(with: ninejson)
                 }else {
                     ToastView.showMessage(with: model.regarding ?? "")
                 }

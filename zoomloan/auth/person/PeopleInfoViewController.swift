@@ -62,6 +62,8 @@ class PeopleInfoViewController: BaseViewController {
     
     var modelArray: [superiorityModel]?
     
+    var begintime: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -135,9 +137,11 @@ class PeopleInfoViewController: BaseViewController {
         }).disposed(by: disposeBag)
         
         
-//        self.tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
-//            self?.listInfo()
-//        })
+        //        self.tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
+        //            self?.listInfo()
+        //        })
+        
+        begintime = DEFINE_TIME
         
     }
     
@@ -154,9 +158,9 @@ extension PeopleInfoViewController {
         let viewModel = PeopleInfoViewModel()
         let json = ["suits": productID ?? ""]
         
-//        defer {
-//            self.tableView.mj_header?.endRefreshing()
-//        }
+        //        defer {
+        //            self.tableView.mj_header?.endRefreshing()
+        //        }
         
         Task {
             do {
@@ -178,12 +182,15 @@ extension PeopleInfoViewController {
             do {
                 let model = try await viewModel.saveInfo(with: json)
                 if model.sentences == "0" {
+                    
+                    await self.insertInfo(with: "5", begin: begintime, finish: DEFINE_TIME, orderID: "")
+                    
                     self.backToProductPageVc()
                 }else {
                     ToastView.showMessage(with: model.regarding ?? "")
                 }
             } catch {
-            
+                
             }
         }
     }

@@ -40,4 +40,14 @@ class LaunchViewModel {
         }
     }
     
+    func insertPageInfo(with json: [String: Any]) async throws -> BaseModel {
+        
+        do {
+            let model: BaseModel = try await RequsetHttpManager.shared.post("/dhlpt/laugh", body: json)
+            return model
+        } catch  {
+            throw error
+        }
+    }
+
 }

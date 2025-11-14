@@ -61,6 +61,8 @@ class LifeHardViewController: BaseViewController {
     
     var modelArray: [superiorityModel]?
     
+    var begintime: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -133,6 +135,7 @@ class LifeHardViewController: BaseViewController {
             addChangeInfo(with: json as! [String : String])
         }).disposed(by: disposeBag)
         
+        begintime = DEFINE_TIME
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -167,12 +170,13 @@ extension LifeHardViewController {
             do {
                 let model = try await viewModel.saveInfo(with: json)
                 if model.sentences == "0" {
+                    await self.insertInfo(with: "6", begin: begintime, finish: DEFINE_TIME, orderID: "")
                     self.backToProductPageVc()
                 }else {
                     ToastView.showMessage(with: model.regarding ?? "")
                 }
             } catch {
-            
+                
             }
         }
     }

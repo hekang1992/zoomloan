@@ -44,6 +44,11 @@ final class HomeViewController: BaseViewController {
         super.viewWillAppear(animated)
         getHomeMessageInfo()
     }
+    
+    @MainActor
+    deinit {
+        print("HomeViewController---------deinit======🚗===")
+    }
 }
 
 // MARK: - Private Methods
@@ -173,6 +178,22 @@ private extension HomeViewController {
                 
             }
         }
+        
+        let begin = UserDefaults.standard.object(forKey: "begintime") as? String ?? ""
+        
+        let finish = UserDefaults.standard.object(forKey: "finishtime") as? String ?? ""
+        
+        if !begin.isEmpty && !finish.isEmpty {
+            
+            Task {
+                await self.insertInfo(with: "1", begin: begin, finish: finish, orderID: "")
+                UserDefaults.standard.removeObject(forKey: "begintime")
+                UserDefaults.standard.removeObject(forKey: "finishtime")
+                UserDefaults.standard.synchronize()
+            }
+            
+        }
+        
     }
     
     func getAssInfo() {

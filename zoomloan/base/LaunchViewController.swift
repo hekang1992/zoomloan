@@ -36,7 +36,7 @@ class LaunchViewController: BaseViewController {
         super.viewWillAppear(animated)
     }
     
-    
+    @MainActor
     deinit {
         networkMonitor.stopListening()
         print("🚀 deinit - LaunchViewController - deinit")
