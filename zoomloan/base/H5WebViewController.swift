@@ -101,11 +101,10 @@ class H5WebViewController: BaseViewController {
         setupBindings()
         loadWebContent()
         
-        // 设置脚本处理器代理
         H5WebViewControllerScriptHandler.shared.delegate = self
     }
     
-    @MainActor
+//    @MainActor
     deinit {
         removeScriptMessageHandlers()
         H5WebViewControllerScriptHandler.shared.delegate = nil

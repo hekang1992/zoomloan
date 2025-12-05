@@ -48,7 +48,7 @@ final class HomeViewController: BaseViewController {
         getHomeMessageInfo()
     }
     
-    @MainActor
+//    @MainActor
     deinit {
         print("HomeViewController---------deinit======🚗===")
     }

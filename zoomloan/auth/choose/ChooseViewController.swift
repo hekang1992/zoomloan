@@ -160,7 +160,7 @@ class ChooseViewController: BaseViewController {
 //        }
     }
     
-    @MainActor
+//    @MainActor
     deinit {
         print("ChooseViewController==============")
     }

@@ -95,7 +95,7 @@ class LoginViewController: BaseViewController {
         
     }
     
-    @MainActor
+//    @MainActor
     deinit {
         countdownTimer?.invalidate()
     }
