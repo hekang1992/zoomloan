@@ -476,41 +476,45 @@ extension UploadImageViewController {
     }
     
     private func threeInfo() {
-        let dict = ["countenances": "3",
-                    "few": "2",
-                    "caught": DeviceIDManager.shared.getIDFV(),
-                    "earnestly": DeviceIDManager.shared.getIDFA(),
-                    "watchful": self.locationModel?.longitude ?? 0.0,
-                    "villany": self.locationModel?.latitude ?? 0.0,
-                    "conceal": self.pbegintime,
-                    "thin": String(Int(Date().timeIntervalSince1970)),
-                    "drew": ""] as [String : Any]
-        
-        Task {
-            do {
-                let _ = try await self.launchViewModel.insertPageInfo(with: dict)
-            } catch  {
-                
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            let dict = ["countenances": "3",
+                        "few": "2",
+                        "caught": DeviceIDManager.shared.getIDFV(),
+                        "earnestly": DeviceIDManager.shared.getIDFA(),
+                        "watchful": self.locationModel?.longitude ?? 0.0,
+                        "villany": self.locationModel?.latitude ?? 0.0,
+                        "conceal": self.pbegintime,
+                        "thin": String(Int(Date().timeIntervalSince1970)),
+                        "drew": ""] as [String : Any]
+            
+            Task {
+                do {
+                    let _ = try await self.launchViewModel.insertPageInfo(with: dict)
+                } catch  {
+                    
+                }
             }
         }
     }
     
     private func fourInfo() {
-        let dict = ["countenances": "4",
-                    "few": "2",
-                    "caught": DeviceIDManager.shared.getIDFV(),
-                    "earnestly": DeviceIDManager.shared.getIDFA(),
-                    "watchful": self.locationModel?.longitude ?? 0.0,
-                    "villany": self.locationModel?.latitude ?? 0.0,
-                    "conceal": self.fbegintime,
-                    "thin": String(Int(Date().timeIntervalSince1970)),
-                    "drew": ""] as [String : Any]
-        
-        Task {
-            do {
-                let _ = try await self.launchViewModel.insertPageInfo(with: dict)
-            } catch  {
-                
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            let dict = ["countenances": "4",
+                        "few": "2",
+                        "caught": DeviceIDManager.shared.getIDFV(),
+                        "earnestly": DeviceIDManager.shared.getIDFA(),
+                        "watchful": self.locationModel?.longitude ?? 0.0,
+                        "villany": self.locationModel?.latitude ?? 0.0,
+                        "conceal": self.fbegintime,
+                        "thin": String(Int(Date().timeIntervalSince1970)),
+                        "drew": ""] as [String : Any]
+            
+            Task {
+                do {
+                    let _ = try await self.launchViewModel.insertPageInfo(with: dict)
+                } catch  {
+                    
+                }
             }
         }
     }

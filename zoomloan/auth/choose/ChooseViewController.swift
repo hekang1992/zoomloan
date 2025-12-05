@@ -160,6 +160,11 @@ class ChooseViewController: BaseViewController {
         }
     }
     
+    @MainActor
+    deinit {
+        print("ChooseViewController==============")
+    }
+    
 }
 
 extension ChooseViewController: UITableViewDelegate, UITableViewDataSource {
@@ -178,21 +183,23 @@ extension ChooseViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let dict = ["countenances": "2",
-                    "few": "2",
-                    "caught": DeviceIDManager.shared.getIDFV(),
-                    "earnestly": DeviceIDManager.shared.getIDFA(),
-                    "watchful": self.locationModel?.longitude ?? 0.0,
-                    "villany": self.locationModel?.latitude ?? 0.0,
-                    "conceal": begintime,
-                    "thin": String(Int(Date().timeIntervalSince1970)),
-                    "drew": ""] as [String : Any]
-        
-        Task {
-            do {
-                let _ = try await locaitonViewModel.insertPageInfo(with: dict)
-            } catch  {
-                
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            let dict = ["countenances": "2",
+                        "few": "2",
+                        "caught": DeviceIDManager.shared.getIDFV(),
+                        "earnestly": DeviceIDManager.shared.getIDFA(),
+                        "watchful": self.locationModel?.longitude ?? 0.0,
+                        "villany": self.locationModel?.latitude ?? 0.0,
+                        "conceal": self.begintime,
+                        "thin": String(Int(Date().timeIntervalSince1970)),
+                        "drew": ""] as [String : Any]
+            
+            Task {
+                do {
+                    let _ = try await self.locaitonViewModel.insertPageInfo(with: dict)
+                } catch  {
+                    
+                }
             }
         }
         

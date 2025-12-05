@@ -72,7 +72,6 @@ private extension HomeViewController {
                             "watchful": location.longitude,
                             "dark": location.city ?? "",
                             "haughtiness": location.district ?? ""]
-                
                 if !isoCountryCode.isEmpty && !country.isEmpty {
                     self?.pushLocation(with: json)
                     self?.pushDeviceJson()
@@ -186,30 +185,31 @@ private extension HomeViewController {
         
         let finish = UserDefaults.standard.object(forKey: "finishtime") as? String ?? ""
         
-        if !begin.isEmpty && !finish.isEmpty {
-            
-            
-            let dict = ["countenances": "1",
-                        "few": "2",
-                        "caught": DeviceIDManager.shared.getIDFV(),
-                        "earnestly": DeviceIDManager.shared.getIDFA(),
-                        "watchful": self.locationModel?.longitude ?? 0.0,
-                        "villany": self.locationModel?.latitude ?? 0.0,
-                        "conceal": begin,
-                        "thin": finish,
-                        "drew": ""] as [String : Any]
-            
-            Task {
-                do {
-                    let _ = try await launchViewModel.insertPageInfo(with: dict)
-                } catch  {
-                    
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            if !begin.isEmpty && !finish.isEmpty {
+        
+                let dict = ["countenances": "1",
+                            "few": "2",
+                            "caught": DeviceIDManager.shared.getIDFV(),
+                            "earnestly": DeviceIDManager.shared.getIDFA(),
+                            "watchful": self.locationModel?.longitude ?? 0.0,
+                            "villany": self.locationModel?.latitude ?? 0.0,
+                            "conceal": begin,
+                            "thin": finish,
+                            "drew": ""] as [String : Any]
+                
+                Task {
+                    do {
+                        let _ = try await self.launchViewModel.insertPageInfo(with: dict)
+                    } catch  {
+                        
+                    }
+                    UserDefaults.standard.removeObject(forKey: "begintime")
+                    UserDefaults.standard.removeObject(forKey: "finishtime")
+                    UserDefaults.standard.synchronize()
                 }
-                UserDefaults.standard.removeObject(forKey: "begintime")
-                UserDefaults.standard.removeObject(forKey: "finishtime")
-                UserDefaults.standard.synchronize()
+                
             }
-            
         }
         
     }

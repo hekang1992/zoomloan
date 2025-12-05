@@ -76,8 +76,10 @@ class H5WebViewController: BaseViewController {
     let launchViewModel = LaunchViewModel()
     
     let locationManager = AppLocationManager()
-            
+    
     var locationModel: AppLocation?
+    
+    var locationManager1: AppLocationManager?
     
     // MARK: - Initialization
     init() {
@@ -314,52 +316,52 @@ extension H5WebViewController: H5WebViewControllerScriptHandlerDelegate {
     }
     
     private func handleDisturbedMessage(_ body: Any) {
-        print("Handling disturbed message: \(body)")
         if let nav = self.navigationController {
             nav.popViewController(animated: true)
         }
     }
     
     private func handleEatMessage(_ body: Any) {
-        print("Handling eat message: \(body)")
         let pageUrls = body as? [String] ?? []
         SchemeURLManagerTool.goPageWithPageUrl(pageUrls.first ?? "", from: self)
     }
     
     private func handleBitMessage(_ body: Any) {
-        print("Handling bit message: \(body)")
         NotificationCenter.default.post(name: CHANGE_ROOT_VC, object: nil)
     }
     
     private func handleTrulyMessage(_ body: Any) {
-        print("Handling truly message: \(body)")
         requestAppStoreReview()
     }
     
     private func handleTholouseMessage(_ body: Any) {
-        print("Handling tholouse message: \(body)")
-        locationManager.requestLocation { result in
-            switch result {
-            case .success(let success):
-                self.locationModel = success
-                self.noneInfo(with: self.orderID)
-                break
-            case .failure(let failure):
-                break
+        print("==========poine =====10")
+        self.locationManager1 = AppLocationManager()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            self.locationManager1?.requestLocation { result in
+                switch result {
+                case .success(let success):
+                    self.locationModel = success
+                    self.noneInfo(with: self.orderID)
+                    self.locationManager1 = nil
+                    break
+                case .failure(_):
+                    self.locationManager1 = nil
+                    break
+                }
             }
         }
     }
     
     private func handleMonsMessage(_ body: Any) {
-        print("Handling mons message: \(body)")
         begintime = String(Int(Date().timeIntervalSince1970))
         locationManager.requestLocation { result in
             switch result {
             case .success(let success):
                 self.locationModel = success
-                print("==========")
+                print("==========poine =====8")
                 break
-            case .failure(let failure):
+            case .failure(_):
                 break
             }
         }
@@ -372,25 +374,26 @@ extension H5WebViewController: H5WebViewControllerScriptHandlerDelegate {
     }
     
     private func egithInfo() {
-        let dict = ["countenances": "8",
-                    "few": "2",
-                    "caught": DeviceIDManager.shared.getIDFV(),
-                    "earnestly": DeviceIDManager.shared.getIDFA(),
-                    "watchful": self.locationModel?.longitude ?? 0.0,
-                    "villany": self.locationModel?.latitude ?? 0.0,
-                    "conceal": begintime,
-                    "thin": String(Int(Date().timeIntervalSince1970)),
-                    "drew": ""] as [String : Any]
-        
-        Task {
-            do {
-                let _ = try await launchViewModel.insertPageInfo(with: dict)
-            } catch  {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            let dict = ["countenances": "8",
+                        "few": "2",
+                        "caught": DeviceIDManager.shared.getIDFV(),
+                        "earnestly": DeviceIDManager.shared.getIDFA(),
+                        "watchful": self.locationModel?.longitude ?? 0.0,
+                        "villany": self.locationModel?.latitude ?? 0.0,
+                        "conceal": self.begintime,
+                        "thin": String(Int(Date().timeIntervalSince1970)),
+                        "drew": ""] as [String : Any]
+            
+            Task {
+                do {
+                    let _ = try await self.launchViewModel.insertPageInfo(with: dict)
+                } catch  {
+                    
+                }
                 
             }
-            
         }
-        
     }
     
     private func noneInfo(with orderID: String) {
@@ -401,7 +404,7 @@ extension H5WebViewController: H5WebViewControllerScriptHandlerDelegate {
                     "earnestly": DeviceIDManager.shared.getIDFA(),
                     "watchful": self.locationModel?.longitude ?? 0.0,
                     "villany": self.locationModel?.latitude ?? 0.0,
-                    "conceal": begintime,
+                    "conceal": String(Int(Date().timeIntervalSince1970)),
                     "thin": String(Int(Date().timeIntervalSince1970)),
                     "drew": orderID] as [String : Any]
         

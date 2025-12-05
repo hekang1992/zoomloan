@@ -214,24 +214,25 @@ extension PeopleInfoViewController {
     
     
     private func fiveInfo() {
-        
-        let dict = ["countenances": "5",
-                    "few": "2",
-                    "caught": DeviceIDManager.shared.getIDFV(),
-                    "earnestly": DeviceIDManager.shared.getIDFA(),
-                    "watchful": self.locationModel?.longitude ?? 0.0,
-                    "villany": self.locationModel?.latitude ?? 0.0,
-                    "conceal": begintime,
-                    "thin": String(Int(Date().timeIntervalSince1970)),
-                    "drew": ""] as [String : Any]
-        
-        Task {
-            do {
-                let _ = try await launchViewModel.insertPageInfo(with: dict)
-            } catch  {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            let dict = ["countenances": "5",
+                        "few": "2",
+                        "caught": DeviceIDManager.shared.getIDFV(),
+                        "earnestly": DeviceIDManager.shared.getIDFA(),
+                        "watchful": self.locationModel?.longitude ?? 0.0,
+                        "villany": self.locationModel?.latitude ?? 0.0,
+                        "conceal": self.begintime,
+                        "thin": String(Int(Date().timeIntervalSince1970)),
+                        "drew": ""] as [String : Any]
+            
+            Task {
+                do {
+                    let _ = try await self.launchViewModel.insertPageInfo(with: dict)
+                } catch  {
+                    
+                }
                 
             }
-            
         }
         
     }

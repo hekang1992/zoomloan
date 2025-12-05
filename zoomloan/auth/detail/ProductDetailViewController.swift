@@ -253,26 +253,25 @@ class ChoosePageVcConfig {
         
         let locationModel = vc.locationModel
         
-        let dict = ["countenances": "9",
-                    "few": "2",
-                    "caught": DeviceIDManager.shared.getIDFV(),
-                    "earnestly": DeviceIDManager.shared.getIDFA(),
-                    "watchful": locationModel?.longitude ?? 0.0,
-                    "villany": locationModel?.latitude ?? 0.0,
-                    "conceal": String(Int(Date().timeIntervalSince1970)),
-                    "thin": String(Int(Date().timeIntervalSince1970)),
-                    "drew": orderid] as [String : Any]
-        Task {
-            do {
-                let _ = try await vc.launchViewModel.insertPageInfo(with: dict)
-            } catch  {
-                
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            let dict = ["countenances": "9",
+                        "few": "2",
+                        "caught": DeviceIDManager.shared.getIDFV(),
+                        "earnestly": DeviceIDManager.shared.getIDFA(),
+                        "watchful": locationModel?.longitude ?? 0.0,
+                        "villany": locationModel?.latitude ?? 0.0,
+                        "conceal": String(Int(Date().timeIntervalSince1970)),
+                        "thin": String(Int(Date().timeIntervalSince1970)),
+                        "drew": orderid] as [String : Any]
+            Task {
+                do {
+                    let _ = try await vc.launchViewModel.insertPageInfo(with: dict)
+                } catch  {
+                    
+                }
             }
+            
         }
-        
-        
-        
-        
         
     }
     

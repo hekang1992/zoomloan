@@ -199,24 +199,24 @@ extension LifeHardViewController {
     }
     
     private func sixinfo() {
-        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
         let dict = ["countenances": "6",
                     "few": "2",
                     "caught": DeviceIDManager.shared.getIDFV(),
                     "earnestly": DeviceIDManager.shared.getIDFA(),
                     "watchful": self.locationModel?.longitude ?? 0.0,
                     "villany": self.locationModel?.latitude ?? 0.0,
-                    "conceal": begintime,
+                    "conceal": self.begintime,
                     "thin": String(Int(Date().timeIntervalSince1970)),
                     "drew": ""] as [String : Any]
         
-        Task {
-            do {
-                let _ = try await launchViewModel.insertPageInfo(with: dict)
-            } catch  {
-                
+            Task {
+                do {
+                    let _ = try await self.launchViewModel.insertPageInfo(with: dict)
+                } catch  {
+                    
+                }
             }
-            
         }
     }
     

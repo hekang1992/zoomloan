@@ -46,7 +46,7 @@ class AppMainHeadView: BaseView {
             make.height.equalTo(122)
         }
         backBtn.snp.makeConstraints { make in
-            make.top.equalTo(self.safeAreaLayoutGuide.snp.top)
+            make.bottom.equalToSuperview().offset(-42)
             make.left.equalToSuperview().offset(16)
             make.size.equalTo(CGSize(width: 20, height: 20))
         }
