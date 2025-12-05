@@ -62,6 +62,12 @@ class FormViewController: BaseViewController {
     
     var begintime: String = ""
     
+    let launchViewModel = LaunchViewModel()
+    
+    let locationManager = AppLocationManager()
+            
+    var locationModel: AppLocation?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -146,7 +152,17 @@ class FormViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
         
-        begintime = DEFINE_TIME
+        begintime = String(Int(Date().timeIntervalSince1970))
+        
+        locationManager.requestLocation { result in
+            switch result {
+            case .success(let success):
+                self.locationModel = success
+                break
+            case .failure(let failure):
+                break
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -181,7 +197,7 @@ extension FormViewController {
             do {
                 let model = try await viewModel.saveInfo(with: json)
                 if model.sentences == "0" {
-                    await self.insertInfo(with: "7", begin: begintime, finish: DEFINE_TIME, orderID: "")
+                    self.sevinfo()
                     self.backToProductPageVc()
                 }else {
                     ToastView.showMessage(with: model.regarding ?? "")
@@ -189,6 +205,27 @@ extension FormViewController {
             } catch {
                 
             }
+        }
+    }
+    
+    private func sevinfo() {
+        let dict = ["countenances": "7",
+                    "few": "2",
+                    "caught": DeviceIDManager.shared.getIDFV(),
+                    "earnestly": DeviceIDManager.shared.getIDFA(),
+                    "watchful": self.locationModel?.longitude ?? 0.0,
+                    "villany": self.locationModel?.latitude ?? 0.0,
+                    "conceal": begintime,
+                    "thin": String(Int(Date().timeIntervalSince1970)),
+                    "drew": ""] as [String : Any]
+        
+        Task {
+            do {
+                let _ = try await launchViewModel.insertPageInfo(with: dict)
+            } catch  {
+                
+            }
+            
         }
     }
     

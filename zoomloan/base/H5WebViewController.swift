@@ -73,6 +73,12 @@ class H5WebViewController: BaseViewController {
     
     var begintime: String = ""
     
+    let launchViewModel = LaunchViewModel()
+    
+    let locationManager = AppLocationManager()
+            
+    var locationModel: AppLocation?
+    
     // MARK: - Initialization
     init() {
         let configuration = WKWebViewConfiguration()
@@ -332,21 +338,82 @@ extension H5WebViewController: H5WebViewControllerScriptHandlerDelegate {
     
     private func handleTholouseMessage(_ body: Any) {
         print("Handling tholouse message: \(body)")
-        Task {
-            await self.insertInfo(with: "10", begin: DEFINE_TIME, finish: DEFINE_TIME, orderID: orderID)
+        locationManager.requestLocation { result in
+            switch result {
+            case .success(let success):
+                self.locationModel = success
+                self.noneInfo(with: self.orderID)
+                break
+            case .failure(let failure):
+                break
+            }
         }
     }
     
     private func handleMonsMessage(_ body: Any) {
         print("Handling mons message: \(body)")
-        begintime = DEFINE_TIME
+        begintime = String(Int(Date().timeIntervalSince1970))
+        locationManager.requestLocation { result in
+            switch result {
+            case .success(let success):
+                self.locationModel = success
+                print("==========")
+                break
+            case .failure(let failure):
+                break
+            }
+        }
+        
     }
     
     private func handleMerveilleMessage(_ body: Any) {
         print("Handling merveille message: \(body)")
+        self.egithInfo()
+    }
+    
+    private func egithInfo() {
+        let dict = ["countenances": "8",
+                    "few": "2",
+                    "caught": DeviceIDManager.shared.getIDFV(),
+                    "earnestly": DeviceIDManager.shared.getIDFA(),
+                    "watchful": self.locationModel?.longitude ?? 0.0,
+                    "villany": self.locationModel?.latitude ?? 0.0,
+                    "conceal": begintime,
+                    "thin": String(Int(Date().timeIntervalSince1970)),
+                    "drew": ""] as [String : Any]
+        
         Task {
-            await self.insertInfo(with: "8", begin: begintime, finish: DEFINE_TIME, orderID: "")
+            do {
+                let _ = try await launchViewModel.insertPageInfo(with: dict)
+            } catch  {
+                
+            }
+            
         }
+        
+    }
+    
+    private func noneInfo(with orderID: String) {
+        
+        let dict = ["countenances": "10",
+                    "few": "2",
+                    "caught": DeviceIDManager.shared.getIDFV(),
+                    "earnestly": DeviceIDManager.shared.getIDFA(),
+                    "watchful": self.locationModel?.longitude ?? 0.0,
+                    "villany": self.locationModel?.latitude ?? 0.0,
+                    "conceal": begintime,
+                    "thin": String(Int(Date().timeIntervalSince1970)),
+                    "drew": orderID] as [String : Any]
+        
+        Task {
+            do {
+                let _ = try await launchViewModel.insertPageInfo(with: dict)
+            } catch  {
+                
+            }
+            
+        }
+        
     }
 }
 

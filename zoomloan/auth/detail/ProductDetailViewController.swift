@@ -23,6 +23,12 @@ class ProductDetailViewController: BaseViewController {
     var expectedmodel: expectedModel?
     var headmodel: headModel?
     
+    let locationManager = AppLocationManager()
+    
+    let launchViewModel = LaunchViewModel()
+    
+    var locationModel: AppLocation?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -72,11 +78,28 @@ class ProductDetailViewController: BaseViewController {
             guard let self = self, let model = expectedmodel else { return }
             applyClickInfo(with: model)
         }).disposed(by: disposeBag)
+        
+        locaino { model in
+            self.locationModel = model
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.getProductDetailInfo()
+    }
+    
+     func locaino(completion: @escaping (AppLocation) -> Void) {
+        locationManager.requestLocation { result in
+            switch result {
+            case .success(let success):
+                completion(success)
+                break
+            case .failure(let failure):
+                break
+            }
+        }
     }
     
 }
@@ -212,11 +235,7 @@ class ChoosePageVcConfig {
                     }else {
                         print("===============")
                     }
-                    let ninejson = ["countenances": "9",
-                                    "conceal": DEFINE_TIME,
-                                    "thin": DEFINE_TIME,
-                                    "drew": json["cried"] as? String ?? ""]
-                    await QuantumConfig.insertPageInfoAsync(with: ninejson)
+                    nineInfo(with: vc.headmodel?.cried ?? "", vc: vc)
                 }else {
                     ToastView.showMessage(with: model.regarding ?? "")
                 }
@@ -224,6 +243,37 @@ class ChoosePageVcConfig {
                 
             }
         }
+    }
+    
+    static private func nineInfo(with orderid: String, vc: ProductDetailViewController) {
+        
+//        vc.locaino { locationModel in
+//
+//        }
+        
+        let locationModel = vc.locationModel
+        
+        let dict = ["countenances": "9",
+                    "few": "2",
+                    "caught": DeviceIDManager.shared.getIDFV(),
+                    "earnestly": DeviceIDManager.shared.getIDFA(),
+                    "watchful": locationModel?.longitude ?? 0.0,
+                    "villany": locationModel?.latitude ?? 0.0,
+                    "conceal": String(Int(Date().timeIntervalSince1970)),
+                    "thin": String(Int(Date().timeIntervalSince1970)),
+                    "drew": orderid] as [String : Any]
+        Task {
+            do {
+                let _ = try await vc.launchViewModel.insertPageInfo(with: dict)
+            } catch  {
+                
+            }
+        }
+        
+        
+        
+        
+        
     }
     
 }

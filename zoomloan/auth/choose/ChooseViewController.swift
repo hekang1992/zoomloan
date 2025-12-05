@@ -26,6 +26,12 @@ class ChooseViewController: BaseViewController {
     
     var finishtime: String = ""
     
+    let locationManager = AppLocationManager()
+    
+    let locaitonViewModel = LaunchViewModel()
+    
+    var locationModel: AppLocation?
+    
     lazy var oneBtn: UIButton = {
         let oneBtn = UIButton(type: .custom)
         oneBtn.setTitle("Recommended ID Type", for: .normal)
@@ -142,7 +148,16 @@ class ChooseViewController: BaseViewController {
             make.bottom.equalToSuperview().offset(-10)
         }
         
-        begintime = DEFINE_TIME
+        begintime = String(Int(Date().timeIntervalSince1970))
+        
+        locationManager.requestLocation { result in
+            switch result {
+            case .success(let success):
+                self.locationModel = success
+            case .failure(let failure):
+                break
+            }
+        }
     }
     
 }
@@ -163,8 +178,22 @@ extension ChooseViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        let dict = ["countenances": "2",
+                    "few": "2",
+                    "caught": DeviceIDManager.shared.getIDFV(),
+                    "earnestly": DeviceIDManager.shared.getIDFA(),
+                    "watchful": self.locationModel?.longitude ?? 0.0,
+                    "villany": self.locationModel?.latitude ?? 0.0,
+                    "conceal": begintime,
+                    "thin": String(Int(Date().timeIntervalSince1970)),
+                    "drew": ""] as [String : Any]
+        
         Task {
-            await self.insertInfo(with: "2", begin: begintime, finish: DEFINE_TIME, orderID: "")
+            do {
+                let _ = try await locaitonViewModel.insertPageInfo(with: dict)
+            } catch  {
+                
+            }
         }
         
         let title = modelArray?[indexPath.row] ?? ""

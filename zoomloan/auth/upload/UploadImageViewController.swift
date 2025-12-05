@@ -42,6 +42,12 @@ class UploadImageViewController: BaseViewController{
     var pbegintime: String = ""
     var fbegintime: String = ""
     
+    let launchViewModel = LaunchViewModel()
+    
+    let locationManager = AppLocationManager()
+            
+    var locationModel: AppLocation?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -76,6 +82,7 @@ class UploadImageViewController: BaseViewController{
         
         uploadView.photoBlock = { [weak self] in
             guard let self = self, let baseModel = baseModel else { return }
+            loca()
             let angerModel = baseModel.credulity?.anger
             let photo = angerModel?.possessed ?? 0
             if photo == 0 {
@@ -87,6 +94,7 @@ class UploadImageViewController: BaseViewController{
         
         uploadView.faceBlock = { [weak self] in
             guard let self = self, let baseModel = baseModel else { return }
+            loca()
             let angerModel = baseModel.credulity?.anger
             let belongModel = baseModel.credulity?.belong
             let photo = angerModel?.possessed ?? 0
@@ -121,7 +129,21 @@ class UploadImageViewController: BaseViewController{
         
         peopleDetailInfo()
         
-        pbegintime = DEFINE_TIME
+        pbegintime = String(Int(Date().timeIntervalSince1970))
+        
+        loca()
+    }
+    
+    private func loca() {
+        locationManager.requestLocation { result in
+            switch result {
+            case .success(let success):
+                self.locationModel = success
+                break
+            case .failure(let failure):
+                break
+            }
+        }
     }
     
 }
@@ -155,6 +177,7 @@ extension UploadImageViewController {
                         let logoUrl = angerModel?.trick ?? ""
                         self.uploadView.oneListView.asoImageView.isHidden = false
                         self.uploadView.oneListView.descImageView.kf.setImage(with: URL(string: logoUrl))
+                        self.uploadView.oneListView.loginBtn.isHidden = true
                     }
                     
                     if face == 0 {
@@ -166,6 +189,7 @@ extension UploadImageViewController {
                         let logoUrl = belongModel?.trick ?? ""
                         self.uploadView.twoListView.asoImageView.isHidden = false
                         self.uploadView.twoListView.descImageView.kf.setImage(with: URL(string: logoUrl))
+                        self.uploadView.twoListView.loginBtn.isHidden = true
                     }
                 }
             } catch {
@@ -195,7 +219,7 @@ extension UploadImageViewController {
     
     private func alertFaceExampleView() {
         isFace = 10
-        fbegintime = DEFINE_TIME
+        fbegintime = String(Int(Date().timeIntervalSince1970))
         let examView = PopExampleView(frame: self.view.bounds)
         examView.bgImageView.image = UIImage(named: "popface_image")
         let alertVc = TYAlertController(alert: examView, preferredStyle: .alert)
@@ -207,6 +231,7 @@ extension UploadImageViewController {
         
         examView.sureBlock = { [weak self] in
             self?.dismiss(animated: true) {
+                self?.loca()
                 self?.checkCameraPermission(with: 1)
             }
         }
@@ -405,9 +430,7 @@ extension UploadImageViewController {
                         alertNameView(with: model.credulity?.scrupulous ?? [])
                     }else {
                         self.peopleDetailInfo()
-                        Task {
-                            await self.insertInfo(with: "4", begin: fbegintime, finish: DEFINE_TIME, orderID: "")
-                        }
+                        self.fourInfo()
                     }
                 }else {
                     ToastView.showMessage(with: model.regarding ?? "")
@@ -440,9 +463,7 @@ extension UploadImageViewController {
                     if model.sentences == "0" {
                         self.dismiss(animated: true) {
                             self.peopleDetailInfo()
-                            Task {
-                                await self.insertInfo(with: "3", begin: self.pbegintime, finish: DEFINE_TIME, orderID: "")
-                            }
+                            self.threeInfo()
                         }
                     }else {
                         ToastView.showMessage(with: model.regarding ?? "")
@@ -453,4 +474,45 @@ extension UploadImageViewController {
             }
         }
     }
+    
+    private func threeInfo() {
+        let dict = ["countenances": "3",
+                    "few": "2",
+                    "caught": DeviceIDManager.shared.getIDFV(),
+                    "earnestly": DeviceIDManager.shared.getIDFA(),
+                    "watchful": self.locationModel?.longitude ?? 0.0,
+                    "villany": self.locationModel?.latitude ?? 0.0,
+                    "conceal": self.pbegintime,
+                    "thin": String(Int(Date().timeIntervalSince1970)),
+                    "drew": ""] as [String : Any]
+        
+        Task {
+            do {
+                let _ = try await self.launchViewModel.insertPageInfo(with: dict)
+            } catch  {
+                
+            }
+        }
+    }
+    
+    private func fourInfo() {
+        let dict = ["countenances": "4",
+                    "few": "2",
+                    "caught": DeviceIDManager.shared.getIDFV(),
+                    "earnestly": DeviceIDManager.shared.getIDFA(),
+                    "watchful": self.locationModel?.longitude ?? 0.0,
+                    "villany": self.locationModel?.latitude ?? 0.0,
+                    "conceal": self.fbegintime,
+                    "thin": String(Int(Date().timeIntervalSince1970)),
+                    "drew": ""] as [String : Any]
+        
+        Task {
+            do {
+                let _ = try await self.launchViewModel.insertPageInfo(with: dict)
+            } catch  {
+                
+            }
+        }
+    }
+    
 }

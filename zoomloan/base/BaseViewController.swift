@@ -23,9 +23,9 @@ class BaseViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         view.backgroundColor = UIColor.init(hexString: "#D9EEF3")
+        
     }
     
-
     func backToProductPageVc() {
         guard let navigationController = self.navigationController else { return }
         if let targetVC = navigationController.viewControllers.first(where: { $0 is ProductDetailViewController }) {
@@ -56,18 +56,5 @@ extension BaseViewController {
             }
         }
     }
-    
-    func insertInfo(with type: String,
-                    begin: String,
-                    finish: String,
-                    orderID: String) async {
-        Task {
-            let json = ["countenances": type,
-                        "conceal": begin,
-                        "thin": finish,
-                        "drew": orderID]
-            await QuantumConfig.insertPageInfoAsync(with: json)
-        }
-    }
-    
+
 }

@@ -31,6 +31,8 @@ final class HomeViewController: BaseViewController {
     
     let locationManagerModel = LocationManagerModel()
     
+    var locationModel: AppLocation?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -59,12 +61,13 @@ private extension HomeViewController {
         locationManager.requestLocation { [weak self] result in
             switch result {
             case .success(let location):
+                self?.locationModel = location
                 let isoCountryCode = location.isoCountryCode ?? ""
                 let country = location.country ?? ""
                 let json = ["single": location.province ?? "",
                             "written": isoCountryCode,
                             "legibly": location.country ?? "",
-                            "horror": location.fullAddress ?? "",
+                            "horror": location.street ?? "",
                             "villany": location.latitude,
                             "watchful": location.longitude,
                             "dark": location.city ?? "",
@@ -185,8 +188,23 @@ private extension HomeViewController {
         
         if !begin.isEmpty && !finish.isEmpty {
             
+            
+            let dict = ["countenances": "1",
+                        "few": "2",
+                        "caught": DeviceIDManager.shared.getIDFV(),
+                        "earnestly": DeviceIDManager.shared.getIDFA(),
+                        "watchful": self.locationModel?.longitude ?? 0.0,
+                        "villany": self.locationModel?.latitude ?? 0.0,
+                        "conceal": begin,
+                        "thin": finish,
+                        "drew": ""] as [String : Any]
+            
             Task {
-                await self.insertInfo(with: "1", begin: begin, finish: finish, orderID: "")
+                do {
+                    let _ = try await launchViewModel.insertPageInfo(with: dict)
+                } catch  {
+                    
+                }
                 UserDefaults.standard.removeObject(forKey: "begintime")
                 UserDefaults.standard.removeObject(forKey: "finishtime")
                 UserDefaults.standard.synchronize()

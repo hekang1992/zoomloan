@@ -254,8 +254,8 @@ private extension ProductDetailView {
         guard let productModel = productModel else { return }
         let logoUrl = productModel.breaking ?? ""
         logoImageView.kf.setImage(with: URL(string: logoUrl))
-        nameLabel.text = productModel.signora ?? ""
-        oneLabel.text = productModel.profound ?? ""
+        nameLabel.text = productModel.profound ?? ""
+        oneLabel.text = productModel.signora ?? ""
         moneyLabel.text = String(productModel.bertolini ?? 0)
     }
 }

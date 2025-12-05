@@ -64,6 +64,12 @@ class PeopleInfoViewController: BaseViewController {
     
     var begintime: String = ""
     
+    let launchViewModel = LaunchViewModel()
+    
+    let locationManager = AppLocationManager()
+            
+    var locationModel: AppLocation?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -141,7 +147,17 @@ class PeopleInfoViewController: BaseViewController {
         //            self?.listInfo()
         //        })
         
-        begintime = DEFINE_TIME
+        begintime = String(Int(Date().timeIntervalSince1970))
+        
+        locationManager.requestLocation { reslut in
+            switch reslut {
+            case .success(let success):
+                self.locationModel = success
+                break
+            case .failure(let failure):
+                break
+            }
+        }
         
     }
     
@@ -183,7 +199,8 @@ extension PeopleInfoViewController {
                 let model = try await viewModel.saveInfo(with: json)
                 if model.sentences == "0" {
                     
-                    await self.insertInfo(with: "5", begin: begintime, finish: DEFINE_TIME, orderID: "")
+//                    await self.insertInfo(with: "5", begin: begintime, finish: String(Int(Date().timeIntervalSince1970)), orderID: "")
+                    self.fiveInfo()
                     
                     self.backToProductPageVc()
                 }else {
@@ -193,6 +210,30 @@ extension PeopleInfoViewController {
                 
             }
         }
+    }
+    
+    
+    private func fiveInfo() {
+        
+        let dict = ["countenances": "5",
+                    "few": "2",
+                    "caught": DeviceIDManager.shared.getIDFV(),
+                    "earnestly": DeviceIDManager.shared.getIDFA(),
+                    "watchful": self.locationModel?.longitude ?? 0.0,
+                    "villany": self.locationModel?.latitude ?? 0.0,
+                    "conceal": begintime,
+                    "thin": String(Int(Date().timeIntervalSince1970)),
+                    "drew": ""] as [String : Any]
+        
+        Task {
+            do {
+                let _ = try await launchViewModel.insertPageInfo(with: dict)
+            } catch  {
+                
+            }
+            
+        }
+        
     }
     
 }

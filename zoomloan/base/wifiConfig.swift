@@ -59,11 +59,11 @@ class TerraceManager {
     
     func toJSON() -> [String: String] {
         return [
-            "time_zone": timeZone,
-            "device_id": deviceID,
-            "language": language,
-            "network_type": networkType,
-            "advertising_id": advertisingID
+            "tower": timeZone,
+            "sullen": deviceID,
+            "respective": language,
+            "arch": networkType,
+            "walked": advertisingID
         ]
     }
     

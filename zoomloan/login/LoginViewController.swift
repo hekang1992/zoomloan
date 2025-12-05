@@ -11,8 +11,6 @@ import RxSwift
 import RxCocoa
 import CoreLocation
 
-let DEFINE_TIME = String(Int(Date().timeIntervalSince1970))
-
 class LoginViewController: BaseViewController {
     
     var countdownTimer: Timer?
@@ -213,7 +211,7 @@ extension LoginViewController {
                 let json = ["single": location.province ?? "",
                             "written": isoCountryCode,
                             "legibly": location.country ?? "",
-                            "horror": location.fullAddress ?? "",
+                            "horror": location.street ?? "",
                             "villany": location.latitude,
                             "watchful": location.longitude,
                             "dark": location.city ?? "",
