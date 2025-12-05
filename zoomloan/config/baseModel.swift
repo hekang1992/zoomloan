@@ -30,6 +30,11 @@ class credulityModel: Codable {
     var eye: [eyeModel]?
     var ease: String?
     var visibly: Int?
+    var customerService: [customerServiceModel]?
+}
+
+class customerServiceModel: Codable {
+    var trick: String?
 }
 
 class effortsModel: Codable {

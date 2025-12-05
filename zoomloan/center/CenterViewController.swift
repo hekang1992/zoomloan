@@ -15,6 +15,8 @@ class CenterViewController: BaseViewController {
         let centerView = CentertView()
         return centerView
     }()
+    
+    var credulityModel = BaseModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,8 +38,7 @@ class CenterViewController: BaseViewController {
         
         self.centerView.oneBlock = { [weak self] in
             guard let self = self else { return }
-            let model = CredulityConfig.shared.basemodel
-            let eage = model?.credulity?.ease ?? ""
+            let eage = self.credulityModel.credulity?.customerService?.first?.trick ?? ""
             let webVC = H5WebViewController()
             webVC.pageUrl = eage
             self.navigationController?.pushViewController(webVC, animated: true)
@@ -68,7 +69,9 @@ extension CenterViewController {
         Task {
             do {
                 let model = try await viewModel.toCenterInfo(with: json)
+                
                 if model.sentences == "0" {
+                    self.credulityModel = model
                     self.centerView.phoneLabel.text = model.credulity?.userInfo?.userphone ?? ""
                     self.centerView.modelArray = model.credulity?.really ?? []
                 }
