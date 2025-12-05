@@ -150,14 +150,14 @@ class ChooseViewController: BaseViewController {
         
         begintime = String(Int(Date().timeIntervalSince1970))
         
-        locationManager.requestLocation { result in
-            switch result {
-            case .success(let success):
-                self.locationModel = success
-            case .failure(let failure):
-                break
-            }
-        }
+//        locationManager.requestLocation { result in
+//            switch result {
+//            case .success(let success):
+//                break
+//            case .failure(let failure):
+//                break
+//            }
+//        }
     }
     
     @MainActor
@@ -182,24 +182,34 @@ extension ChooseViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let time = String(Int(Date().timeIntervalSince1970))
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            let dict = ["countenances": "2",
-                        "few": "2",
-                        "caught": DeviceIDManager.shared.getIDFV(),
-                        "earnestly": DeviceIDManager.shared.getIDFA(),
-                        "watchful": self.locationModel?.longitude ?? 0.0,
-                        "villany": self.locationModel?.latitude ?? 0.0,
-                        "conceal": self.begintime,
-                        "thin": String(Int(Date().timeIntervalSince1970)),
-                        "drew": ""] as [String : Any]
-            
-            Task {
-                do {
-                    let _ = try await self.locaitonViewModel.insertPageInfo(with: dict)
-                } catch  {
+        locationManager.requestLocation { result in
+            switch result {
+            case .success(let success):
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    let dict = ["countenances": "2",
+                                "few": "2",
+                                "caught": DeviceIDManager.shared.getIDFV(),
+                                "earnestly": DeviceIDManager.shared.getIDFA(),
+                                "watchful": success.longitude,
+                                "villany": success.latitude,
+                                "conceal": self.begintime,
+                                "thin": time,
+                                "drew": ""] as [String : Any]
                     
+                    Task {
+                        do {
+                            let _ = try await self.locaitonViewModel.insertPageInfo(with: dict)
+                        } catch  {
+                            
+                        }
+                    }
                 }
+                
+                break
+            case .failure(_):
+                break
             }
         }
         

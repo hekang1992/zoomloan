@@ -206,6 +206,8 @@ extension LoginViewController {
         locationManager.requestLocation { [weak self] result in
             switch result {
             case .success(let location):
+                print("==========================location")
+                LocatShange.shared.model = location
                 let isoCountryCode = location.isoCountryCode ?? ""
                 let country = location.country ?? ""
                 let json = ["single": location.province ?? "",
@@ -250,4 +252,10 @@ extension LoginViewController {
         }
     }
     
+}
+
+class LocatShange {
+    static let shared = LocatShange()
+    private init() {}
+    var model: AppLocation?
 }

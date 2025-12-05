@@ -33,13 +33,14 @@ final class HomeViewController: BaseViewController {
     
     var locationModel: AppLocation?
     
+    var model: AppLocation?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupUI()
         setupBindings()
         getAssInfo()
-        getLocation()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -187,13 +188,17 @@ private extension HomeViewController {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
             if !begin.isEmpty && !finish.isEmpty {
-        
+                if self.locationModel == nil {
+                    self.model = LocatShange.shared.model
+                }else {
+                    self.model = self.locationModel
+                }
                 let dict = ["countenances": "1",
                             "few": "2",
                             "caught": DeviceIDManager.shared.getIDFV(),
                             "earnestly": DeviceIDManager.shared.getIDFA(),
-                            "watchful": self.locationModel?.longitude ?? 0.0,
-                            "villany": self.locationModel?.latitude ?? 0.0,
+                            "watchful": self.model?.longitude ?? 0.0,
+                            "villany": self.model?.latitude ?? 0.0,
                             "conceal": begin,
                             "thin": finish,
                             "drew": ""] as [String : Any]

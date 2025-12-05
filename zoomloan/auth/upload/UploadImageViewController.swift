@@ -140,7 +140,7 @@ class UploadImageViewController: BaseViewController{
             case .success(let success):
                 self.locationModel = success
                 break
-            case .failure(let failure):
+            case .failure(_):
                 break
             }
         }
@@ -201,6 +201,7 @@ extension UploadImageViewController {
     
     private func alertPhotoExampleView() {
         isFace = 11
+        self.pbegintime = String(Int(Date().timeIntervalSince1970))
         let examView = PopExampleView(frame: self.view.bounds)
         examView.bgImageView.image = UIImage(named: "pop_imge_image")
         let alertVc = TYAlertController(alert: examView, preferredStyle: .alert)
@@ -211,15 +212,15 @@ extension UploadImageViewController {
         }
         
         examView.sureBlock = { [weak self] in
-            self?.dismiss(animated: true) {
-                self?.showImagePickerSheet()
+            guard let self = self else { return }
+            self.dismiss(animated: true) {
+                self.showImagePickerSheet()
             }
         }
     }
     
     private func alertFaceExampleView() {
         isFace = 10
-        fbegintime = String(Int(Date().timeIntervalSince1970))
         let examView = PopExampleView(frame: self.view.bounds)
         examView.bgImageView.image = UIImage(named: "popface_image")
         let alertVc = TYAlertController(alert: examView, preferredStyle: .alert)
@@ -230,9 +231,11 @@ extension UploadImageViewController {
         }
         
         examView.sureBlock = { [weak self] in
-            self?.dismiss(animated: true) {
-                self?.loca()
-                self?.checkCameraPermission(with: 1)
+            guard let self = self else { return }
+            fbegintime = String(Int(Date().timeIntervalSince1970))
+            self.dismiss(animated: true) {
+                self.loca()
+                self.checkCameraPermission(with: 1)
             }
         }
     }
@@ -462,8 +465,8 @@ extension UploadImageViewController {
                     let model = try await viweModel.saveMessageInfo(with: json)
                     if model.sentences == "0" {
                         self.dismiss(animated: true) {
-                            self.peopleDetailInfo()
                             self.threeInfo()
+                            self.peopleDetailInfo()
                         }
                     }else {
                         ToastView.showMessage(with: model.regarding ?? "")
@@ -476,6 +479,7 @@ extension UploadImageViewController {
     }
     
     private func threeInfo() {
+        let time = String(Int(Date().timeIntervalSince1970))
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
             let dict = ["countenances": "3",
                         "few": "2",
@@ -484,7 +488,7 @@ extension UploadImageViewController {
                         "watchful": self.locationModel?.longitude ?? 0.0,
                         "villany": self.locationModel?.latitude ?? 0.0,
                         "conceal": self.pbegintime,
-                        "thin": String(Int(Date().timeIntervalSince1970)),
+                        "thin": time,
                         "drew": ""] as [String : Any]
             
             Task {
@@ -498,6 +502,7 @@ extension UploadImageViewController {
     }
     
     private func fourInfo() {
+        let time = String(Int(Date().timeIntervalSince1970))
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
             let dict = ["countenances": "4",
                         "few": "2",
@@ -506,7 +511,7 @@ extension UploadImageViewController {
                         "watchful": self.locationModel?.longitude ?? 0.0,
                         "villany": self.locationModel?.latitude ?? 0.0,
                         "conceal": self.fbegintime,
-                        "thin": String(Int(Date().timeIntervalSince1970)),
+                        "thin": time,
                         "drew": ""] as [String : Any]
             
             Task {

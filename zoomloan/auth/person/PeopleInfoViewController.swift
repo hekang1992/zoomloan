@@ -214,6 +214,7 @@ extension PeopleInfoViewController {
     
     
     private func fiveInfo() {
+        let time = String(Int(Date().timeIntervalSince1970))
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
             let dict = ["countenances": "5",
                         "few": "2",
@@ -222,7 +223,7 @@ extension PeopleInfoViewController {
                         "watchful": self.locationModel?.longitude ?? 0.0,
                         "villany": self.locationModel?.latitude ?? 0.0,
                         "conceal": self.begintime,
-                        "thin": String(Int(Date().timeIntervalSince1970)),
+                        "thin": time,
                         "drew": ""] as [String : Any]
             
             Task {

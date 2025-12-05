@@ -374,6 +374,7 @@ extension H5WebViewController: H5WebViewControllerScriptHandlerDelegate {
     }
     
     private func egithInfo() {
+        let time = String(Int(Date().timeIntervalSince1970))
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
             let dict = ["countenances": "8",
                         "few": "2",
@@ -382,7 +383,7 @@ extension H5WebViewController: H5WebViewControllerScriptHandlerDelegate {
                         "watchful": self.locationModel?.longitude ?? 0.0,
                         "villany": self.locationModel?.latitude ?? 0.0,
                         "conceal": self.begintime,
-                        "thin": String(Int(Date().timeIntervalSince1970)),
+                        "thin": time,
                         "drew": ""] as [String : Any]
             
             Task {
