@@ -92,7 +92,7 @@ extension AppLocationManager: CLLocationManagerDelegate {
             }
             
             let latitude = location.coordinate.latitude.rounded6()
-            let longitude = location.coordinate.latitude.rounded6()
+            let longitude = location.coordinate.longitude.rounded6()
             
             UserDefaults.standard.setValue(latitude, forKey: "latitude")
             UserDefaults.standard.setValue(longitude, forKey: "longitude")
