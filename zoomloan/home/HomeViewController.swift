@@ -317,9 +317,9 @@ extension HomeViewController {
     }
     
     private func pushDeviceJson() {
-        let deviceJson = ["credulity": AppDeviceManager.toJson() ?? ""]
         Task {
             do {
+                let deviceJson = ["credulity": await AppDeviceManager.toJson() ?? ""]
                 let _ = try await locationManagerModel.toUploadDeviceInfo(with: deviceJson)
             } catch  {
                 

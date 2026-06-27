@@ -137,22 +137,22 @@ class HomeView: BaseView {
         oneImageView.snp.makeConstraints { make in
             make.top.left.equalToSuperview()
             make.centerX.equalToSuperview()
-            make.height.equalTo(550)
+            make.height.equalTo(550.pix())
         }
         twoImageView.snp.makeConstraints { make in
             make.top.equalTo(oneImageView.snp.top).offset(226)
             make.centerX.equalToSuperview()
-            make.size.equalTo(CGSize(width: 343, height: 397))
+            make.size.equalTo(CGSize(width: 343.pix(), height: 397.pix()))
         }
         threeImageView.snp.makeConstraints { make in
             make.bottom.equalTo(twoImageView.snp.bottom)
             make.centerX.equalToSuperview()
-            make.size.equalTo(CGSize(width: 343, height: 117))
+            make.size.equalTo(CGSize(width: 343.pix(), height: 117.pix()))
         }
         fourImageView.snp.makeConstraints { make in
             make.top.equalTo(twoImageView.snp.bottom).offset(2)
             make.centerX.equalToSuperview()
-            make.size.equalTo(CGSize(width: 362, height: 310))
+            make.size.equalTo(CGSize(width: 362.pix(), height: 310.pix()))
             make.bottom.equalToSuperview().offset(-10)
         }
         

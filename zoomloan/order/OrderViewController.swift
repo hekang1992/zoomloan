@@ -251,7 +251,7 @@ class EmptyView: BaseView {
         bgImageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalToSuperview().offset(100)
-            make.size.equalTo(CGSize(width: 250, height: 250))
+            make.size.equalTo(CGSize(width: 250.pix(), height: 250.pix()))
         }
         bgImageView.rx.tapGesture().when(.recognized).subscribe(onNext: { [weak self] _ in
             self?.clickBlock?()

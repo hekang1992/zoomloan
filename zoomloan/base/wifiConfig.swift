@@ -27,6 +27,7 @@ class WiFiConfig: NSObject {
             switch status {
             case .some(let network):
                 return (network.ssid, network.bssid)
+                
             case .none:
                 throw WiFiError.noNetworkInfo
             }

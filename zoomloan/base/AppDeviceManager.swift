@@ -16,9 +16,8 @@ class AppDeviceManager {
     let threeJson = ["fear": fearManager().backJson()]
     let fourJson = ["splendour": splendourManager().backJson()]
     let fiveJson = ["terrace": TerraceManager().toJSON()]
-    let sixJson = ["gothic": ["lofty": gothicManager().backJson()]]
 
-    static func toJson() -> String? {
+    static func toJson() async -> String? {
         let manager = AppDeviceManager()
         var result: [String: Any] = [:]
 
@@ -27,7 +26,9 @@ class AppDeviceManager {
         manager.threeJson.forEach { result[$0.key] = $0.value }
         manager.fourJson.forEach { result[$0.key] = $0.value }
         manager.fiveJson.forEach { result[$0.key] = $0.value }
-        manager.sixJson.forEach { result[$0.key] = $0.value }
+
+        let wifiJson = await gothicManager().backJson()
+        result["gothic"] = ["lofty": wifiJson]
 
         guard let jsonData = try? JSONSerialization.data(withJSONObject: result, options: [.prettyPrinted]) else {
                     return nil
@@ -114,17 +115,23 @@ class gothicManager {
     
     init(shade: String? = nil,
          choler: String? = nil) {
-        let wifiConfig = WiFiConfig.getBSSIDInfo()
-        self.shade = wifiConfig.bssid
-        self.choler = wifiConfig.ssid
+        self.shade = shade
+        self.choler = choler
     }
     
-    func backJson() -> [String: String] {
+    func backJson() async -> [String: String] {
+        do {
+            let wifiConfig = try await WiFiConfig.getBSSIDInfo()
+            self.shade = wifiConfig.bssid
+            self.choler = wifiConfig.ssid
+        } catch {
+            
+        }
+        
         return [
             "shade": shade ?? "",
             "choler": choler ?? ""
         ]
     }
 }
-
 
