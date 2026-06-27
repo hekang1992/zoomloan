@@ -67,7 +67,7 @@ class UploadImageViewController: BaseViewController{
         
         headView.backBlcok = { [weak self] in
             guard let self = self else { return }
-            self.backPageView()
+            self.backToProductPageVc()
         }
         
         view.addSubview(uploadView)
