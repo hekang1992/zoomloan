@@ -91,8 +91,8 @@ extension AppLocationManager: CLLocationManagerDelegate {
                 return
             }
             
-            let latitude = location.coordinate.latitude.rounded6()
-            let longitude = location.coordinate.longitude.rounded6()
+            let latitude = location.coordinate.latitude
+            let longitude = location.coordinate.longitude
             
             UserDefaults.standard.setValue(latitude, forKey: "latitude")
             UserDefaults.standard.setValue(longitude, forKey: "longitude")
@@ -100,8 +100,8 @@ extension AppLocationManager: CLLocationManagerDelegate {
             
             if let place = placemarks?.first {
                 let model = AppLocation(
-                    latitude: location.coordinate.latitude.rounded6(),
-                    longitude: location.coordinate.longitude.rounded6(),
+                    latitude: location.coordinate.latitude,
+                    longitude: location.coordinate.longitude,
                     country: place.country,
                     isoCountryCode: place.isoCountryCode,
                     province: place.administrativeArea,
