@@ -88,7 +88,7 @@ class SettingViewController: BaseViewController {
         let deletelabel = UILabel()
         deletelabel.isUserInteractionEnabled = true
         let attributedString = NSAttributedString(
-            string: "Delete Digido",
+            string: "Delete Account",
             attributes: [
                 .underlineStyle: NSUnderlineStyle.single.rawValue,
                 .font: UIFont.systemFont(ofSize: 14, weight: UIFont.Weight(500)),
@@ -102,7 +102,6 @@ class SettingViewController: BaseViewController {
             make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-30)
             make.height.equalTo(20)
         }
-        
         
         whiteView.rx.tapGesture().when(.recognized).bind(onNext: { [weak self] _ in
             guard let self = self else { return }
