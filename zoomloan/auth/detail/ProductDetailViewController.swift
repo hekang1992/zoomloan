@@ -10,6 +10,7 @@ import SnapKit
 import MJRefresh
 import RxSwift
 import RxCocoa
+import RxGesture
 
 class ProductDetailViewController: BaseViewController {
     
@@ -28,6 +29,8 @@ class ProductDetailViewController: BaseViewController {
     let launchViewModel = LaunchViewModel()
     
     var locationModel: AppLocation?
+    
+    var repeated: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,6 +86,19 @@ class ProductDetailViewController: BaseViewController {
             self.locationModel = model
         }
         
+        self.listView
+            .agreeLabel
+            .rx
+            .tapGesture()
+            .when(.recognized)
+            .bind(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                let webVC = H5WebViewController()
+                webVC.pageUrl = self.repeated
+                webVC.type = "1"
+                self.navigationController?.pushViewController(webVC, animated: true)
+            }).disposed(by: disposeBag)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -90,13 +106,14 @@ class ProductDetailViewController: BaseViewController {
         self.getProductDetailInfo()
     }
     
-     func locaino(completion: @escaping (AppLocation) -> Void) {
+    func locaino(completion: @escaping (AppLocation) -> Void) {
         locationManager.requestLocation { result in
             switch result {
             case .success(let success):
                 completion(success)
                 break
-            case .failure(let failure):
+                
+            case .failure(_):
                 break
             }
         }
@@ -127,6 +144,7 @@ extension ProductDetailViewController {
                     self.headView.nameLabel.text = model.credulity?.head?.profound ?? ""
                     self.listView.loginBtn.setTitle(model.credulity?.head?.illusion ?? "", for: .normal)
                     let repeated = model.credulity?.lowered?.repeated ?? ""
+                    self.repeated = repeated
                     self.listView.agreeLabel.isHidden = repeated.isEmpty
                     self.listView.productModel = model.credulity?.head
                     self.listView.modelArray = model.credulity?.produce ?? []
@@ -247,9 +265,9 @@ class ChoosePageVcConfig {
     
     static private func nineInfo(with orderid: String, vc: ProductDetailViewController) {
         
-//        vc.locaino { locationModel in
-//
-//        }
+        //        vc.locaino { locationModel in
+        //
+        //        }
         
         let locationModel = vc.locationModel
         
