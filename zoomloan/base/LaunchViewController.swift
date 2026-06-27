@@ -36,7 +36,7 @@ class LaunchViewController: BaseViewController {
         super.viewWillAppear(animated)
     }
     
-//    @MainActor
+    @MainActor
     deinit {
         networkMonitor.stopListening()
         print("🚀 deinit - LaunchViewController - deinit")
@@ -57,11 +57,11 @@ private extension LaunchViewController {
         networkMonitor.statusChanged = { [weak self] status in
             switch status {
             case .reachable(.ethernetOrWiFi):
-                self?.setInitInfo()
-                break
+                self?.dynamicDomain()
+                
             case .reachable(.cellular):
-                self?.setInitInfo()
-                break
+                self?.dynamicDomain()
+                
             case .notReachable, .unknown:
                 break
             }
@@ -77,6 +77,10 @@ private extension LaunchViewController {
 
 // MARK: - App Initialization Flow
 private extension LaunchViewController {
+    
+    private func dynamicDomain() {
+        
+    }
     
     func startAppInitialization() {
         requestTrackingAuthorization()
@@ -98,9 +102,10 @@ private extension LaunchViewController {
         switch status {
         case .authorized, .denied, .notDetermined:
             initializeAppData()
+            
         case .restricted:
-            // 受限制的情况，可以选择继续初始化或特殊处理
             initializeAppData()
+            
         @unknown default:
             initializeAppData()
         }

@@ -11,8 +11,6 @@ import SAMKeychain
 import AppTrackingTransparency
 import AdSupport
 
-let base_url = "http://47.84.60.25:8600/gnbcyi"
-
 class APISchemConfig {
     static let scheme_url = "minimal://line.form.space"
 }
@@ -93,7 +91,19 @@ extension RequsetHttpManager {
     
     func getApiUrl(with url: String) -> String {
         let loginJson = ApiCommonParaConfig.loginDictInfo()
-        let apiUrl = ParameterToUrlConfig.appendQuery(to: base_url + url, parameters: loginJson)
+        
+        var api_Url = ""
+        
+        var base_url = UserDefaults.standard.object(forKey: "base_url") as? String ?? ""
+        
+        if base_url.isEmpty {
+            api_Url = "https://yliiqs.raftlink-cons.com/gnbcyi"
+        }else {
+            api_Url = base_url
+        }
+        
+        let apiUrl = ParameterToUrlConfig.appendQuery(to: api_Url + url, parameters: loginJson)
+        
         return apiUrl ?? ""
     }
     
