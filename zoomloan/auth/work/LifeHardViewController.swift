@@ -15,6 +15,8 @@ let hadf_title = "Work Certification"
 
 class LifeHardViewController: BaseViewController {
     
+    
+    
     var productID: String? {
         didSet {
             print("pro=======\(productID ?? "")")
@@ -148,8 +150,8 @@ class LifeHardViewController: BaseViewController {
             switch result {
             case .success(let success):
                 self.locationModel = success
-                break
-            case .failure(let failure):
+                
+            case .failure(_):
                 break
             }
         }

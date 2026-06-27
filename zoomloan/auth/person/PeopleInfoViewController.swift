@@ -153,8 +153,8 @@ class PeopleInfoViewController: BaseViewController {
             switch reslut {
             case .success(let success):
                 self.locationModel = success
-                break
-            case .failure(let failure):
+                
+            case .failure(_):
                 break
             }
         }

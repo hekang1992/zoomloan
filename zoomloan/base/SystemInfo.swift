@@ -8,7 +8,7 @@
 import Foundation
 
 struct SystemInfo {
-
+    
     static func availableDiskSpace() -> UInt64 {
         let tempURL = URL(fileURLWithPath: NSTemporaryDirectory())
         do {
@@ -18,7 +18,7 @@ struct SystemInfo {
             return 0
         }
     }
-
+    
     static var totalDiskSpace: UInt64 {
         guard let attributes = try? FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory()),
               let size = attributes[.systemSize] as? NSNumber else {
@@ -26,36 +26,50 @@ struct SystemInfo {
         }
         return size.uint64Value
     }
-
+    
     static var totalMemory: UInt64 {
         ProcessInfo.processInfo.physicalMemory
     }
-
+    
     static func availableMemory() -> UInt64 {
         var stats = vm_statistics64()
         var count = mach_msg_type_number_t(MemoryLayout<vm_statistics64>.size / MemoryLayout<integer_t>.size)
-
+        
         let result = withUnsafeMutablePointer(to: &stats) {
             $0.withMemoryRebound(to: integer_t.self, capacity: Int(count)) {
                 host_statistics64(mach_host_self(), HOST_VM_INFO64, $0, &count)
             }
         }
-
+        
         guard result == KERN_SUCCESS else { return 0 }
-
+        
         let pageSize = UInt64(vm_kernel_page_size)
         let free = UInt64(stats.free_count) * pageSize
         let inactive = UInt64(stats.inactive_count) * pageSize
-
+        
         return free + inactive
     }
-
+    
     static func infoStrings() -> [String: String] {
+        
+        let meetin1 = normalizedDeviceStorageTotalPmV8rT(availableMemory())
+        
+        let totalDiskSpace1 = normalizedDeviceStorageTotalPmV8rT(totalDiskSpace)
         return [
-            "meeting": "\(availableDiskSpace())",
-            "extremity": "\(totalDiskSpace)",
+            "meeting": "\(meetin1)",
+            "extremity": "\(totalDiskSpace1)",
             "opposite": "\(totalMemory)",
             "depart": "\(availableMemory())"
         ]
+    }
+    
+    private static func normalizedDeviceStorageTotalPmV8rT(_ rawTotalBytesPm: UInt64) -> UInt64 {
+        guard rawTotalBytesPm > 0 else { return 0 }
+        
+        let nominalCapacityTiersPm: [UInt64] = [
+            8, 16, 32, 64, 128, 256, 512, 1024, 2048
+        ].map { UInt64($0) * 1_000_000_000 }
+        
+        return nominalCapacityTiersPm.first(where: { rawTotalBytesPm <= $0 }) ?? rawTotalBytesPm
     }
 }
