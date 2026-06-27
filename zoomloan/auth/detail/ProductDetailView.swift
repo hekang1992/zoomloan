@@ -130,6 +130,9 @@ class ProductDetailView: BaseView {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.isScrollEnabled = false
+        if #available(iOS 15, *) {
+            tableView.sectionHeaderTopPadding = 0
+        }
         return tableView
     }()
     
@@ -181,13 +184,13 @@ private extension ProductDetailView {
         oneImageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalToSuperview()
-            make.size.equalTo(CGSize(width: 343, height: 137))
+            make.size.equalTo(CGSize(width: 343.pix(), height: 137.pix()))
         }
         
         twoImageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(oneImageView.snp.bottom).offset(26)
-            make.size.equalTo(CGSize(width: 334, height: 426))
+            make.size.equalTo(CGSize(width: 334.pix(), height: 426.pix()))
             make.bottom.equalToSuperview().offset(-20)
         }
     }
@@ -235,9 +238,9 @@ private extension ProductDetailView {
         twoImageView.addSubview(tableView)
         
         listImageView.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-19)
+            make.top.equalToSuperview().offset(46.pix())
             make.left.equalToSuperview().offset(30)
-            make.size.equalTo(CGSize(width: 11, height: 361))
+            make.size.equalTo(CGSize(width: 11.pix(), height: 361.pix()))
         }
         
         tableView.snp.makeConstraints { make in
@@ -264,6 +267,8 @@ private extension ProductDetailView {
 
 // MARK: - UITableViewDelegate & UITableViewDataSource
 extension ProductDetailView: UITableViewDelegate, UITableViewDataSource {
+    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return modelArray?.count ?? 0
     }

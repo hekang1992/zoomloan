@@ -70,7 +70,7 @@ class FormViewCell: UITableViewCell {
     lazy var relaTextFiled: UITextField = {
         let relaTextFiled = UITextField()
         relaTextFiled.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight(600))
-        relaTextFiled.textColor = UIColor.init(hexString: "#59BDB7")
+        relaTextFiled.textColor = UIColor.black
         relaTextFiled.backgroundColor = .clear
         relaTextFiled.layer.cornerRadius = 14
         relaTextFiled.clipsToBounds = true
@@ -105,7 +105,7 @@ class FormViewCell: UITableViewCell {
     lazy var nameTextFiled: UITextField = {
         let nameTextFiled = UITextField()
         nameTextFiled.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight(600))
-        nameTextFiled.textColor = UIColor.init(hexString: "#59BDB7")
+        nameTextFiled.textColor = UIColor.black
         nameTextFiled.backgroundColor = .clear
         nameTextFiled.layer.cornerRadius = 14
         nameTextFiled.clipsToBounds = true

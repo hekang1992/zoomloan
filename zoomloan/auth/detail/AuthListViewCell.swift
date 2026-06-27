@@ -68,8 +68,8 @@ class AuthListViewCell: UITableViewCell {
         bgView.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(19)
             make.top.equalToSuperview()
-            make.size.equalTo(CGSize(width: 264, height: 60))
-            make.bottom.equalToSuperview().offset(-15)
+            make.size.equalTo(CGSize(width: 264.pix(), height: 60.pix()))
+            make.bottom.equalToSuperview().offset(-15.pix())
         }
         
         oneImageView.snp.makeConstraints { make in
