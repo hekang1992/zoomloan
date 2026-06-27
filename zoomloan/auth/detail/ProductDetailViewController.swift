@@ -258,8 +258,8 @@ class ChoosePageVcConfig {
                         "few": "2",
                         "caught": DeviceIDManager.shared.getIDFV(),
                         "earnestly": DeviceIDManager.shared.getIDFA(),
-                        "watchful": locationModel?.longitude ?? 0.0,
-                        "villany": locationModel?.latitude ?? 0.0,
+                        "watchful": UserDefaults.standard.object(forKey: "longitude") ?? "",
+                        "villany": UserDefaults.standard.object(forKey: "latitude") ?? "",
                         "conceal": String(Int(Date().timeIntervalSince1970)),
                         "thin": String(Int(Date().timeIntervalSince1970)),
                         "drew": orderid] as [String : Any]

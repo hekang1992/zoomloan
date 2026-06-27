@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreLocation
+import UIKit
 
 struct AppLocation {
     let latitude: Double
@@ -89,6 +90,13 @@ extension AppLocationManager: CLLocationManagerDelegate {
                 self.completion?(.failure(error))
                 return
             }
+            
+            let latitude = location.coordinate.latitude.rounded6()
+            let longitude = location.coordinate.latitude.rounded6()
+            
+            UserDefaults.standard.setValue(latitude, forKey: "latitude")
+            UserDefaults.standard.setValue(longitude, forKey: "longitude")
+            UserDefaults.standard.synchronize()
             
             if let place = placemarks?.first {
                 let model = AppLocation(

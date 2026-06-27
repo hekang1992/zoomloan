@@ -52,6 +52,12 @@ class LampView: BaseView {
         return scrollView
     }()
     
+    lazy var tImageView: UIImageView = {
+        let tImageView = UIImageView()
+        tImageView.image = UIImage(named: "t_bg_image")
+        return tImageView
+    }()
+    
     private lazy var headImageView: UIImageView = {
         let oneImageView = UIImageView()
         oneImageView.image = UIImage(named: "lam_icon_image")
@@ -116,15 +122,28 @@ class LampView: BaseView {
         return whiteView
     }()
     
+    lazy var bgView: UIView = {
+        let bgView = UIView()
+        bgView.backgroundColor = UIColor.init(hexString: "#D9EEF3")
+        return bgView
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubview(bgImageView)
+        addSubview(bgView)
         addSubview(scrollView)
         scrollView.addSubview(headImageView)
         
-        bgImageView.snp.makeConstraints { make in
+        bgView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
+        bgView.addSubview(tImageView)
+        tImageView.snp.makeConstraints { make in
+            make.top.left.right.equalToSuperview()
+            make.height.equalTo(254.pix())
+        }
+        
         scrollView.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide.snp.top)
             make.left.right.equalToSuperview()
@@ -132,7 +151,7 @@ class LampView: BaseView {
         }
         headImageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(5)
+            make.top.equalToSuperview().offset(60)
             make.size.equalTo(CGSize(width: 343, height: 221))
         }
         

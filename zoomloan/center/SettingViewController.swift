@@ -29,12 +29,12 @@ class SettingViewController: BaseViewController {
         }
         
         let bgImageView = UIImageView()
-        bgImageView.image = UIImage(named: "logo_desc_image")
+        bgImageView.image = UIImage(named: "cn_log_image")
         view.addSubview(bgImageView)
         bgImageView.snp.makeConstraints { make in
             make.top.equalTo(headView.snp.bottom).offset(35)
             make.centerX.equalToSuperview()
-            make.size.equalTo(CGSize(width: 354, height: 121))
+            make.size.equalTo(CGSize(width: 114, height: 114))
         }
         
         let nameLabel = UILabel()

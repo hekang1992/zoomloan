@@ -43,7 +43,7 @@ class InputViewCell: UITableViewCell {
     lazy var numTextField: UITextField = {
         let numTextField = UITextField()
         numTextField.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight(600))
-        numTextField.textColor = UIColor.init(hexString: "#59BDB7")
+        numTextField.textColor = UIColor.black
         numTextField.backgroundColor = .clear
         numTextField.layer.cornerRadius = 14
         numTextField.clipsToBounds = true

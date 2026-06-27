@@ -488,8 +488,8 @@ extension UploadImageViewController {
                         "few": "2",
                         "caught": DeviceIDManager.shared.getIDFV(),
                         "earnestly": DeviceIDManager.shared.getIDFA(),
-                        "watchful": self.locationModel?.longitude ?? 0.0,
-                        "villany": self.locationModel?.latitude ?? 0.0,
+                        "watchful": UserDefaults.standard.object(forKey: "longitude") ?? "",
+                        "villany": UserDefaults.standard.object(forKey: "latitude") ?? "",
                         "conceal": self.pbegintime,
                         "thin": time,
                         "drew": ""] as [String : Any]
@@ -511,8 +511,8 @@ extension UploadImageViewController {
                         "few": "2",
                         "caught": DeviceIDManager.shared.getIDFV(),
                         "earnestly": DeviceIDManager.shared.getIDFA(),
-                        "watchful": self.locationModel?.longitude ?? 0.0,
-                        "villany": self.locationModel?.latitude ?? 0.0,
+                        "watchful": UserDefaults.standard.object(forKey: "longitude") ?? "",
+                        "villany": UserDefaults.standard.object(forKey: "latitude") ?? "",
                         "conceal": self.fbegintime,
                         "thin": time,
                         "drew": ""] as [String : Any]

@@ -85,26 +85,26 @@ class LifeHardViewController: BaseViewController {
             self.backToProductPageVc()
         }
         
-        let logoImageView = UIImageView()
-        logoImageView.image = UIImage(named: "has_icon_image")
-        view.addSubview(logoImageView)
-        logoImageView.snp.makeConstraints { make in
-            make.size.equalTo(CGSize(width: 40, height: 40))
-            make.top.equalTo(headView.snp.bottom).offset(-10)
-            make.left.equalToSuperview().offset(18)
-        }
-        
-        let nameLabel = UILabel()
-        nameLabel.textAlignment = .left
-        nameLabel.text = hadf_title
-        nameLabel.textColor = UIColor.init(hexString: "#333333")
-        nameLabel.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight(700))
-        view.addSubview(nameLabel)
-        nameLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(logoImageView.snp.centerY)
-            make.left.equalTo(logoImageView.snp.right).offset(10)
-            make.height.equalTo(15)
-        }
+//        let logoImageView = UIImageView()
+//        logoImageView.image = UIImage(named: "has_icon_image")
+//        view.addSubview(logoImageView)
+//        logoImageView.snp.makeConstraints { make in
+//            make.size.equalTo(CGSize(width: 40, height: 40))
+//            make.top.equalTo(headView.snp.bottom).offset(-10)
+//            make.left.equalToSuperview().offset(18)
+//        }
+//        
+//        let nameLabel = UILabel()
+//        nameLabel.textAlignment = .left
+//        nameLabel.text = hadf_title
+//        nameLabel.textColor = UIColor.init(hexString: "#333333")
+//        nameLabel.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight(700))
+//        view.addSubview(nameLabel)
+//        nameLabel.snp.makeConstraints { make in
+//            make.centerY.equalTo(logoImageView.snp.centerY)
+//            make.left.equalTo(logoImageView.snp.right).offset(10)
+//            make.height.equalTo(15)
+//        }
         
         view.addSubview(bgView)
         bgView.addSubview(nextBtn)
@@ -122,7 +122,7 @@ class LifeHardViewController: BaseViewController {
         
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(logoImageView.snp.bottom).offset(18)
+            make.top.equalTo(headView.snp.bottom).offset(-10)
             make.bottom.equalTo(bgView.snp.top).offset(-20)
             make.left.right.equalToSuperview().inset(16)
         }
@@ -205,8 +205,8 @@ extension LifeHardViewController {
                     "few": "2",
                     "caught": DeviceIDManager.shared.getIDFV(),
                     "earnestly": DeviceIDManager.shared.getIDFA(),
-                    "watchful": self.locationModel?.longitude ?? 0.0,
-                    "villany": self.locationModel?.latitude ?? 0.0,
+                    "watchful": UserDefaults.standard.object(forKey: "longitude") ?? "",
+                    "villany": UserDefaults.standard.object(forKey: "latitude") ?? "",
                     "conceal": self.begintime,
                     "thin": time,
                     "drew": ""] as [String : Any]

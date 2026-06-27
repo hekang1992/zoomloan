@@ -336,19 +336,23 @@ extension H5WebViewController: H5WebViewControllerScriptHandlerDelegate {
     private func handleTholouseMessage(_ body: Any) {
         print("==========poine =====10")
         self.locationManager1 = AppLocationManager()
+        self.locationManager1?.requestLocation { dict in }
+        
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-            self.locationManager1?.requestLocation { result in
-                switch result {
-                case .success(let success):
-                    self.locationModel = success
-                    self.noneInfo(with: self.orderID)
-                    self.locationManager1 = nil
-                    break
-                case .failure(_):
-                    self.locationManager1 = nil
-                    break
-                }
-            }
+//            self.locationManager1?.requestLocation { result in
+//                switch result {
+//                case .success(let success):
+//                    self.locationModel = success
+//                    
+//                    self.locationManager1 = nil
+//                    break
+//                case .failure(_):
+//                    self.locationManager1 = nil
+//                    break
+//                }
+//            }
+            self.noneInfo(with: self.orderID)
         }
     }
     
@@ -379,8 +383,8 @@ extension H5WebViewController: H5WebViewControllerScriptHandlerDelegate {
                         "few": "2",
                         "caught": DeviceIDManager.shared.getIDFV(),
                         "earnestly": DeviceIDManager.shared.getIDFA(),
-                        "watchful": self.locationModel?.longitude ?? 0.0,
-                        "villany": self.locationModel?.latitude ?? 0.0,
+                        "watchful": UserDefaults.standard.object(forKey: "longitude") ?? "",
+                        "villany": UserDefaults.standard.object(forKey: "latitude") ?? "",
                         "conceal": self.begintime,
                         "thin": time,
                         "drew": ""] as [String : Any]
@@ -402,8 +406,8 @@ extension H5WebViewController: H5WebViewControllerScriptHandlerDelegate {
                     "few": "2",
                     "caught": DeviceIDManager.shared.getIDFV(),
                     "earnestly": DeviceIDManager.shared.getIDFA(),
-                    "watchful": self.locationModel?.longitude ?? 0.0,
-                    "villany": self.locationModel?.latitude ?? 0.0,
+                    "watchful": UserDefaults.standard.object(forKey: "longitude") ?? "",
+                    "villany": UserDefaults.standard.object(forKey: "latitude") ?? "",
                     "conceal": String(Int(Date().timeIntervalSince1970)),
                     "thin": String(Int(Date().timeIntervalSince1970)),
                     "drew": orderID] as [String : Any]

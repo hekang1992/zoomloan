@@ -192,7 +192,6 @@ private extension HomeViewController {
         let begin = UserDefaults.standard.object(forKey: "begintime") as? String ?? ""
         
         let finish = UserDefaults.standard.object(forKey: "finishtime") as? String ?? ""
-        
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
             if !begin.isEmpty && !finish.isEmpty {
                 if self.locationModel == nil {
@@ -204,8 +203,8 @@ private extension HomeViewController {
                             "few": "2",
                             "caught": DeviceIDManager.shared.getIDFV(),
                             "earnestly": DeviceIDManager.shared.getIDFA(),
-                            "watchful": self.model?.longitude ?? 0.0,
-                            "villany": self.model?.latitude ?? 0.0,
+                            "watchful": UserDefaults.standard.object(forKey: "longitude") ?? "",
+                            "villany": UserDefaults.standard.object(forKey: "latitude") ?? "",
                             "conceal": begin,
                             "thin": finish,
                             "drew": ""] as [String : Any]

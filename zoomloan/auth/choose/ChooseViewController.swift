@@ -150,6 +150,8 @@ class ChooseViewController: BaseViewController {
         
         begintime = String(Int(Date().timeIntervalSince1970))
         
+        locationManager.requestLocation { result in }
+        
 //        locationManager.requestLocation { result in
 //            switch result {
 //            case .success(let success):
@@ -184,34 +186,37 @@ extension ChooseViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let time = String(Int(Date().timeIntervalSince1970))
         
-        locationManager.requestLocation { result in
-            switch result {
-            case .success(let success):
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    let dict = ["countenances": "2",
-                                "few": "2",
-                                "caught": DeviceIDManager.shared.getIDFV(),
-                                "earnestly": DeviceIDManager.shared.getIDFA(),
-                                "watchful": success.longitude,
-                                "villany": success.latitude,
-                                "conceal": self.begintime,
-                                "thin": time,
-                                "drew": ""] as [String : Any]
+//        locationManager.requestLocation { result in
+//            switch result {
+//            case .success(let success):
+//
+//                
+//                break
+//            case .failure(_):
+//                break
+//            }
+//        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            let dict = ["countenances": "2",
+                        "few": "2",
+                        "caught": DeviceIDManager.shared.getIDFV(),
+                        "earnestly": DeviceIDManager.shared.getIDFA(),
+                        "watchful": UserDefaults.standard.object(forKey: "longitude") ?? "",
+                        "villany": UserDefaults.standard.object(forKey: "latitude") ?? "",
+                        "conceal": self.begintime,
+                        "thin": time,
+                        "drew": ""] as [String : Any]
+            
+            Task {
+                do {
+                    let _ = try await self.locaitonViewModel.insertPageInfo(with: dict)
+                } catch  {
                     
-                    Task {
-                        do {
-                            let _ = try await self.locaitonViewModel.insertPageInfo(with: dict)
-                        } catch  {
-                            
-                        }
-                    }
                 }
-                
-                break
-            case .failure(_):
-                break
             }
         }
+        
         
         let title = modelArray?[indexPath.row] ?? ""
         let uploadVc = UploadImageViewController()
