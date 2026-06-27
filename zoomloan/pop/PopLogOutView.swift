@@ -45,7 +45,7 @@ class PopLogOutView: BaseView {
         bgImageView.addSubview(forkBtn)
         bgImageView.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.size.equalTo(CGSize(width: 311, height: 282))
+            make.size.equalTo(CGSize(width: 311, height: 322))
         }
         
         forkBtn.snp.makeConstraints { make in

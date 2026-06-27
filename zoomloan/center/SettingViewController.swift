@@ -34,7 +34,7 @@ class SettingViewController: BaseViewController {
         bgImageView.snp.makeConstraints { make in
             make.top.equalTo(headView.snp.bottom).offset(35)
             make.centerX.equalToSuperview()
-            make.size.equalTo(CGSize(width: 114, height: 114))
+            make.size.equalTo(CGSize(width: 354, height: 121))
         }
         
         let nameLabel = UILabel()

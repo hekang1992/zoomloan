@@ -138,14 +138,14 @@ class ChooseViewController: BaseViewController {
         listImageView.snp.makeConstraints { make in
             make.top.equalTo(bgImageView.snp.bottom).offset(15)
             make.centerX.equalToSuperview()
-            make.size.equalTo(CGSize(width: 343, height: 418))
+            make.size.equalTo(CGSize(width: 343, height: 618))
         }
         
         listImageView.addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(76)
             make.left.right.equalToSuperview().inset(5)
-            make.bottom.equalToSuperview().offset(-10)
+            make.bottom.equalToSuperview().offset(-70)
         }
         
         begintime = String(Int(Date().timeIntervalSince1970))

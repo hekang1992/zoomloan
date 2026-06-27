@@ -84,6 +84,7 @@ class AgreementView: BaseView {
     }
     
     private func setupBindings() {
+        
         checkButton.rx.tap
             .map { [weak self] in !(self?.checkButton.isSelected ?? false) }
             .bind { [weak self] isSelected in
@@ -110,8 +111,8 @@ class AgreementView: BaseView {
     }
     
     private func isTapOnPrivacyPolicy(location: CGPoint) -> Bool {
-        let fullText = "I have read and agree to Privacy Policy"
-        let privacyRange = (fullText as NSString).range(of: "Privacy Policy")
+        let fullText = "I have read and agree to <Privacy Policy>"
+        let privacyRange = (fullText as NSString).range(of: "I have read and agree to <Privacy Policy>")
         
         let textStorage = NSTextStorage(attributedString: agreementLabel.attributedText ?? NSAttributedString())
         let layoutManager = NSLayoutManager()

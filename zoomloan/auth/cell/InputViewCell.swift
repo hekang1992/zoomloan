@@ -103,18 +103,31 @@ private extension InputViewCell {
         guard let model = model else { return }
         let name = model.jealously ?? ""
         nameLabel.text = name
-        numTextField.placeholder = name
         numTextField.text = model.importance ?? ""
+        
+        let attributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.lightGray,
+            .font: UIFont.systemFont(ofSize: 14, weight: .regular)
+        ]
+        numTextField.attributedPlaceholder = NSAttributedString(string: name, attributes: attributes)
+        
     }
     
     func updateUIWithAuthModel() {
         guard let authModel = authModel else { return }
         nameLabel.text = authModel.affray ?? ""
-        numTextField.placeholder = authModel.sternly ?? ""
         numTextField.text = authModel.impunity ?? ""
         let displayed = authModel.displayed ?? 0
         
         numTextField.keyboardType = displayed == 1 ? .numberPad : .default
+        
+        
+        let attributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.lightGray,
+            .font: UIFont.systemFont(ofSize: 14, weight: .regular)
+        ]
+        numTextField.attributedPlaceholder = NSAttributedString(string: authModel.sternly ?? "", attributes: attributes)
+        
     }
 }
 

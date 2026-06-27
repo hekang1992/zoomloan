@@ -47,8 +47,11 @@ class EnumViewCell: UITableViewCell {
     
     lazy var numTextField: UITextField = {
         let numTextField = UITextField()
+        
         numTextField.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight(600))
-        numTextField.textColor = UIColor.init(hexString: "#59BDB7")
+        numTextField.textColor = UIColor.black
+        
+        
         numTextField.backgroundColor = .clear
         numTextField.layer.cornerRadius = 14
         numTextField.clipsToBounds = true
@@ -139,14 +142,26 @@ private extension EnumViewCell {
         guard let model = model else { return }
         let name = model.jealously ?? ""
         nameLabel.text = name
-        numTextField.placeholder = name
         numTextField.text = model.importance ?? ""
+        
+        let attributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.lightGray,
+            .font: UIFont.systemFont(ofSize: 14, weight: .regular)
+        ]
+        numTextField.attributedPlaceholder = NSAttributedString(string: name, attributes: attributes)
+        
     }
     
     func updateUIWithAuthModel() {
         guard let authModel = authModel else { return }
         nameLabel.text = authModel.affray ?? ""
-        numTextField.placeholder = authModel.sternly ?? ""
         numTextField.text = authModel.impunity ?? ""
+        
+        let attributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.lightGray,
+            .font: UIFont.systemFont(ofSize: 14, weight: .regular)
+        ]
+        numTextField.attributedPlaceholder = NSAttributedString(string: authModel.sternly ?? "", attributes: attributes)
+        
     }
 }

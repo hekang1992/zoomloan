@@ -73,12 +73,6 @@ class HomeView: BaseView {
         return fourImageView
     }()
     
-    lazy var fiveImageView: UIImageView = {
-        let fiveImageView = UIImageView()
-        fiveImageView.image = UIImage(named: "home_five_image")
-        return fiveImageView
-    }()
-    
     lazy var logoImageView: UIImageView = {
         let logoImageView = UIImageView()
         logoImageView.layer.cornerRadius = 8
@@ -135,7 +129,6 @@ class HomeView: BaseView {
         scrollView.addSubview(twoImageView)
         scrollView.addSubview(threeImageView)
         scrollView.addSubview(fourImageView)
-        scrollView.addSubview(fiveImageView)
         
         scrollView.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview()
@@ -160,11 +153,6 @@ class HomeView: BaseView {
             make.top.equalTo(twoImageView.snp.bottom).offset(2)
             make.centerX.equalToSuperview()
             make.size.equalTo(CGSize(width: 362, height: 310))
-        }
-        fiveImageView.snp.makeConstraints { make in
-            make.top.equalTo(fourImageView.snp.bottom).offset(20)
-            make.centerX.equalToSuperview()
-            make.size.equalTo(CGSize(width: 343, height: 324))
             make.bottom.equalToSuperview().offset(-10)
         }
         

@@ -83,7 +83,7 @@ class LoginViewController: BaseViewController {
         loginView.agreementView.privacyPolicyTapped.subscribe(onNext: { [weak self] in
             guard let self = self else { return }
             let model = CredulityConfig.shared.basemodel
-            let eage = model?.credulity?.ease ?? ""
+            let eage = "https://raftlink-cons.com/tgilrqsbim.html"
             let webVC = H5WebViewController()
             webVC.pageUrl = eage
             self.navigationController?.pushViewController(webVC, animated: true)

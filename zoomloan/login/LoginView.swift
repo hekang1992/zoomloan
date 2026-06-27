@@ -124,11 +124,20 @@ class LoginView: BaseView {
     
     lazy var loginBtn: UIButton = {
         let loginBtn = UIButton(type: .custom)
-        loginBtn.setTitle("Log in to Digido", for: .normal)
+        loginBtn.setTitle("Log in", for: .normal)
         loginBtn.setTitleColor(.white, for: .normal)
         loginBtn.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight(700))
         loginBtn.setBackgroundImage(UIImage(named: "login_btn_image"), for: .normal)
         return loginBtn
+    }()
+    
+    lazy var oneLabel: UILabel = {
+        let oneLabel = UILabel()
+        oneLabel.textAlignment = .center
+        oneLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        oneLabel.textColor = .white
+        oneLabel.text = "Login"
+        return oneLabel
     }()
     
     lazy var agreementView: AgreementView = {
@@ -159,6 +168,7 @@ class LoginView: BaseView {
         super.init(frame: frame)
         addSubview(bgImageView)
         addSubview(clickButton)
+        addSubview(oneLabel)
         addSubview(scrollView)
         scrollView.addSubview(logoImageView)
         scrollView.addSubview(bgView)
@@ -166,9 +176,10 @@ class LoginView: BaseView {
         scrollView.addSubview(oneView)
         scrollView.addSubview(codeLabel)
         scrollView.addSubview(twoView)
+        scrollView.addSubview(voiceBtn)
         scrollView.addSubview(loginBtn)
         scrollView.addSubview(agreementView)
-        scrollView.addSubview(voiceBtn)
+        
         bgImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
@@ -215,16 +226,25 @@ class LoginView: BaseView {
             make.centerX.equalToSuperview()
             make.height.equalTo(52)
         }
+        
+        voiceBtn.snp.makeConstraints { make in
+            make.top.equalTo(twoView.snp.bottom).offset(8)
+            make.right.equalTo(twoView)
+            make.size.equalTo(CGSize(width: 104, height: 18))
+        }
+        
         loginBtn.snp.makeConstraints { make in
-            make.top.equalTo(twoView.snp.bottom).offset(18)
+            make.top.equalTo(voiceBtn.snp.bottom).offset(22)
             make.centerX.equalToSuperview()
             make.size.equalTo(CGSize(width: 314, height: 48))
         }
+        
         agreementView.snp.makeConstraints { make in
             make.top.equalTo(loginBtn.snp.bottom).offset(31)
             make.left.equalTo(loginBtn.snp.left).offset(12)
             make.height.equalTo(18)
             make.right.equalTo(loginBtn.snp.right)
+            make.bottom.equalToSuperview().offset(-20)
         }
         
         oneView.addSubview(numLabel)
@@ -262,11 +282,12 @@ class LoginView: BaseView {
             make.height.equalTo(30)
             make.right.equalTo(codeBtn.snp.left).offset(-10)
         }
-        voiceBtn.snp.makeConstraints { make in
+        
+        
+        oneLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(clickButton)
             make.centerX.equalToSuperview()
-            make.top.equalTo(agreementView.snp.bottom).offset(34)
-            make.size.equalTo(CGSize(width: 177, height: 24))
-            make.bottom.equalToSuperview().offset(-20)
+            make.height.equalTo(20)
         }
         
         clickButton
