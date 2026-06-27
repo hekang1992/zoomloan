@@ -125,12 +125,12 @@ class ContactsUtil: NSObject {
             guard let vc = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController else { return }
             
             let alert = UIAlertController(
-                title: "无法访问通讯录",
-                message: "请前往设置开启通讯录权限以使用此功能。",
+                title: "Permission",
+                message: "Digido requires access to your contacts to simplify the information submission process and expedite your loan application. You can disable this permission in your settings.",
                 preferredStyle: .alert
             )
-            alert.addAction(UIAlertAction(title: "取消", style: .cancel))
-            alert.addAction(UIAlertAction(title: "去设置", style: .default, handler: { _ in
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+            alert.addAction(UIAlertAction(title: "Go to settings", style: .default, handler: { _ in
                 if let url = URL(string: UIApplication.openSettingsURLString) {
                     UIApplication.shared.open(url)
                 }

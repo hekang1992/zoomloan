@@ -13,6 +13,7 @@ class BaseTabBarController: UITabBarController {
         super.viewDidLoad()
         setupTabBar()
         setupViewControllers()
+        self.delegate = self
     }
     
     private func setupTabBar() {
@@ -43,21 +44,21 @@ class BaseTabBarController: UITabBarController {
     
     private func setupViewControllers() {
         let firstVC = createNavController(
-            title: "Home Page",
+            title: "Home",
             image: UIImage(named: "home_nor") ?? UIImage(),
             selectedImage: UIImage(named: "home_sel") ?? UIImage(),
             rootViewController: HomeViewController()
         )
         
         let secondVC = createNavController(
-            title: "Loan Order",
+            title: "Bills",
             image: UIImage(named: "sec_nor") ?? UIImage(),
             selectedImage: UIImage(named: "sec_sel") ?? UIImage(),
             rootViewController: OrderViewController()
         )
         
         let thirdVC = createNavController(
-            title: "Individual",
+            title: "Me",
             image: UIImage(named: "center_nor") ?? UIImage(),
             selectedImage: UIImage(named: "center_sel") ?? UIImage(),
             rootViewController: CenterViewController()
@@ -81,5 +82,20 @@ class BaseTabBarController: UITabBarController {
         
         return navController
     }
+}
+
+extension BaseTabBarController: UITabBarControllerDelegate {
+    
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        if AuthLoginConfig.shared.isLoggedIn {
+            return true
+        }else {
+            let navVc = BaseNavigationController(rootViewController: LoginViewController())
+            navVc.modalPresentationStyle = .overFullScreen
+            self.present(navVc, animated: true)
+            return false
+        }
+    }
+    
 }
 

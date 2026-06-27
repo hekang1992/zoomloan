@@ -83,6 +83,8 @@ class ProductDetailView: BaseView {
     
     private lazy var logoImageView: UIImageView = {
         let logoImageView = UIImageView()
+        logoImageView.layer.cornerRadius = 8
+        logoImageView.layer.masksToBounds = true
         return logoImageView
     }()
     
@@ -160,7 +162,7 @@ private extension ProductDetailView {
     func setupConstraints() {
         agreeLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-25)
+            make.bottom.equalToSuperview().offset(-15)
             make.left.equalToSuperview().offset(16)
             make.height.equalTo(32)
         }
@@ -179,13 +181,13 @@ private extension ProductDetailView {
         oneImageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalToSuperview()
-            make.size.equalTo(CGSize(width: 343, height: 162))
+            make.size.equalTo(CGSize(width: 343, height: 137))
         }
         
         twoImageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(oneImageView.snp.bottom).offset(31)
-            make.size.equalTo(CGSize(width: 343, height: 470))
+            make.top.equalTo(oneImageView.snp.bottom).offset(26)
+            make.size.equalTo(CGSize(width: 334, height: 426))
             make.bottom.equalToSuperview().offset(-20)
         }
     }
@@ -198,8 +200,8 @@ private extension ProductDetailView {
         oneImageView.addSubview(moneyLabel)
         
         logoImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(8)
-            make.left.equalToSuperview().offset(107)
+            make.top.equalToSuperview().offset(12)
+            make.left.equalToSuperview().offset(18)
             make.size.equalTo(CGSize(width: 28, height: 28))
         }
         
@@ -211,7 +213,7 @@ private extension ProductDetailView {
         
         oneLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(59)
+            make.top.equalToSuperview().offset(42)
             make.height.equalTo(20)
         }
         

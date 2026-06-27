@@ -48,7 +48,7 @@ class CentertView: BaseView {
     
     lazy var appLabel: UILabel = {
         let appLabel = UILabel()
-        appLabel.text = "Zoom Loan"
+        appLabel.text = "Digido"
         appLabel.textAlignment = .left
         appLabel.textColor = UIColor.init(hexString: "#333333")
         appLabel.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight(700))
@@ -114,14 +114,14 @@ class CentertView: BaseView {
         
         addSubview(whiteImageView)
         whiteImageView.snp.makeConstraints { make in
-            make.top.equalTo(logoImageView.snp.bottom)
+            make.top.equalTo(logoImageView.snp.bottom).offset(5)
             make.left.right.equalToSuperview()
             make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom)
         }
         
         whiteImageView.addSubview(tableView)
         tableView.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(58)
+            make.top.equalToSuperview().inset(10)
             make.left.right.bottom.equalToSuperview()
         }
         
@@ -138,37 +138,37 @@ class CentertView: BaseView {
 
 extension CentertView: UITableViewDelegate, UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 170
-    }
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 170
+//    }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headView = UIView()
-        let oneImageView = UIImageView()
-        oneImageView.image = UIImage(named: "cen_left_image")
-        headView.addSubview(oneImageView)
-        oneImageView.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.size.equalTo(CGSize(width: 150, height: 150))
-            make.left.equalToSuperview().offset(25)
-        }
-        let twoImageView = UIImageView()
-        twoImageView.image = UIImage(named: "cen_right_image")
-        headView.addSubview(twoImageView)
-        twoImageView.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.size.equalTo(CGSize(width: 150, height: 150))
-            make.right.equalToSuperview().offset(-25)
-        }
-        oneImageView.rx.tapGesture().when(.recognized).bind(onNext: { [weak self] _ in
-            self?.oneBlock?()
-        }).disposed(by: disposeBag)
-        
-        twoImageView.rx.tapGesture().when(.recognized).bind(onNext: { [weak self] _ in
-            self?.twoBlock?()
-        }).disposed(by: disposeBag)
-        return headView
-    }
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        let headView = UIView()
+//        let oneImageView = UIImageView()
+//        oneImageView.image = UIImage(named: "cen_left_image")
+//        headView.addSubview(oneImageView)
+//        oneImageView.snp.makeConstraints { make in
+//            make.centerY.equalToSuperview()
+//            make.size.equalTo(CGSize(width: 150, height: 150))
+//            make.left.equalToSuperview().offset(25)
+//        }
+//        let twoImageView = UIImageView()
+//        twoImageView.image = UIImage(named: "cen_right_image")
+//        headView.addSubview(twoImageView)
+//        twoImageView.snp.makeConstraints { make in
+//            make.centerY.equalToSuperview()
+//            make.size.equalTo(CGSize(width: 150, height: 150))
+//            make.right.equalToSuperview().offset(-25)
+//        }
+//        oneImageView.rx.tapGesture().when(.recognized).bind(onNext: { [weak self] _ in
+//            self?.oneBlock?()
+//        }).disposed(by: disposeBag)
+//        
+//        twoImageView.rx.tapGesture().when(.recognized).bind(onNext: { [weak self] _ in
+//            self?.twoBlock?()
+//        }).disposed(by: disposeBag)
+//        return headView
+//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return modelArray?.count ?? 0

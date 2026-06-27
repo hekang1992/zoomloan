@@ -41,18 +41,11 @@ class UploadAuthView: BaseView {
         return nextBtn
     }()
     
-    lazy var bgImageView: UIImageView = {
-        let bgImageView = UIImageView()
-        bgImageView.image = UIImage(named: "pla_desc_image")
-        bgImageView.contentMode = .scaleAspectFit
-        return bgImageView
-    }()
-    
     lazy var oneListView: UploadListView = {
         let oneListView = UploadListView()
-        oneListView.nameLabel.text = "Upload your identification document"
+        oneListView.nameLabel.text = "Front of ID Card"
         oneListView.descImageView.image = UIImage(named: "pla_id_image")
-        oneListView.descLabel.text = "Please take a clear photo of your own ID card front."
+        oneListView.descLabel.text = "Click 'Upload' to provide your ID via Camera or Photo Gallery."
         oneListView.loginBtn.setTitle("Upload", for: .normal)
         return oneListView
     }()
@@ -62,7 +55,7 @@ class UploadAuthView: BaseView {
         twoListView.nameLabel.text = "Face recognition"
         twoListView.descImageView.image = UIImage(named: "pla_fa_image")
         twoListView.descLabel.text = "Please face the camera directly."
-        twoListView.loginBtn.setTitle("Start facial recognition", for: .normal)
+        twoListView.loginBtn.setTitle("Upload", for: .normal)
         return twoListView
     }()
 
@@ -71,7 +64,6 @@ class UploadAuthView: BaseView {
         addSubview(bgView)
         bgView.addSubview(nextBtn)
         addSubview(scrollView)
-        scrollView.addSubview(bgImageView)
         scrollView.addSubview(oneListView)
         scrollView.addSubview(twoListView)
         
@@ -91,15 +83,11 @@ class UploadAuthView: BaseView {
             make.left.right.equalToSuperview()
             make.bottom.equalTo(bgView.snp.top).offset(-5)
         }
-        bgImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.centerX.equalToSuperview()
-            make.size.equalTo(CGSize(width: 343, height: 141))
-        }
+        
         oneListView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(bgImageView.snp.bottom).offset(15)
-            make.size.equalTo(CGSize(width: 343, height: 265))
+            make.top.equalToSuperview().offset(15)
+            make.size.equalTo(CGSize(width: 343, height: 282))
         }
         twoListView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()

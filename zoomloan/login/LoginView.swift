@@ -7,12 +7,16 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 
 let DESC_PHONE = "Please enter the phone number"
 let DESC_CODE = "Please enter the verification code"
 let DESC_AGREE = "Please agree to Privacy Policy"
 
 class LoginView: BaseView {
+    
+    var backBlock: (() -> Void)?
     
     lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -38,14 +42,14 @@ class LoginView: BaseView {
         let phoneLabel = UILabel()
         phoneLabel.text = "Telephone Number"
         phoneLabel.textAlignment = .left
-        phoneLabel.textColor = UIColor.init(hexString: "#FFFFFF")
+        phoneLabel.textColor = UIColor.init(hexString: "#333333")
         phoneLabel.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight(700))
         return phoneLabel
     }()
     
     lazy var oneView: UIView = {
         let oneView = UIView()
-        oneView.backgroundColor = .white
+        oneView.backgroundColor = UIColor.init(hexString: "#F3F3F3")
         oneView.layer.cornerRadius = 20
         oneView.layer.masksToBounds = true
         return oneView
@@ -83,14 +87,14 @@ class LoginView: BaseView {
         let codeLabel = UILabel()
         codeLabel.text = "Verification Code"
         codeLabel.textAlignment = .left
-        codeLabel.textColor = UIColor.init(hexString: "#FFFFFF")
+        codeLabel.textColor = UIColor.init(hexString: "#333333")
         codeLabel.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight(700))
         return codeLabel
     }()
     
     lazy var twoView: UIView = {
         let twoView = UIView()
-        twoView.backgroundColor = .white
+        twoView.backgroundColor = UIColor.init(hexString: "#F3F3F3")
         twoView.layer.cornerRadius = 20
         twoView.layer.masksToBounds = true
         return twoView
@@ -120,7 +124,7 @@ class LoginView: BaseView {
     
     lazy var loginBtn: UIButton = {
         let loginBtn = UIButton(type: .custom)
-        loginBtn.setTitle("Log in to Zoom Loan", for: .normal)
+        loginBtn.setTitle("Log in to Digido", for: .normal)
         loginBtn.setTitleColor(.white, for: .normal)
         loginBtn.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight(700))
         loginBtn.setBackgroundImage(UIImage(named: "login_btn_image"), for: .normal)
@@ -138,11 +142,26 @@ class LoginView: BaseView {
         return voiceBtn
     }()
     
+    lazy var clickButton: UIButton = {
+        let clickButton = UIButton(type: .custom)
+        clickButton.setImage(UIImage(named: "back_image"), for: .normal)
+        clickButton.adjustsImageWhenHighlighted = false
+        return clickButton
+    }()
+    
+    lazy var bgView: UIView = {
+        let bgView = UIView()
+        bgView.backgroundColor = .white
+        return bgView
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(bgImageView)
+        addSubview(clickButton)
         addSubview(scrollView)
         scrollView.addSubview(logoImageView)
+        scrollView.addSubview(bgView)
         scrollView.addSubview(phoneLabel)
         scrollView.addSubview(oneView)
         scrollView.addSubview(codeLabel)
@@ -153,16 +172,28 @@ class LoginView: BaseView {
         bgImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        clickButton.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide).offset(5)
+            make.left.equalToSuperview().offset(16)
+            make.width.height.equalTo(20)
+        }
         scrollView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.equalTo(clickButton.snp.bottom).offset(5)
+            make.left.right.bottom.equalToSuperview()
         }
         logoImageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(96)
-            make.size.equalTo(CGSize(width: 114, height: 114))
+            make.top.equalToSuperview().offset(28)
+            make.size.equalTo(CGSize(width: 354, height: 121))
+        }
+        bgView.snp.makeConstraints { make in
+            make.top.equalTo(logoImageView.snp.bottom)
+            make.left.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.height.equalTo(10000)
         }
         phoneLabel.snp.makeConstraints { make in
-            make.top.equalTo(logoImageView.snp.bottom).offset(45)
+            make.top.equalTo(logoImageView.snp.bottom).offset(40)
             make.left.equalToSuperview().offset(29)
             make.height.equalTo(17)
         }
@@ -237,6 +268,13 @@ class LoginView: BaseView {
             make.size.equalTo(CGSize(width: 177, height: 24))
             make.bottom.equalToSuperview().offset(-20)
         }
+        
+        clickButton
+            .rx
+            .tap
+            .bind(onNext: { [weak self] in
+                self?.backBlock?()
+            }).disposed(by: disposeBag)
     }
     
     @MainActor required init?(coder: NSCoder) {

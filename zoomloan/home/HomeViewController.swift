@@ -142,6 +142,13 @@ private extension HomeViewController {
     
     func applyProductInfo(with model: chairsModel) {
         
+        if AuthLoginConfig.shared.isLoggedIn == false {
+            let navVc = BaseNavigationController(rootViewController: LoginViewController())
+            navVc.modalPresentationStyle = .overFullScreen
+            self.present(navVc, animated: true)
+            return
+        }
+        
         let alertModel = CredulityConfig.shared.basemodel
         let visibly = alertModel?.credulity?.visibly ?? 0
         
@@ -153,8 +160,8 @@ private extension HomeViewController {
             if locationStatus == .authorizedAlways || locationStatus == .authorizedWhenInUse {
                 realAppluInfo(with: model)
             }else {
-                if self.showPermissionAlert(message: "Location") {
-                    print("have alert =====🏮=====")
+                if self.showPermissionAlert(message: "Digido requires access to your device's location services to accurately assess your loan eligibility and provide localized services. You can disable this permission at any time via your device's \"Settings\" > \"Privacy & Security\" > \"Location Services.\"") {
+                    
                 }else {
                     realAppluInfo(with: model)
                 }
@@ -265,7 +272,7 @@ private extension HomeViewController {
     
     private func showPermissionAlert(message: String) -> Bool {
         let defaults = UserDefaults.standard
-        let key = "PermissionAlertShownDate_\(message)"
+        let key = "\(message)"
         
         if let lastShownDate = defaults.object(forKey: key) as? Date {
             if Calendar.current.isDateInToday(lastShownDate) {
@@ -274,18 +281,18 @@ private extension HomeViewController {
         }
         
         let alert = UIAlertController(
-            title: "权限提示",
+            title: "Permission",
             message: message,
             preferredStyle: .alert
         )
         
-        let settingsAction = UIAlertAction(title: "去设置", style: .default) { _ in
+        let settingsAction = UIAlertAction(title: "Go to settings", style: .default) { _ in
             if let url = URL(string: UIApplication.openSettingsURLString) {
                 UIApplication.shared.open(url)
             }
         }
         
-        let cancelAction = UIAlertAction(title: "取消", style: .cancel)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         
         alert.addAction(settingsAction)
         alert.addAction(cancelAction)

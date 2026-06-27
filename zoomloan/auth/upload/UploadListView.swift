@@ -33,7 +33,7 @@ class UploadListView: BaseView {
     
     lazy var nameLabel: UILabel = {
         let nameLabel = UILabel()
-        nameLabel.textAlignment = .left
+        nameLabel.textAlignment = .center
         nameLabel.textColor = UIColor.init(hexString: "#333333")
         nameLabel.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight(700))
         return nameLabel
@@ -41,6 +41,8 @@ class UploadListView: BaseView {
     
     lazy var descImageView: UIImageView = {
         let descImageView = UIImageView()
+        descImageView.layer.cornerRadius = 8
+        descImageView.layer.masksToBounds = true
         return descImageView
     }()
     
@@ -49,6 +51,7 @@ class UploadListView: BaseView {
         descLabel.textAlignment = .center
         descLabel.textColor = UIColor.init(hexString: "#666666")
         descLabel.font = UIFont.systemFont(ofSize: 11, weight: UIFont.Weight(500))
+        descLabel.numberOfLines = 2
         return descLabel
     }()
     
@@ -89,7 +92,7 @@ class UploadListView: BaseView {
         whiteView.snp.makeConstraints { make in
             make.bottom.equalToSuperview()
             make.left.right.equalToSuperview()
-            make.height.equalTo(219)
+            make.top.equalToSuperview().offset(46)
         }
         
         bgView.addSubview(nameLabel)
@@ -100,7 +103,7 @@ class UploadListView: BaseView {
         
         nameLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(12)
-            make.left.equalTo(logoImageView.snp.right).offset(10)
+            make.centerX.equalToSuperview()
             make.height.equalTo(17)
         }
         descImageView.snp.makeConstraints { make in
@@ -110,7 +113,7 @@ class UploadListView: BaseView {
         }
         descLabel.snp.makeConstraints { make in
             make.top.equalTo(descImageView.snp.bottom).offset(12)
-            make.height.equalTo(17)
+            make.left.equalToSuperview().offset(15)
             make.centerX.equalToSuperview()
         }
         loginBtn.snp.makeConstraints { make in

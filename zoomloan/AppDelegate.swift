@@ -41,14 +41,20 @@ extension AppDelegate {
     
     @objc private func changeRootVc(_ noti: Notification) {
         let tabBar = BaseTabBarController()
-        if AuthLoginConfig.shared.isLoggedIn {
-            let userInfo = noti.userInfo as? [String: String]
-            let type = userInfo?["order"] as? String ?? ""
-            tabBar.selectedIndex = type == "1" ? 1 : 0
-            window?.rootViewController = tabBar
-        }else {
-            window?.rootViewController = BaseNavigationController(rootViewController: LoginViewController())
-        }
+//        if AuthLoginConfig.shared.isLoggedIn {
+//            let userInfo = noti.userInfo as? [String: String]
+//            let type = userInfo?["order"] as? String ?? ""
+//            tabBar.selectedIndex = type == "1" ? 1 : 0
+//            window?.rootViewController = tabBar
+//        }else {
+//            window?.rootViewController = BaseNavigationController(rootViewController: LoginViewController())
+//        }
+        
+        let userInfo = noti.userInfo as? [String: String]
+        let type = userInfo?["order"] as? String ?? ""
+        tabBar.selectedIndex = type == "1" ? 1 : 0
+        window?.rootViewController = tabBar
+        
     }
     
 }

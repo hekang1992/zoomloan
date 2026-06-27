@@ -88,7 +88,7 @@ class UploadImageViewController: BaseViewController{
             if photo == 0 {
                 alertPhotoExampleView()
             }else {
-                ToastView.showMessage(with: "认证完成===========")
+                ToastView.showMessage(with: "Complete")
             }
         }
         
@@ -107,7 +107,7 @@ class UploadImageViewController: BaseViewController{
                 alertFaceExampleView()
                 return
             }
-            ToastView.showMessage(with: "认证完成===========")
+            ToastView.showMessage(with: "Complete")
         }
         
         uploadView.nextBtn.rx.tap.bind(onNext: { [weak self] in
@@ -177,6 +177,8 @@ extension UploadImageViewController {
                         let logoUrl = angerModel?.trick ?? ""
                         self.uploadView.oneListView.asoImageView.isHidden = false
                         self.uploadView.oneListView.descImageView.kf.setImage(with: URL(string: logoUrl))
+                        self.uploadView.oneListView.descLabel.text = "Completed"
+                        self.uploadView.oneListView.descLabel.textColor = UIColor.init(hexString: "#EA5D50")
                         self.uploadView.oneListView.loginBtn.isHidden = true
                     }
                     
@@ -189,6 +191,8 @@ extension UploadImageViewController {
                         let logoUrl = belongModel?.trick ?? ""
                         self.uploadView.twoListView.asoImageView.isHidden = false
                         self.uploadView.twoListView.descImageView.kf.setImage(with: URL(string: logoUrl))
+                        self.uploadView.twoListView.descLabel.text = "Completed"
+                        self.uploadView.twoListView.descLabel.textColor = UIColor.init(hexString: "#EA5D50")
                         self.uploadView.twoListView.loginBtn.isHidden = true
                     }
                 }
@@ -246,25 +250,25 @@ extension UploadImageViewController {
     
     private func showImagePickerSheet() {
         let alertController = UIAlertController(
-            title: "选择图片",
-            message: "请选择图片来源",
+            title: "Choose Image",
+            message: "Select Image Source",
             preferredStyle: .actionSheet
         )
         
         // 相机选项
-        let cameraAction = UIAlertAction(title: "拍照", style: .default) { [weak self] _ in
+        let cameraAction = UIAlertAction(title: "Camera", style: .default) { [weak self] _ in
             self?.source = 1
             self?.checkCameraPermission(with: 0)
         }
         
         // 相册选项
-        let photoLibraryAction = UIAlertAction(title: "从相册选择", style: .default) { [weak self] _ in
+        let photoLibraryAction = UIAlertAction(title: "Album", style: .default) { [weak self] _ in
             self?.source = 2
             self?.checkPhotoLibraryPermission()
         }
         
         // 取消选项
-        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
         // 添加操作
         alertController.addAction(cameraAction)
@@ -289,13 +293,13 @@ extension UploadImageViewController {
                     if granted {
                         self?.openCamera(with: source)
                     } else {
-                        self?.showPermissionAlert(message: "相机权限被拒绝，请在设置中启用")
+                        self?.showPermissionAlert(message: "Camera access has been denied. Please enable it in Settings.")
                     }
                 }
             }
         case .denied, .restricted:
             // 被拒绝或受限
-            showPermissionAlert(message: "相机权限被拒绝，请在设置中启用")
+            showPermissionAlert(message: "Camera access has been denied. Please enable it in Settings.")
         @unknown default:
             break
         }
@@ -315,13 +319,13 @@ extension UploadImageViewController {
                     if status == .authorized {
                         self?.openPhotoLibrary()
                     } else {
-                        self?.showPermissionAlert(message: "相册权限被拒绝，请在设置中启用")
+                        self?.showPermissionAlert(message: "Album access has been denied. Please enable it in Settings.")
                     }
                 }
             }
         case .denied, .restricted:
             // 被拒绝或受限
-            showPermissionAlert(message: "相册权限被拒绝，请在设置中启用")
+            showPermissionAlert(message: "Album access has been denied. Please enable it in Settings.")
         case .limited:
             // iOS 14+ 有限权限
             openPhotoLibrary()
@@ -333,7 +337,7 @@ extension UploadImageViewController {
     // MARK: - 打开相机和相册
     private func openCamera(with source: Int) {
         guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
-            showAlert(title: "错误", message: "相机不可用")
+            showAlert(title: "Permission", message: "Camera Unavailable")
             return
         }
         
@@ -347,7 +351,7 @@ extension UploadImageViewController {
     
     private func openPhotoLibrary() {
         guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else {
-            showAlert(title: "错误", message: "相册不可用")
+            showAlert(title: "Permission", message: "Album Unavailable")
             return
         }
         
@@ -358,21 +362,20 @@ extension UploadImageViewController {
         present(imagePicker, animated: true)
     }
     
-    // MARK: - 提示框
     private func showPermissionAlert(message: String) {
         let alert = UIAlertController(
-            title: "权限提示",
+            title: "Permission",
             message: message,
             preferredStyle: .alert
         )
         
-        let settingsAction = UIAlertAction(title: "去设置", style: .default) { _ in
+        let settingsAction = UIAlertAction(title: "Go to settings", style: .default) { _ in
             if let url = URL(string: UIApplication.openSettingsURLString) {
                 UIApplication.shared.open(url)
             }
         }
         
-        let cancelAction = UIAlertAction(title: "取消", style: .cancel)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         
         alert.addAction(settingsAction)
         alert.addAction(cancelAction)
@@ -387,7 +390,7 @@ extension UploadImageViewController {
             preferredStyle: .alert
         )
         
-        let okAction = UIAlertAction(title: "确定", style: .default)
+        let okAction = UIAlertAction(title: "Sure", style: .default)
         alert.addAction(okAction)
         
         present(alert, animated: true)

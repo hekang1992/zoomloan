@@ -79,7 +79,54 @@ private extension LaunchViewController {
 private extension LaunchViewController {
     
     private func dynamicDomain() {
+        networkMonitor.stopListening()
         
+        let configURL = "https://ph4-dc.oss-ap-southeast-1.aliyuncs.com/zoom-loan/ucxnco.json"
+        AF.request(configURL, requestModifier: { request in
+            request.timeoutInterval = 10
+        }).responseDecodable(of: [[String: String]].self) { [weak self] response in
+            guard let self = self else { return }
+            
+            guard let list = response.value else {
+                self.setInitInfo()
+                return
+            }
+            
+            let domains = list.compactMap { item in
+                item["ap"]?.trimmingCharacters(in: .whitespacesAndNewlines)
+            }.filter { !$0.isEmpty }
+            
+            self.checkDynamicDomain(domains, index: 0)
+        }
+    }
+    
+    private func checkDynamicDomain(_ domains: [String], index: Int) {
+        guard index < domains.count else {
+            setInitInfo()
+            return
+        }
+        
+        let domain = domains[index]
+        AF.request(domain, requestModifier: { request in
+            request.timeoutInterval = 10
+        }).response { [weak self] response in
+            guard let self = self else { return }
+            
+            if response.response != nil {
+                UserDefaults.standard.set(self.removeTrailingSlash(domain), forKey: "base_url")
+                self.setInitInfo()
+            } else {
+                self.checkDynamicDomain(domains, index: index + 1)
+            }
+        }
+    }
+    
+    private func removeTrailingSlash(_ url: String) -> String {
+        var result = url
+        while result.hasSuffix("/") {
+            result.removeLast()
+        }
+        return result
     }
     
     func startAppInitialization() {

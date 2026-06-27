@@ -81,6 +81,8 @@ class HomeView: BaseView {
     
     lazy var logoImageView: UIImageView = {
         let logoImageView = UIImageView()
+        logoImageView.layer.cornerRadius = 8
+        logoImageView.layer.masksToBounds = true
         return logoImageView
     }()
     

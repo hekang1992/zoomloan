@@ -93,6 +93,15 @@ class LoginViewController: BaseViewController {
         
         start()
         
+        loginView.backBlock = { [weak self] in
+            self?.dismiss(animated: true)
+        }
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.loginView.numTextField.becomeFirstResponder()
     }
     
     @MainActor
@@ -113,6 +122,7 @@ extension LoginViewController {
                 if model.sentences == "0" {
                     self.startTimer()
                     self.loginView.codeBtn.isEnabled = false
+                    self.loginView.codeTextFiled.becomeFirstResponder()
                 }
                 ToastView.showMessage(with: model.regarding ?? "")
             } catch  {

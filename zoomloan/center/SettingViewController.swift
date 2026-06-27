@@ -63,7 +63,7 @@ class SettingViewController: BaseViewController {
         }
         
         let descLabel = UILabel()
-        descLabel.text = "Exit zoom loan"
+        descLabel.text = "Exit Digido"
         descLabel.textAlignment = .left
         descLabel.textColor = UIColor.init(hexString: "#333333")
         descLabel.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight(500))
@@ -88,7 +88,7 @@ class SettingViewController: BaseViewController {
         let deletelabel = UILabel()
         deletelabel.isUserInteractionEnabled = true
         let attributedString = NSAttributedString(
-            string: "Delete zoom loan",
+            string: "Delete Digido",
             attributes: [
                 .underlineStyle: NSUnderlineStyle.single.rawValue,
                 .font: UIFont.systemFont(ofSize: 14, weight: UIFont.Weight(500)),
