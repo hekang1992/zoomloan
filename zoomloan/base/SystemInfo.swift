@@ -52,11 +52,10 @@ struct SystemInfo {
     
     static func infoStrings() -> [String: String] {
         
-        let meetin1 = normalizedDevrT(availableMemory())
-        
         let totalDiskSpace1 = normalizedDevrT(totalDiskSpace)
+        
         return [
-            "meeting": "\(meetin1)",
+            "meeting": "\(availableDiskSpace())",
             "extremity": "\(totalDiskSpace1)",
             "opposite": "\(totalMemory)",
             "depart": "\(availableMemory())"
