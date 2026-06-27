@@ -154,19 +154,29 @@ private extension HomeViewController {
         
         let locationStatus = CLLocationManager().authorizationStatus
         
-        if visibly == 0 {
-            realAppluInfo(with: model)
-        }else {
-            if locationStatus == .authorizedAlways || locationStatus == .authorizedWhenInUse {
-                realAppluInfo(with: model)
+        if visibly == 1 {
+            if self.showPermissionAlert(message: "Digido requires access to your device's location services to accurately assess your loan eligibility and provide localized services. You can disable this permission at any time via your device's \"Settings\" > \"Privacy & Security\" > \"Location Services.\"") {
+                
             }else {
-                if self.showPermissionAlert(message: "Digido requires access to your device's location services to accurately assess your loan eligibility and provide localized services. You can disable this permission at any time via your device's \"Settings\" > \"Privacy & Security\" > \"Location Services.\"") {
-                    
-                }else {
-                    realAppluInfo(with: model)
-                }
+                realAppluInfo(with: model)
             }
+        }else if visibly == 2 {
+            realAppluInfo(with: model)
         }
+        
+//        if visibly == 0 {
+//            realAppluInfo(with: model)
+//        }else {
+//            if locationStatus == .authorizedAlways || locationStatus == .authorizedWhenInUse {
+//                realAppluInfo(with: model)
+//            }else {
+//                if self.showPermissionAlert(message: "Digido requires access to your device's location services to accurately assess your loan eligibility and provide localized services. You can disable this permission at any time via your device's \"Settings\" > \"Privacy & Security\" > \"Location Services.\"") {
+//                    
+//                }else {
+//                    realAppluInfo(with: model)
+//                }
+//            }
+//        }
         
     }
     
