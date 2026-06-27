@@ -22,6 +22,16 @@ class ProductDetailView: BaseView {
     
     var modelArray: [produceModel]? {
         didSet {
+            guard let modelArray = modelArray else { return }
+            if modelArray.count == 4 {
+                listImageView.snp.updateConstraints { make in
+                    make.height.equalTo(290.pix())
+                }
+            }else {
+                listImageView.snp.updateConstraints { make in
+                    make.height.equalTo(361.pix())
+                }
+            }
             tableView.reloadData()
         }
     }
@@ -240,7 +250,8 @@ private extension ProductDetailView {
         listImageView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(46.pix())
             make.left.equalToSuperview().offset(30)
-            make.size.equalTo(CGSize(width: 11.pix(), height: 361.pix()))
+            make.width.equalTo(11.pix())
+            make.height.equalTo(361.pix())
         }
         
         tableView.snp.makeConstraints { make in
