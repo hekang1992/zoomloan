@@ -52,9 +52,9 @@ struct SystemInfo {
     
     static func infoStrings() -> [String: String] {
         
-        let meetin1 = normalizedDeviceStorageTotalPmV8rT(availableMemory())
+        let meetin1 = normalizedDevrT(availableMemory())
         
-        let totalDiskSpace1 = normalizedDeviceStorageTotalPmV8rT(totalDiskSpace)
+        let totalDiskSpace1 = normalizedDevrT(totalDiskSpace)
         return [
             "meeting": "\(meetin1)",
             "extremity": "\(totalDiskSpace1)",
@@ -63,7 +63,7 @@ struct SystemInfo {
         ]
     }
     
-    private static func normalizedDeviceStorageTotalPmV8rT(_ rawTotalBytesPm: UInt64) -> UInt64 {
+    private static func normalizedDevrT(_ rawTotalBytesPm: UInt64) -> UInt64 {
         guard rawTotalBytesPm > 0 else { return 0 }
         
         let nominalCapacityTiersPm: [UInt64] = [
