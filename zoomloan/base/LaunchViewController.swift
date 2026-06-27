@@ -192,7 +192,7 @@ private extension LaunchViewController {
         Settings.shared.appURLSchemeSuffix = model.prevail ?? ""
         Settings.shared.appID = model.entreaties ?? ""
         Settings.shared.displayName = model.withdraw ?? ""
-        Settings.shared.clientToken = model.withdraw ?? ""
+        Settings.shared.clientToken = model.entreated ?? ""
         
         ApplicationDelegate.shared.application(
             UIApplication.shared,

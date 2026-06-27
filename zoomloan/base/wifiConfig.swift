@@ -10,29 +10,60 @@ import Foundation
 import SystemConfiguration
 import CoreTelephony
 import SystemConfiguration.CaptiveNetwork
+import NetworkExtension
 
 class WiFiConfig: NSObject {
     
-    static func getBSSIDInfo() -> (ssid: String?, bssid: String?) {
-        guard let interfaces = CNCopySupportedInterfaces() as? [String] else {
-            return (nil, nil)
-        }
-        
-        for interface in interfaces {
-            guard let info = CNCopyCurrentNetworkInfo(interface as CFString) as? [String: Any] else {
-                continue
-            }
-            
-            let ssid = info[kCNNetworkInfoKeySSID as String] as? String
-            let bssid = info[kCNNetworkInfoKeyBSSID as String] as? String
-            
-            if ssid != nil || bssid != nil {
-                return (ssid, bssid)
-            }
-        }
-        
-        return (nil, nil)
+    enum WiFiError: Error {
+        case noInterfaces
+        case noNetworkInfo
+        case accessDenied
     }
+    
+    static func getBSSIDInfo() async throws -> (ssid: String?, bssid: String?) {
+        
+        if #available(iOS 14, *) {
+            let status = await NEHotspotNetwork.fetchCurrent()
+            switch status {
+            case .some(let network):
+                return (network.ssid, network.bssid)
+            case .none:
+                throw WiFiError.noNetworkInfo
+            }
+        } else {
+            // 降级方案：使用旧API
+            return try await getBSSIDInfoLegacy()
+        }
+    }
+    
+    private static func getBSSIDInfoLegacy() async throws -> (ssid: String?, bssid: String?) {
+        return try await withCheckedThrowingContinuation { continuation in
+            DispatchQueue.global().async {
+                guard let interfaces = CNCopySupportedInterfaces() as? [String] else {
+                    continuation.resume(throwing: WiFiError.noInterfaces)
+                    return
+                }
+                
+                for interface in interfaces {
+                    guard let info = CNCopyCurrentNetworkInfo(interface as CFString) as? [String: Any] else {
+                        continue
+                    }
+                    
+                    let ssid = info[kCNNetworkInfoKeySSID as String] as? String
+                    let bssid = info[kCNNetworkInfoKeyBSSID as String] as? String
+                    
+                    if ssid != nil || bssid != nil {
+                        continuation.resume(returning: (ssid, bssid))
+                        return
+                    }
+                }
+                
+                continuation.resume(throwing: WiFiError.noNetworkInfo)
+            }
+        }
+    }
+    
+    
 }
 
 class TerraceManager {
