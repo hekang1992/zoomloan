@@ -193,7 +193,7 @@ class ChoosePageVcConfig {
         case "":
             let headmodel = viewController.headmodel
             let cried = headmodel?.cried ?? ""
-            let bertolini = headmodel?.bertolini ?? 0
+            let bertolini = headmodel?.bertolini ?? ""
             let exploit = headmodel?.exploit ?? ""
             let remembrance = headmodel?.remembrance ?? 0
             let json = ["cried": cried,

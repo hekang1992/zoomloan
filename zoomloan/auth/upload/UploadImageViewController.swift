@@ -425,7 +425,11 @@ extension UploadImageViewController: UIImagePickerControllerDelegate, UINavigati
 extension UploadImageViewController {
     
     private func uploadInagApi(with image: UIImage) {
-        let imageData = image.jpegData(compressionQuality: 0.3) ?? Data()
+        guard let imageData = compressedJPEGData(for: image) else {
+            ToastView.showMessage(with: "Image processing failed")
+            return
+        }
+
         let viewModel = UploadAuthViewModel()
         let json = ["increasing": source, "odd": isFace, "insulted": authStr] as [String : Any]
         Task {
@@ -444,6 +448,107 @@ extension UploadImageViewController {
             } catch  {
                 
             }
+        }
+    }
+
+    private func compressedJPEGData(for image: UIImage) -> Data? {
+        let maximumBytes = 700 * 1024
+        let targetBytes = 500 * 1024
+        let minimumQuality: CGFloat = 0.1
+        let minimumDimension: CGFloat = 320
+        let maximumResizeAttempts = 5
+
+        guard let originalData = image.jpegData(compressionQuality: 1.0) else {
+            return nil
+        }
+
+        guard originalData.count > maximumBytes else {
+            return originalData
+        }
+
+        var workingImage = image
+
+        for _ in 0..<maximumResizeAttempts {
+            if let data = jpegData(
+                for: workingImage,
+                targetBytes: targetBytes,
+                maximumBytes: maximumBytes,
+                minimumQuality: minimumQuality
+            ) {
+                return data
+            }
+
+            let pixelSize = CGSize(
+                width: workingImage.size.width * workingImage.scale,
+                height: workingImage.size.height * workingImage.scale
+            )
+            let shortestSide = min(pixelSize.width, pixelSize.height)
+
+            guard shortestSide > minimumDimension else {
+                break
+            }
+
+            guard let minimumQualityData = workingImage.jpegData(compressionQuality: minimumQuality) else {
+                return nil
+            }
+
+            let estimatedScale = sqrt(CGFloat(targetBytes) / CGFloat(minimumQualityData.count)) * 0.9
+            let scale = min(max(estimatedScale, 0.5), 0.85)
+            let nextSize = CGSize(width: pixelSize.width * scale, height: pixelSize.height * scale)
+
+            workingImage = resizedImage(workingImage, to: nextSize)
+        }
+
+        guard let data = workingImage.jpegData(compressionQuality: minimumQuality), data.count <= maximumBytes else {
+            return nil
+        }
+
+        return data
+    }
+
+    private func jpegData(
+        for image: UIImage,
+        targetBytes: Int,
+        maximumBytes: Int,
+        minimumQuality: CGFloat
+    ) -> Data? {
+        guard let minimumQualityData = image.jpegData(compressionQuality: minimumQuality) else {
+            return nil
+        }
+
+        guard minimumQualityData.count <= maximumBytes else {
+            return nil
+        }
+
+        var bestData = minimumQualityData
+        var lowerQuality = minimumQuality
+        var upperQuality: CGFloat = 1.0
+
+        for _ in 0..<6 {
+            let quality = (lowerQuality + upperQuality) / 2
+
+            guard let data = image.jpegData(compressionQuality: quality) else {
+                return nil
+            }
+
+            if data.count > targetBytes {
+                upperQuality = quality
+            } else {
+                bestData = data
+                lowerQuality = quality
+            }
+        }
+
+        return bestData
+    }
+
+    private func resizedImage(_ image: UIImage, to size: CGSize) -> UIImage {
+        let format = UIGraphicsImageRendererFormat()
+        format.scale = 1
+        format.opaque = true
+
+        return UIGraphicsImageRenderer(size: size, format: format).image { _ in
+            image.draw(in: CGRect(origin: .zero, size: size))
         }
     }
     

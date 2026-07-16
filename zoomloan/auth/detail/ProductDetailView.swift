@@ -272,7 +272,8 @@ private extension ProductDetailView {
         logoImageView.kf.setImage(with: URL(string: logoUrl))
         nameLabel.text = productModel.profound ?? ""
         oneLabel.text = productModel.st ?? ""
-        moneyLabel.text = String(productModel.bertolini ?? 0)
+        let money = productModel.bertolini ?? ""
+        moneyLabel.text = money
     }
 }
 

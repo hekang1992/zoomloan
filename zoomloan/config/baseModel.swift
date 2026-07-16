@@ -77,7 +77,7 @@ class userInfoModel: Codable {
 }
 
 class headModel: Codable {
-    var bertolini: Int?
+    var bertolini: String?
     var st: String?
     var borne: String?
     var signora: String?
@@ -88,6 +88,33 @@ class headModel: Codable {
     var cried: String?
     var exploit: String?
     var remembrance: Int?
+
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        if let intValue = try? container.decode(String.self, forKey: .bertolini) {
+            bertolini = intValue
+        } else if let stringValue = try? container.decode(String.self, forKey: .bertolini) {
+            bertolini = String(stringValue)
+        } else {
+            bertolini = nil
+        }
+        
+        st = try? container.decode(String.self, forKey: .st)
+        borne = try? container.decode(String.self, forKey: .borne)
+        signora = try? container.decode(String.self, forKey: .signora)
+        profound = try? container.decode(String.self, forKey: .profound)
+        breaking = try? container.decode(String.self, forKey: .breaking)
+        illusion = try? container.decode(String.self, forKey: .illusion)
+        drink = try? container.decode(String.self, forKey: .drink)
+        cried = try? container.decode(String.self, forKey: .cried)
+        exploit = try? container.decode(String.self, forKey: .exploit)
+        remembrance = try? container.decode(Int.self, forKey: .remembrance)
+    }
+
+    enum CodingKeys: String, CodingKey {
+        case bertolini, st, borne, signora, profound, breaking, illusion, drink, cried, exploit, remembrance
+    }
 }
 
 class loweredModel: Codable {
