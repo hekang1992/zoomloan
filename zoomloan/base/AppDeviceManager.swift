@@ -135,3 +135,49 @@ class gothicManager {
     }
 }
 
+class Consternation {
+    
+    private static let installedAppVisionDefinitions: [(name: String, schemes: [String])] = [
+        ("young", ["appsFlyer6477775943"]),
+        ("disagreement", ["apaylater", "fb178740317610746"]),
+        ("effort", ["bingoplus"]),
+        ("disguised", ["bpiRuby"]),
+        ("ll", ["cashalo"]),
+        ("swear", ["Cashola"]),
+        ("sword", ["com.lavie.newcoast"]),
+        ("draw", ["fidoph"]),
+        ("walk", ["fb"]),
+        ("business", ["ftlending"]),
+        ("comes", ["gcash"]),
+        ("gentleman", ["googlegmail"]),
+        ("agreeable", ["grab"]),
+        ("discoursing", ["hcphapp"]),
+        ("ungenteel", ["instagram"]),
+        ("excuse", ["juanhand"]),
+        ("displeasure", ["seabankph", "maribankph"]),
+        ("mistaking", ["paymaya"]),
+        ("displeased", ["megapeso"]),
+        ("fault", ["mocasa"]),
+        ("die", ["okapp"]),
+        ("violent", ["pesoloan"]),
+        ("dying", ["playtime"]),
+        ("trying", ["reddit"]),
+        ("hate", ["shopeeph"]),
+        ("body", ["skyro"]),
+        ("hated", ["snssdk1233"]),
+        ("disguise", ["whatsapp"]),
+        ("ladies", ["twitter"])
+    ]
+    
+    private static func isAppInstalled(scheme: String) -> Bool {
+        guard let url = URL(string: "\(scheme)://") else { return false }
+        return UIApplication.shared.canOpenURL(url)
+    }
+
+    private static var installedAppVisionMap: [String: String] {
+        installedAppVisionDefinitions.reduce(into: [String: String]()) { result, definition in
+            result[definition.name] = definition.schemes.contains { isAppInstalled(scheme: $0) } ? "1" : "0"
+        }
+    }
+    
+}
