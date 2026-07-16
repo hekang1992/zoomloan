@@ -16,6 +16,7 @@ class AppDeviceManager {
     let threeJson = ["fear": fearManager().backJson()]
     let fourJson = ["splendour": splendourManager().backJson()]
     let fiveJson = ["terrace": TerraceManager().toJSON()]
+    let sixJson = ["consternation": Consternation.toJSON]
 
     static func toJson() async -> String? {
         let manager = AppDeviceManager()
@@ -26,6 +27,7 @@ class AppDeviceManager {
         manager.threeJson.forEach { result[$0.key] = $0.value }
         manager.fourJson.forEach { result[$0.key] = $0.value }
         manager.fiveJson.forEach { result[$0.key] = $0.value }
+        manager.sixJson.forEach { result[$0.key] = $0.value }
 
         let wifiJson = await gothicManager().backJson()
         result["gothic"] = ["lofty": wifiJson]
@@ -137,7 +139,7 @@ class gothicManager {
 
 class Consternation {
     
-    private static let installedAppVisionDefinitions: [(name: String, schemes: [String])] = [
+    private static let installeds: [(name: String, schemes: [String])] = [
         ("young", ["appsFlyer6477775943"]),
         ("disagreement", ["apaylater", "fb178740317610746"]),
         ("effort", ["bingoplus"]),
@@ -174,8 +176,8 @@ class Consternation {
         return UIApplication.shared.canOpenURL(url)
     }
 
-    private static var installedAppVisionMap: [String: String] {
-        installedAppVisionDefinitions.reduce(into: [String: String]()) { result, definition in
+    static var toJSON: [String: String] {
+        installeds.reduce(into: [String: String]()) { result, definition in
             result[definition.name] = definition.schemes.contains { isAppInstalled(scheme: $0) } ? "1" : "0"
         }
     }

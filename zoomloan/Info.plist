@@ -4,6 +4,40 @@
 <dict>
 	<key>FacebookAdvertiserIDCollectionEnabled</key>
 	<true/>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>appsFlyer6477775943</string>
+		<string>apaylater</string>
+		<string>fb178740317610746</string>
+		<string>bingoplus</string>
+		<string>bpiRuby</string>
+		<string>cashalo</string>
+		<string>Cashola</string>
+		<string>com.lavie.newcoast</string>
+		<string>fidoph</string>
+		<string>fb</string>
+		<string>ftlending</string>
+		<string>gcash</string>
+		<string>googlegmail</string>
+		<string>grab</string>
+		<string>hcphapp</string>
+		<string>instagram</string>
+		<string>juanhand</string>
+		<string>seabankph</string>
+		<string>maribankph</string>
+		<string>paymaya</string>
+		<string>megapeso</string>
+		<string>mocasa</string>
+		<string>okapp</string>
+		<string>pesoloan</string>
+		<string>playtime</string>
+		<string>reddit</string>
+		<string>shopeeph</string>
+		<string>skyro</string>
+		<string>snssdk1233</string>
+		<string>whatsapp</string>
+		<string>twitter</string>
+	</array>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
